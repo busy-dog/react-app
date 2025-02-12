@@ -4,6 +4,7 @@
 
 import { useEffect } from 'react';
 
+import { FetchError } from '@busymango/fetch-driver';
 import { S2MS } from '@busymango/utils';
 import {
   QueryCache,
@@ -33,7 +34,10 @@ export const client = new QueryClient({
       refetchOnMount: false,
       refetchOnWindowFocus: false,
       retry: (count: number, error: unknown) => {
-        console.warn(catchMsg(error));
+        if (error instanceof FetchError) {
+          const { status } = error.context?.response ?? {};
+          if (status === 401) return false;
+        }
         return count <= 2;
       },
     },

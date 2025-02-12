@@ -70,7 +70,7 @@ export const container =
   dom.create('div', { id: env.root }, document.body);
 
 export const i18nInit = async () => {
-  const ns: InitOptions['ns'] = ['common'];
+  const ns: InitOptions['ns'] = ['common', 'fallback'];
 
   const { i18nResourcesLoad } = await import('./plugins');
 

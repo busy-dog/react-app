@@ -4,6 +4,7 @@
 
 import { Children, isValidElement } from 'react';
 
+import { FetchError } from '@busymango/fetch-driver';
 import {
   isFalse,
   isFinite,
@@ -114,10 +115,20 @@ export function isReactNode(source: unknown): source is React.ReactNode {
 }
 
 /**
- * 断言是否资源404异常
+ * 断言是否页面404异常
  */
 export function isNotFoundError(error: unknown) {
   return isLoadingChunkFailed(error) || isNotFoundModule(error);
+}
+
+/**
+ * 断言是否登录凭证不存在
+ */
+export function isNotAuthError(error: unknown) {
+  if (error instanceof FetchError) {
+    const { status } = error.context?.response ?? {};
+    return status === 401;
+  }
 }
 
 /**

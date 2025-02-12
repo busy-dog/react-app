@@ -24,6 +24,7 @@ const dotenv = assign<{
 
 export default defineConfig({
   root: 'docs',
+  title: 'Mango',
   base: '/react-app/',
   icon: '/favicon.svg',
   logo: '/mango.png',

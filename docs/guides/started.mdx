@@ -6,6 +6,20 @@ Mango React App 是个人开源的 React SPA 脚手架模板，它把【可维�
 
 ## 环境准备
 
+### 开发工具
+
+推荐使用 [VS Code](https://code.visualstudio.com/)、Cursor 进行开发，并安装以下插件：
+
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [MDX](https://github.com/mdx-js/mdx-analyzer)
+- [i18n Ally](https://github.com/lokalise/i18n-ally)
+- [React Developer Tools](https://react.dev/reference/devtools)
+- [SCSS Formatter](https://github.com/sibiraj-s/vscode-scss-formatter)
+- [EJS language support](https://github.com/Digitalbrainstem/ejs-grammar)
+- [Browserslist](https://github.com/wspwebben/browserslist-highlight.git)
+- [CSS Variable Autocomplete](https://github.com/vunguyentuan/vscode-css-variables)
+
 ### Node.js
 
 在开始使用前，你需要安装 [Node.js](https://nodejs.org/)，并保证 Node.js 版本不低于 18（**我们推荐使用 Node.js 20 的 LTS 版本**），你可以通过`node -v`检查当前使用的 Node.js 版本。
@@ -39,27 +53,29 @@ pnpm docs:dev         # 启动文档开发服务器
 
 ```tree
 .
-├── rspress.config.ts
-├── src
-│   ├── components
-│   │   ├── FileTreeRender.tsx
-│   │   ├── Tree
-│   │   │   ├── Expand.tsx
-│   │   │   ├── FileIcon.tsx
-│   │   │   ├── Tree.tsx
-│   │   │   ├── TreeContext.tsx
-│   │   │   ├── TreeFile.tsx
-│   │   │   ├── TreeFolder.tsx
-│   │   │   ├── TreeFolderIcon.tsx
-│   │   │   ├── TreeIndents.tsx
-│   │   │   ├── TreeStatusIcon.tsx
-│   │   │   ├── index.less
-│   │   │   └── index.tsx
-│   │   ├── helpers.ts
-│   │   └── presets.ts
+├── docs                     # 项目文档
+│   ├── guides              # 指南文档
+│   └── public              # 文档静态资源
+├── scripts                 # 构建脚本
+│   ├── @dev.server.ts     # 开发服务器
+│   └── @caniuse.ts        # 兼容性检查
+├── src                     # 源代码目录
+│   ├── components         # 组件目录
+│   │   ├── boundary
+│   │   └── business
+│   ├── pages              # 页面目录
+│   ├── styles             # 样式目录
+│   ├── types              # 类型定义
+│   ├── utils              # 工具函数
 │   ├── index.ts
 │   └── parser.ts
-└── tsconfig.json
+├── .eslintrc.js          # ESLint 配置
+├── .prettierrc           # Prettier 配置
+├── .gitignore           # Git 忽略配置
+├── package.json         # 项目配置
+├── pnpm-lock.yaml      # 依赖锁定文件
+├── rspress.config.ts    # Rspress 配置
+└── tsconfig.json        # TypeScript 配置
 ```
 
 ## 启动项目
