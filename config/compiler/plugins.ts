@@ -3,10 +3,10 @@
  */
 
 import { readdirSync, readFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-import type { PlainObject } from '@busymango/is-esm';
+import { isTrue, type PlainObject } from '@busymango/is-esm';
 import { compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
@@ -18,7 +18,6 @@ import type {
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
-import { CSSVarTSEmitPlugin } from '../plugins';
 import { app, dir } from '../project';
 
 type RspackPlugin =
@@ -30,20 +29,25 @@ type RspackPlugin =
   | RspackPluginInstance
   | RspackPluginFunction;
 
+export interface PluginParams {
+  doctor?: boolean;
+  envvars?: PlainObject;
+}
+
 const doctor = new RsdoctorRspackPlugin({
   supports: { generateTileGraph: true },
   linter: { rules: { 'ecma-version-check': 'off' } },
 });
 
-export const iPlugins = <T extends PlainObject>(
+export const iPlugins = (
   env: 'dev' | 'test' | 'prod' = 'dev',
-  params?: T
+  params?: PluginParams
 ): (RspackPlugin | WebpackPluginInstance)[] => {
   const dotenv = {
     ...process.env,
     ...parse(readFileSync(resolve(dir.envs, 'comm.env'))),
     ...parse(readFileSync(resolve(dir.envs, `${env}.env`))),
-    ...Object.entries(params ?? {}).reduce(
+    ...Object.entries(params?.envvars ?? {}).reduce(
       (acc, [key, val]) => ({
         ...acc,
         [key.toUpperCase()]: val,
@@ -88,12 +92,13 @@ export const iPlugins = <T extends PlainObject>(
         mode: 'write-references',
       },
     }),
-    env === 'test' && doctor,
-    env === 'dev' &&
-      new CSSVarTSEmitPlugin({
-        includes: ['themes\\dark.css'],
-        dirname: join(dir.src, 'types'),
-      }),
+    isTrue(params?.doctor) && doctor,
+    env === 'dev' && new rspack.HotModuleReplacementPlugin(),
     env === 'dev' && new ReactRefreshRspackPlugin({}),
+    // env === 'dev' &&
+    //   new CSSVarTSEmitPlugin({
+    //     includes: ['themes\\dark.css'],
+    //     dirname: join(dir.src, 'types'),
+    //   }),
   ]);
 };

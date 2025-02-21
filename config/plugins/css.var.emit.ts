@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import type { ChildNode } from 'postcss';
 import { parse } from 'postcss';
@@ -79,11 +79,18 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
     thisCompilation.tap(PLUGIN_NAME, async (compilation) => {
       const { afterProcessAssets } = compilation.hooks;
       afterProcessAssets.tap({ name: PLUGIN_NAME }, async () => {
-        const assets = compilation.getAssets();
-        const data = await compile(assets, includes);
-        if (isString(data) && data !== record.data) {
-          writeFileSync(join(dirname, filename), data);
-          record.data = data;
+        try {
+          const assets = compilation.getAssets();
+          const data = await compile(assets, includes);
+          if (isString(data) && data !== record.data) {
+            await writeFile(join(dirname, filename), data);
+            record.data = data;
+          }
+        } catch (error) {
+          console.error(
+            'Error generating CSS variables TypeScript file:',
+            error
+          );
         }
       });
     });

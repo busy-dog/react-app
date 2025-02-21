@@ -45,10 +45,7 @@ export const AssetsRule: RuleSetRule = {
 
 const iSwcrc = (development = false): SwcLoaderOptions => ({
   minify: false,
-  env: {
-    mode: 'usage',
-    coreJs: '3.38.1',
-  },
+  env: { mode: 'usage' },
   jsc: {
     parser: {
       tsx: true,
@@ -57,6 +54,7 @@ const iSwcrc = (development = false): SwcLoaderOptions => ({
     transform: {
       react: {
         development,
+        useBuiltins: false,
         importSource: 'react',
         refresh: development,
         runtime: 'automatic',
@@ -68,7 +66,6 @@ const iSwcrc = (development = false): SwcLoaderOptions => ({
 export const TSDevRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
-  type: 'javascript/auto',
   exclude: /node_modules/,
   options: iSwcrc(true),
 };
@@ -76,7 +73,6 @@ export const TSDevRule: RuleSetRule = {
 export const TSRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
-  type: 'javascript/auto',
   exclude: /node_modules/,
   options: iSwcrc(),
 };
@@ -84,7 +80,6 @@ export const TSRule: RuleSetRule = {
 export const CompatibleRule: RuleSetRule = {
   test: /\.(m?js|tsx?|jsx?)$/,
   loader: 'builtin:swc-loader',
-  type: 'javascript/auto',
   options: iSwcrc(),
   include: [
     /node_modules[\\/]@?mime/,

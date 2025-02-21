@@ -7,12 +7,13 @@ import { merge } from 'webpack-merge';
 import type { Configuration } from '@rspack/core';
 
 import { AssetsRule, SassRule, SVGRule, TSDevRule } from './loaders';
+import type { PluginParams } from './plugins';
 import { iPlugins } from './plugins';
 import common from './rspack.common';
 
-type AppDevParams = { scan?: boolean };
+type AppDevParams = { plugins?: PluginParams };
 
-const create = (parms: { scan?: boolean } = {}): Configuration => ({
+const create = (params: AppDevParams = {}): Configuration => ({
   cache: false,
   mode: 'development',
   devtool: 'cheap-module-source-map',
@@ -22,7 +23,7 @@ const create = (parms: { scan?: boolean } = {}): Configuration => ({
   experiments: {
     incremental: true,
   },
-  plugins: iPlugins('dev', parms),
+  plugins: iPlugins('dev', params.plugins),
   module: {
     rules: [AssetsRule, SassRule, SVGRule, TSDevRule],
   },
