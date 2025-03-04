@@ -35,7 +35,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build with Rspress
         run: |
           pnpm docs:build
