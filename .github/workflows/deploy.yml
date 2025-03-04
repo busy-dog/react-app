@@ -27,7 +27,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4 # pnpm is optional but recommended, you can also use npm / yarn
         with:
-          version: 9.3
+          version: 9.4.0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
