@@ -14,7 +14,7 @@ import { iThemeDefault, iThemeRoot, iThemeSheet } from '@/utils';
 /**
  * 动态主题
  */
-export default function useMutateTheme<T extends string = string>() {
+export default function useColorTheme<T extends string = string>() {
   const res = useMutation({
     gcTime: Infinity,
     mutationFn: async (name: T) => {

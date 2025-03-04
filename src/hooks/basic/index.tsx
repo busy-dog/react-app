@@ -4,7 +4,6 @@ export * from './debounce.state';
 export * from './effect.once';
 export * from './event.state';
 export * from './frame.state';
-export * from './in.view';
 export * from './memo.func';
 export * from './record';
 export * from './resize.observer';

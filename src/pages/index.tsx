@@ -4,19 +4,8 @@
 
 import { useEffect } from 'react';
 import { Trans } from 'react-i18next';
-import { t } from 'i18next';
 
-import {
-  BoundaryFallbackCard,
-  BoundaryFallbackPage,
-  IButton,
-  IChip,
-  IHighLighter,
-  ISafeArea,
-  ITypography,
-  QueryBoundary,
-  snackbar,
-} from '@/components';
+import { IButton, IChip, ISafeArea, snackbar } from '@/components';
 import { useEffectOnce, useToggle } from '@/hooks';
 
 import * as styles from './index.scss';
@@ -51,21 +40,9 @@ const Welcome: React.FC = () => {
 
   return (
     <ISafeArea className={styles.page}>
-      <ITypography>
-        <IHighLighter
-          content={t('common:Confirm')}
-          keyword="确"
-          mode="sub-sequence"
-        />
-      </ITypography>
-
-      <QueryBoundary fallback={<BoundaryFallbackPage />}>
-        <Danger depth={1} />
-        <QueryBoundary fallback={<BoundaryFallbackCard />}>
-          {/* <div className={styles.area}>{t('common:Confirm')}</div> */}
-          <Danger depth={2} />
-        </QueryBoundary>
-      </QueryBoundary>
+      {123}
+      {'4434'}
+      {123213}
     </ISafeArea>
   );
 };

@@ -1,9 +1,10 @@
 import { Fragment } from 'react';
 import { capitalCase } from 'change-case';
+import classNames from 'classnames';
 
-import { sizeOf } from '@busymango/utils';
+import { iCSSVariable, sizeOf } from '@busymango/utils';
 
-import { IFlex } from '@/components';
+import { IFlex, IPopover } from '@/components';
 
 import * as styles from './index.scss';
 
@@ -33,32 +34,62 @@ export const ColorDisc: React.FC = () => (
   <div
     className={styles.wrap}
     style={{
-      gridTemplateRows: `1.5em repeat(${sizeOf(colors)}, 3em)`,
-      gridTemplateColumns: `repeat(${sizeOf(scales)}, 3em) 4em`,
+      gridTemplateRows: `2.5em repeat(${sizeOf(colors)}, 4em)`,
+      gridTemplateColumns: `5em repeat(${sizeOf(scales)}, 4em)`,
     }}
   >
-    {scales.map((scale) => (
-      <IFlex key={scale} centered>
+    <div />
+    {scales.map((scale, index) => (
+      <IFlex
+        key={scale}
+        centered
+        className={classNames(styles.cell, {
+          [styles.colEnd]: index === sizeOf(scales) - 1,
+        })}
+      >
         {scale}
       </IFlex>
     ))}
-    <div />
-    {colors.map(({ value, label }) => (
+    {colors.map(({ value, label }, xIndex) => (
       <Fragment key={value}>
-        {scales.map((scale) => (
-          <div
-            key={scale}
-            className={styles.scale}
-            style={{
-              backgroundColor: `rgb(var(--${value}-color-${scale}) / 1)`,
-            }}
-          />
-        ))}
-        <div className={styles.title}>
+        <div
+          className={classNames(styles.title, styles.cell, {
+            [styles.rowEnd]: xIndex === sizeOf(colors) - 1,
+          })}
+        >
           {label}
           {'\n'}
           {capitalCase(value)}
         </div>
+        {scales.map((scale, yIndex) => (
+          <div
+            key={scale}
+            className={classNames(styles.scale, styles.cell, {
+              [styles.rowEnd]: xIndex === sizeOf(colors) - 1,
+              [styles.colEnd]: yIndex === sizeOf(scales) - 1,
+            })}
+          >
+            <IPopover
+              content={
+                <span>
+                  RGB({iCSSVariable(`--${value}-color-${scale}`)} / 1)
+                </span>
+              }
+              render={{
+                reference: (props) => (
+                  <div
+                    {...props}
+                    className={styles.color}
+                    style={{
+                      backgroundColor: `rgb(var(--${value}-color-${scale}) / 1)`,
+                    }}
+                  />
+                ),
+              }}
+              variant="tooltip"
+            />
+          </div>
+        ))}
       </Fragment>
     ))}
   </div>

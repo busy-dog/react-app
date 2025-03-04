@@ -1,17 +1,39 @@
 .wrap {
-  gap: 1em;
+  width: 100%;
   display: grid;
   line-height: 1.5;
   font-size: var(--font-size-03);
   border-radius: var(--border-radius-04);
+
+  --disc-cell-stroke: 2px solid var(--font-color-10);
+}
+
+.cell {
+  padding: 0.25em;
+  border-top: var(--disc-cell-stroke);
+  border-left: var(--disc-cell-stroke);
 }
 
 .title {
   white-space: pre-wrap;
 }
 
+.cell.col-end {
+  border-right: var(--disc-cell-stroke);
+}
+
+.cell.row-end {
+  border-bottom: var(--disc-cell-stroke);
+}
+
 .scale {
   width: 100%;
   height: 100%;
   border-right: var(--border-radius-03);
+
+  .color {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-02);
+  }
 }
