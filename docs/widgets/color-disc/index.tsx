@@ -8,7 +8,7 @@ import { IFlex, IPopover } from '@/components';
 
 import * as styles from './index.scss';
 
-const colors = [
+export const colors = [
   { value: 'orange', label: '品牌橙' },
   { value: 'sunset', label: '日落黄' },
   { value: 'sunglow', label: '柠檬黄' },
