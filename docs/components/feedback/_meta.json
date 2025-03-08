@@ -16,8 +16,8 @@
   },
   {
     "type": "file",
-    "name": "spinner/index",
-    "label": "Spinner 加载中"
+    "name": "loading/index",
+    "label": "Loading 加载"
   },
   {
     "type": "file",

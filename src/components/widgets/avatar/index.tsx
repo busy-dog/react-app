@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { QueryBoundary } from '@/components/boundary';
 import type { ReactCFC } from '@/models';
 
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import { useImage } from './hooks';
 import type {
   IAvatarImgRender,

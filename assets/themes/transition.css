@@ -1,4 +1,6 @@
 :root {
+  /* https://easings.net/zh-cn#easeOutQuad */
+
   --ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
   --ease-in-sine: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-in-quad: cubic-bezier(0.11, 0, 0.5, 0);

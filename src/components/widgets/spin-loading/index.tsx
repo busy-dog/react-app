@@ -1,11 +1,11 @@
 import type { SVGMotionProps, Target } from 'motion/react';
 import { motion } from 'motion/react';
 
-export interface ISpinnerProps extends SVGMotionProps<SVGSVGElement> {
+export interface ISpinLoadingProps extends SVGMotionProps<SVGSVGElement> {
   animate?: Target;
 }
 
-export const ISpinner: React.FC<ISpinnerProps> = ({
+export const ISpinner: React.FC<ISpinLoadingProps> = ({
   style,
   animate,
   className,
@@ -24,7 +24,7 @@ export const ISpinner: React.FC<ISpinnerProps> = ({
     className={className}
     height="1em"
     stroke="currentColor"
-    style={{ lineHeight: '1em', ...style }}
+    style={{ lineHeight: '1em', display: 'inline-flex', ...style }}
     viewBox={'22 22 44 44'}
     width="1em"
     {...others}

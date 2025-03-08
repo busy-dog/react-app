@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 import type { ReactCFC } from '@/models';
 
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 
 /** Suspense HOC */
 export function suspense<P extends object>(

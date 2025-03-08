@@ -8,7 +8,7 @@ import { useMemoFunc } from '@/hooks';
 import { iEscapeEvent, iPropagation } from '@/utils';
 
 import { ISignLine } from '../sign';
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import { iAnimate, initial, transition } from './helpers';

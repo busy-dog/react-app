@@ -6,7 +6,7 @@ import { ifnot } from '@busymango/utils';
 
 import { useEventState } from '@/hooks';
 
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import { ISVGWrap } from '../svg-wrap';
 import { IWave } from '../wave';
 import type {

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import type { ReactCFC } from '@/models';
 
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 
 import * as styles from './index.scss';
 

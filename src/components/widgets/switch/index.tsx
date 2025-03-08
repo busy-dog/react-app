@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 import { ifnot } from '@busymango/utils';
 
 import { onCheckCatch, useControlState } from '../control';
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import type {
   ISwitchInputRender,
   ISwitchProps,

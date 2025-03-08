@@ -8,7 +8,7 @@ import { FRAME2MS, ifnot } from '@busymango/utils';
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import { iPropagation, isReactChildren } from '@/utils';
 
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import { IWave } from '../wave';
 import type { IButtonProps } from './models';
 

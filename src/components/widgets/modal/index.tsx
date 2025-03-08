@@ -15,7 +15,7 @@ import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
 import { IFlex } from '../flex';
 import { ISignLine } from '../sign';
-import { ISpinner } from '../spinners';
+import { ISpinner } from '../spin-loading';
 import { ISVGWrap } from '../svg-wrap';
 import { ITypography } from '../typography';
 import type {
