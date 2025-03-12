@@ -1,5 +1,5 @@
 /** ErrorBoundary state define */
-export interface ErrorBoundaryState {
+export interface BoundaryState {
   /** 是否捕获到异常 */
   isCaught: boolean;
   /** 捕获到的异常实例 */
@@ -9,7 +9,7 @@ export interface ErrorBoundaryState {
 }
 
 /** ErrorBoundary props define */
-export interface ErrorBoundaryProps {
+export interface BoundaryProps extends React.PropsWithChildren {
   /** 回滚状态下的UI */
   fallback?: React.ReactNode;
   /** 重置操作回调 */
@@ -19,7 +19,7 @@ export interface ErrorBoundaryProps {
 }
 
 /** Fallback Component context value define */
-export interface FallbackContextVal extends ErrorBoundaryState {
+export interface BoundaryContextVal extends BoundaryState {
   /** 重置操作方法 */
-  reset: ErrorBoundaryProps['onReset'];
+  reset: BoundaryProps['onReset'];
 }

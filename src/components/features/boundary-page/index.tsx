@@ -1,15 +1,15 @@
-/**
- * @description boundary error widgets
- */
-
-import { Fragment } from 'react';
+import { Fragment } from 'react/jsx-runtime';
 import type { TranslationProps } from 'react-i18next';
-import { Translation } from 'react-i18next';
+import { Translation, useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { isTrue } from '@busymango/is-esm';
 
-import { IFlex } from '@/components/widgets';
+import { type BoundaryProps, IButton, IFlex } from '@/components/widgets';
+import { Boundary } from '@/components/widgets/boundary';
+import { useBoundary } from '@/components/widgets/boundary/hooks';
 import type { ReactCFC } from '@/models';
+import { catchMsg, isNotFoundError } from '@/utils';
 
 import ErrorSVG from '@/icons/business/error.svg?react';
 import NoConnectionSVG from '@/icons/business/no.connection.svg?react';
@@ -22,6 +22,8 @@ interface FeedbackProps {
   title?: React.ReactNode;
   description?: React.ReactNode;
 }
+
+export interface BoundaryPageProps extends BoundaryProps {}
 
 const AnomalyShell: ReactCFC<{
   image: React.ReactNode;
@@ -46,6 +48,20 @@ export const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
   />
 );
 
+const Unknown: ReactCFC<FeedbackProps> = ({ children, title }) => (
+  <AnomalyShell
+    image
+    render={(t) => (
+      <Fragment>
+        <h1 className={styles.title}>
+          {title ?? t('common:Under abnormality')}
+        </h1>
+        {children}
+      </Fragment>
+    )}
+  />
+);
+
 /** 资源403 */
 export const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => (
   <AnomalyShell
@@ -59,8 +75,7 @@ export const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => (
   />
 );
 
-/** 资源404 */
-export const NotFound: ReactCFC<FeedbackProps> = ({ title, children }) => (
+const NotFound: ReactCFC<FeedbackProps> = ({ title, children }) => (
   <AnomalyShell
     image={<NoDocumentsSVG className={styles.img} />}
     render={(t) => (
@@ -87,16 +102,44 @@ export const Maintained: ReactCFC<FeedbackProps> = ({ children, title }) => (
   />
 );
 
-export const Unknown: ReactCFC<FeedbackProps> = ({ children, title }) => (
-  <AnomalyShell
-    image
-    render={(t) => (
-      <Fragment>
-        <h1 className={styles.title}>
-          {title ?? t('common:Under abnormality')}
-        </h1>
-        {children}
-      </Fragment>
-    )}
-  />
+const Fallback: React.FC = () => {
+  const navigate = useNavigate();
+
+  const { t } = useTranslation();
+
+  const { error, info, reset } = useBoundary();
+
+  if (isNotFoundError(error)) {
+    return (
+      <NotFound
+        title={
+          <Fragment>
+            {t('common:Page not found')}
+            <span
+              style={{
+                marginLeft: 'var(--gap-03)',
+                fontSize: 'var(--font-size-4)',
+              }}
+            >
+              <IButton
+                variant="text"
+                onClick={() => {
+                  navigate('/', { replace: true });
+                  reset?.();
+                }}
+              >
+                {t('common:Home')}
+              </IButton>
+            </span>
+          </Fragment>
+        }
+      />
+    );
+  }
+
+  return <Unknown description={info?.componentStack} title={catchMsg(error)} />;
+};
+
+export const BoundaryPage: React.FC<BoundaryPageProps> = (props) => (
+  <Boundary fallback={<Fallback />} {...props} />
 );

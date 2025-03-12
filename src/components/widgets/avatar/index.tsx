@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-import { QueryBoundary } from '@/components/boundary';
 import type { ReactCFC } from '@/models';
 
+import { boundary } from '../boundary';
 import { ISpinner } from '../spin-loading';
 import { useImage } from './hooks';
 import type {
@@ -87,8 +87,4 @@ export const IAvatarCore: React.FC<Omit<IAvatarProps, 'fallback'>> = (
       );
 };
 
-export const IAvatar: ReactCFC<IAvatarProps> = ({ fallback, ...others }) => (
-  <QueryBoundary fallback={fallback}>
-    <IAvatarCore {...others} />
-  </QueryBoundary>
-);
+export const IAvatar: ReactCFC<IAvatarProps> = boundary(IAvatarCore);
