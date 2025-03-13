@@ -2,3 +2,24 @@
   width: 100%;
   max-width: 640px;
 }
+
+.wrap {
+  width: 100%;
+  height: 100%;
+
+  .img {
+    width: 254px;
+    height: 294px;
+  }
+
+  h1.title {
+    max-width: 100%;
+    padding: 0 var(--gap-03);
+    transform: translateY(-64px);
+    font-size: var(--font-size-08);
+    margin-bottom: calc(32px - 64px);
+
+    line-height: var(--control-size-03);
+    word-break: break-all;
+  }
+}

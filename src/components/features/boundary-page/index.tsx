@@ -9,6 +9,7 @@ import { type BoundaryProps, IButton, IFlex } from '@/components/widgets';
 import { Boundary } from '@/components/widgets/boundary';
 import { useBoundary } from '@/components/widgets/boundary/hooks';
 import type { ReactCFC } from '@/models';
+import { isFetchError } from '@/services';
 import { catchMsg, isNotFoundError } from '@/utils';
 
 import ErrorSVG from '@/icons/business/error.svg?react';
@@ -36,7 +37,7 @@ const AnomalyShell: ReactCFC<{
 );
 
 /** 找不到数据 */
-export const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
+const NoData: ReactCFC<FeedbackProps> = ({ children, title }) => (
   <AnomalyShell
     image={<NoSearchResultSVG className={styles.img} />}
     render={(t) => (
@@ -62,18 +63,20 @@ const Unknown: ReactCFC<FeedbackProps> = ({ children, title }) => (
   />
 );
 
-/** 资源403 */
-export const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => (
-  <AnomalyShell
-    image
-    render={(t) => (
-      <Fragment>
-        <h1 className={styles.title}>{title ?? t('common:No authority')}</h1>
-        {children}
-      </Fragment>
-    )}
-  />
-);
+/** 401、403 */
+const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => {
+  return (
+    <AnomalyShell
+      image
+      render={(t) => (
+        <Fragment>
+          <h1 className={styles.title}>{title ?? t('common:No authority')}</h1>
+          {children}
+        </Fragment>
+      )}
+    />
+  );
+};
 
 const NotFound: ReactCFC<FeedbackProps> = ({ title, children }) => (
   <AnomalyShell
@@ -88,7 +91,7 @@ const NotFound: ReactCFC<FeedbackProps> = ({ title, children }) => (
 );
 
 /** 服务端维护中 */
-export const Maintained: ReactCFC<FeedbackProps> = ({ children, title }) => (
+const Maintained: ReactCFC<FeedbackProps> = ({ children, title }) => (
   <AnomalyShell
     image={<NoConnectionSVG className={styles.img} />}
     render={(t) => (
@@ -108,6 +111,23 @@ const Fallback: React.FC = () => {
   const { t } = useTranslation();
 
   const { error, info, reset } = useBoundary();
+
+  if (isFetchError(error)) {
+    const { context } = error;
+    const { status } = context?.response ?? {};
+
+    if (status === 404) {
+      return <NotFound title={error?.message} />;
+    }
+
+    if (status === 401) {
+      return <NoAuth title={error?.message} />;
+    }
+
+    if (status === 500) {
+      return <Maintained title={error?.message} />;
+    }
+  }
 
   if (isNotFoundError(error)) {
     return (

@@ -1,8 +1,8 @@
-:root {
+:root,
+:global(#root) {
   width: 100vw;
   height: 100vh;
   height: 100dvh;
-
   color: var(--font-color-8);
   font-size: var(--font-size-4);
 }

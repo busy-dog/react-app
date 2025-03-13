@@ -1,3 +1,4 @@
+import { FetchError } from '@busymango/fetch-driver';
 import { compact } from '@busymango/utils';
 
 import { domain, prefix } from '@/init';
@@ -16,3 +17,7 @@ export async function iServerData<T = unknown>(
   if (current.success) return current.data;
   throw new Error(catchMsg(current.message));
 }
+
+export const isFetchError = (error: unknown): error is FetchError => {
+  return error instanceof FetchError;
+};
