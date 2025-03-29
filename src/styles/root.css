@@ -3,8 +3,10 @@
   width: 100vw;
   height: 100vh;
   height: 100dvh;
+  box-sizing: border-box;
   color: var(--font-color-8);
   font-size: var(--font-size-4);
+  overflow: hidden;
 }
 
 *::-webkit-scrollbar {

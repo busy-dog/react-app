@@ -16,7 +16,7 @@ import type { ReactCFC } from '@/models';
 import { isFetchError } from '@/services';
 import { catchMsg } from '@/utils';
 
-import NoSearchResultSVG from '@/icons/business/no.search.result.svg?react';
+import NoSearchResultSVG from '@/icons/feedbacks/no.search.result.svg?react';
 
 import * as styles from './index.scss';
 

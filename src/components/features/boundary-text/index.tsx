@@ -9,7 +9,7 @@ import { Boundary, type BoundaryProps } from '@/components/widgets';
 import { useBoundary } from '@/components/widgets/boundary/hooks';
 import { catchMsg } from '@/utils';
 
-import RefreshSVG from '@/icons/refresh.svg?react';
+import RefreshSVG from '@/icons/actions/refresh.svg?react';
 
 import * as styles from './index.scss';
 

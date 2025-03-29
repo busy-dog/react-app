@@ -1,17 +1,10 @@
-/**
- * @description 动态组件
- * TODO https://examples.motion.dev/react/use-presence-data
- */
-
 import { lazy } from 'react';
-import { useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'motion/react';
 
 import { isNonProd } from '@/init';
 import type { ReactSvgProps } from '@/models';
 import { devtoolAsync } from '@/utils';
 
-import Picture from '@/icons/picture.svg?react';
+import Picture from '@/icons/identifier/picture.svg?react';
 
 import { useLazyComponent, useLazyIcon } from './hooks';
 
@@ -35,16 +28,6 @@ export const DynamicIcon: React.FC<DynamicIconProps> = (props) => {
   const { SVGComponent } = useLazyIcon(path);
 
   return SVGComponent ? <SVGComponent {...others} /> : <Picture {...others} />;
-};
-
-export const DynamicPage: React.FC = () => {
-  const { pathname } = useLocation();
-
-  return (
-    <AnimatePresence mode="wait">
-      <Loadable route={pathname} />
-    </AnimatePresence>
-  );
 };
 
 export const ReactQueryDevtools = isNonProd && lazy(devtoolAsync);

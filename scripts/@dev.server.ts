@@ -34,6 +34,12 @@ const options: Configuration = {
   server: { type: 'http' },
   client: { overlay: false },
   headers: { 'Access-Control-Allow-Origin': '*' },
+  proxy: [
+    {
+      context: ['/api'],
+      target: 'http://localhost:3000',
+    },
+  ],
 };
 
 const server = new RspackDevServer(options, rspack(config));

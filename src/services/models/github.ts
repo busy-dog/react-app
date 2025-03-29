@@ -1,3 +1,5 @@
+import type { IServerModel } from './common';
+
 export interface GithubUserInfo {
   // 用户登录名
   login: string;
@@ -87,3 +89,5 @@ export interface GithubUserInfo {
     collaborators: number;
   };
 }
+
+export interface GithubUserInfoBody extends IServerModel<GithubUserInfo> {}

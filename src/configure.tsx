@@ -12,12 +12,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 
-import {
-  BoundaryPage,
-  ISnackbarPortal,
-  ISuspense,
-  ReactQueryDevtools,
-} from '@/components';
+import { ISnackbarPortal, ReactQueryDevtools } from '@/components';
 import { useAppAction, useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
 import { catchMsg } from '@/utils';
@@ -69,9 +64,7 @@ export const Configure: ReactCFC = (props) => {
 
   return (
     <QueryClientProvider client={client}>
-      <BoundaryPage>
-        <ISuspense>{children}</ISuspense>
-      </BoundaryPage>
+      {children}
       <ISnackbarPortal />
       {ReactQueryDevtools && <ReactQueryDevtools />}
     </QueryClientProvider>

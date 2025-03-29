@@ -11,7 +11,7 @@ import { IChip, IFlex, IInputCore, ISignLine } from '@/components';
 import { COLOR_DISC } from '@/constants';
 import { isInputElement } from '@/utils';
 
-import PictureSVG from '@/icons/picture.svg?react';
+import PictureSVG from '@/icons/identifier/picture.svg?react';
 
 export type IChipConfig = Pick<
   IChipProps,

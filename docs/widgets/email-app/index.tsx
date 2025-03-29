@@ -17,7 +17,6 @@ import {
   IFlex,
   IMenu,
   IPopover,
-  ISafeArea,
   ISegment,
   ISelector,
   ISignLine,
@@ -78,7 +77,7 @@ const Count: React.FC<{ type?: string }> = ({ type }) => {
 };
 
 export const EmailApp: React.FC = () => (
-  <ISafeArea className={styles.area}>
+  <div className={styles.area}>
     <div>
       <ISelector
         defaultValue={'mango@gmail.com'}
@@ -194,5 +193,5 @@ export const EmailApp: React.FC = () => (
     <div style={{ height: '100%' }}>
       <EmialBody />
     </div>
-  </ISafeArea>
+  </div>
 );

@@ -31,9 +31,9 @@ try {
     scan({ enabled: true, log: true });
   }
 
-  const { IRoutes } = await import('./routes');
-
   const { caniuse } = await import('./caniuse');
+
+  const { IRoutes } = await import('@/routers');
 
   const { Configure } = await import('@/configure');
 

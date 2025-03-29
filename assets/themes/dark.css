@@ -296,7 +296,7 @@
   --font-color-b8: rgb(255 255 255 / 1);
 
   /* 字体颜色 - 强调 */
-  --font-color-info: rgb(var(--blue-color-600) / 1);
+  --font-color-info: rgb(var(--blue-color-400) / 1);
   /* 字体颜色 - 警告 */
   --font-color-warn: rgb(var(--orange-color-900) / 1);
   /* 字体颜色 - 危险 */
@@ -306,7 +306,7 @@
   /* 字体颜色 - 禁用 */
   --font-color-disabled: rgb(var(--gray-color-1000) / 0.5);
   /* 字体颜色 - 高亮 */
-  --font-color-highlight: rgb(var(--blue-color-600) / 1);
+  --font-color-highlight: rgb(var(--blue-color-500) / 1);
 
   /* 图标颜色-默认 */
   --icon-color: rgb(var(--gray-color-700) / 1);

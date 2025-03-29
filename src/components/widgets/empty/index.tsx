@@ -1,6 +1,6 @@
 import type { ReactCFC } from '@/models';
 
-import EmptySVG from '@/icons/business/empty.svg?react';
+import EmptySVG from '@/icons/feedbacks/empty.svg?react';
 
 import { IFlex } from '../flex';
 import { ISuspense } from '../suspense';

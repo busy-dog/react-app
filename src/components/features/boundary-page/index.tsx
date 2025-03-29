@@ -12,10 +12,10 @@ import type { ReactCFC } from '@/models';
 import { isFetchError } from '@/services';
 import { catchMsg, isNotFoundError } from '@/utils';
 
-import ErrorSVG from '@/icons/business/error.svg?react';
-import NoConnectionSVG from '@/icons/business/no.connection.svg?react';
-import NoDocumentsSVG from '@/icons/business/no.documents.svg?react';
-import NoSearchResultSVG from '@/icons/business/no.search.result.svg?react';
+import ErrorSVG from '@/icons/feedbacks/error.svg?react';
+import NoConnectionSVG from '@/icons/feedbacks/no.connection.svg?react';
+import NoDocumentsSVG from '@/icons/feedbacks/no.documents.svg?react';
+import NoSearchResultSVG from '@/icons/feedbacks/no.search.result.svg?react';
 
 import * as styles from './index.scss';
 
@@ -72,6 +72,13 @@ const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => {
         <Fragment>
           <h1 className={styles.title}>{title ?? t('common:No authority')}</h1>
           {children}
+          <IButton
+            onClick={() => {
+              window.location.href = '/api/signin/github';
+            }}
+          >
+            {t('common:Login')}
+          </IButton>
         </Fragment>
       )}
     />

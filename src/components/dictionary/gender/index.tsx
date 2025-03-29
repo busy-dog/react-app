@@ -6,8 +6,8 @@ import { Fragment } from 'react';
 
 import { Gender } from '@/constants/enums';
 
-import Female from '@/icons/female.svg?react';
-import Male from '@/icons/male.svg?react';
+import Female from '@/icons/identifier/gender.female.svg?react';
+import Male from '@/icons/identifier/gender.male.svg?react';
 
 import * as styles from './index.scss';
 

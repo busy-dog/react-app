@@ -1,8 +1,8 @@
 import type { ICheckboxProps, ICheckIconRender } from '@/components';
 import { ICheckbox, IFlex } from '@/components';
 
-import FavoriteFlatSVG from '@/icons/favorite.flat.svg?react';
-import FavoriteSVG from '@/icons/favorite.svg?react';
+import FavoriteFlatSVG from '@/icons/actions/favorite.flat.svg?react';
+import FavoriteSVG from '@/icons/actions/favorite.svg?react';
 
 const icon: ICheckIconRender = (_, { checked }) =>
   checked ? (
