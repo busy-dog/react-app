@@ -3,7 +3,7 @@
  */
 
 import { readdirSync, readFileSync } from 'fs';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
 import { isTrue, type PlainObject } from '@busymango/is-esm';
@@ -18,6 +18,7 @@ import type {
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
+import { CSSVarTSEmitPlugin } from '../plugins';
 import { app, dir } from '../project';
 
 type RspackPlugin =
@@ -93,12 +94,11 @@ export const iPlugins = (
       },
     }),
     isTrue(params?.doctor) && doctor,
-    env === 'dev' && new rspack.HotModuleReplacementPlugin(),
     env === 'dev' && new ReactRefreshRspackPlugin({}),
-    // env === 'dev' &&
-    //   new CSSVarTSEmitPlugin({
-    //     includes: ['themes\\dark.css'],
-    //     dirname: join(dir.src, 'types'),
-    //   }),
+    env === 'dev' &&
+      new CSSVarTSEmitPlugin({
+        includes: ['themes\\dark.css'],
+        dirname: join(dir.src, 'types'),
+      }),
   ]);
 };

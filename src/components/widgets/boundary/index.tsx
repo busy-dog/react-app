@@ -118,4 +118,5 @@ export function boundary<P extends object>(
   return BoundaryComponent;
 }
 
+export { useBoundary } from './hooks';
 export type { BoundaryProps, BoundaryState } from './models';

@@ -30,7 +30,8 @@ export const client = new QueryClient({
       retry: (count: number, error: unknown) => {
         if (error instanceof FetchError) {
           const { status } = error.context?.response ?? {};
-          if (status === 401) return false;
+          const condition = ((status ?? 0) / 100) | 0;
+          if (condition === 4) return false;
         }
         return count <= 2;
       },

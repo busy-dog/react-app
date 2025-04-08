@@ -1,9 +1,16 @@
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import type { ChildNode } from 'postcss';
-import { parse } from 'postcss';
+import { writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-import { isNonEmptyArray, isString } from '@busymango/is-esm';
+import { transform } from 'lightningcss';
+
+import {
+  isArray,
+  isBufferSource,
+  isNil,
+  isNonEmptyArray,
+  isRegExp,
+  isString,
+} from '@busymango/is-esm';
 import { dedup } from '@busymango/utils';
 import type { Asset, Compiler, RspackPluginInstance } from '@rspack/core';
 
@@ -30,27 +37,28 @@ declare module 'react' {
 const compile = async (assets: readonly Asset[], includes?: string[]) => {
   const names: string[] = [];
 
-  const recursion = async (node: ChildNode) => {
-    if (node.type === 'rule') {
-      node.nodes?.forEach((node) => {
-        if (node.type === 'decl' && node.variable) {
-          names.push(node.prop);
-        }
-      });
-    }
-    if (node.type === 'atrule') {
-      await Promise.all(node.nodes?.map(recursion) ?? []);
-    }
-  };
-
   await Promise.all(
     assets
       .filter(({ name }) => name.endsWith('.css'))
       .flatMap(({ name, source }) =>
         includes?.map((include) => {
           if (isSubdirectory(name, include)) {
-            const { nodes } = parse(source.source());
-            return nodes?.map(recursion);
+            const code = source.source();
+            if (isBufferSource(code)) {
+              transform({
+                code,
+                minify: false,
+                unusedSymbols: ['--color'],
+                filename: 'visitor.css',
+                visitor: {
+                  Declaration({ property, value }) {
+                    if (property === 'custom') {
+                      names.push(value.name);
+                    }
+                  },
+                },
+              });
+            }
           }
           return [];
         })
@@ -67,18 +75,38 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
     this.options = options;
   }
 
-  apply({ hooks: { thisCompilation } }: Compiler) {
+  apply({ hooks: { thisCompilation }, options }: Compiler) {
     const {
       dirname,
       includes,
       filename = 'react.css.vars.d.ts',
     } = this.options;
 
+    if (isNil(options.watchOptions.ignored)) {
+      options.watchOptions.ignored = [];
+    }
+
+    if (isString(options.watchOptions.ignored)) {
+      const { ignored } = options.watchOptions;
+      options.watchOptions.ignored = [ignored];
+    }
+
+    if (isRegExp(options.watchOptions.ignored)) {
+      const { ignored } = options.watchOptions;
+      options.watchOptions.ignored = [ignored.toString()];
+    }
+
+    if (isArray(options.watchOptions.ignored)) {
+      const reg = `**/${filename}`;
+      const { ignored } = options.watchOptions;
+      options.watchOptions.ignored = [...ignored, reg];
+    }
+
     const record: { data: null | string } = { data: null };
 
     thisCompilation.tap(PLUGIN_NAME, async (compilation) => {
-      const { afterProcessAssets } = compilation.hooks;
-      afterProcessAssets.tap({ name: PLUGIN_NAME }, async () => {
+      const { processAssets } = compilation.hooks;
+      processAssets.tap({ name: PLUGIN_NAME }, async () => {
         try {
           const assets = compilation.getAssets();
           const data = await compile(assets, includes);

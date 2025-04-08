@@ -4,23 +4,38 @@
 
 import sass from 'sass-embedded';
 
-import type { RuleSetRule, SwcLoaderOptions } from '@rspack/core';
+import type {
+  LightningcssLoaderOptions,
+  RuleSetRule,
+  RuleSetUse,
+  SwcLoaderOptions,
+} from '@rspack/core';
+
+const CSSLoader: RuleSetUse = {
+  loader: 'builtin:lightningcss-loader',
+  options: {
+    targets: ['chrome >= 87', 'edge >= 88', '> 0.5%'],
+  } satisfies LightningcssLoaderOptions,
+};
 
 /**
  * 同时使用 `modern-compiler` 和 `sass-embedded` 可以显著提升构建性能
  * 需要 `sass-loader >= 14.2.1`
  */
 export const SassRule: RuleSetRule = {
-  use: {
-    loader: 'sass-loader',
-    options: {
-      api: 'modern-compiler',
-      implementation: sass,
-    } satisfies {
-      api: string;
-      implementation: typeof sass;
+  use: [
+    CSSLoader,
+    {
+      loader: 'sass-loader',
+      options: {
+        api: 'modern-compiler',
+        implementation: sass,
+      } satisfies {
+        api: string;
+        implementation: typeof sass;
+      },
     },
-  },
+  ],
   type: 'css/module',
   test: /\.(sa|sc|c)ss$/,
   exclude: /node_modules/,

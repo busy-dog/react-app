@@ -25,6 +25,7 @@ watch(dir.browserslistrc, () => {
 
 const options: Configuration = {
   port,
+  hot: true,
   compress: true,
   host: opts.host,
   allowedHosts: 'all',

@@ -30,12 +30,6 @@
     "**/themes/dark.css",
     "src/styles/*.css",
   ],
-  "css-module-typed.pluginOptions": {
-    "goToDefinition": true,
-    "classnameTransform": "camelCaseOnly",
-    "customMatcher": "\\.(c|le|sa|sc)ss$",
-    "allowUnknownClassnamesAsDeprecated": true
-  },
   "[svg]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "DotJoshJohnson.xml"

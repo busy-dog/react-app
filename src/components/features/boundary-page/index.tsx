@@ -5,11 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { isTrue } from '@busymango/is-esm';
 
-import { type BoundaryProps, IButton, IFlex } from '@/components/widgets';
-import { Boundary } from '@/components/widgets/boundary';
-import { useBoundary } from '@/components/widgets/boundary/hooks';
+import type { BoundaryProps } from '@/components/widgets';
+import { Boundary, IButton, IFlex, useBoundary } from '@/components/widgets';
 import type { ReactCFC } from '@/models';
-import { isFetchError } from '@/services';
+import { isFetchError, USER_OAUTH_GITHUB_API } from '@/services';
 import { catchMsg, isNotFoundError } from '@/utils';
 
 import ErrorSVG from '@/icons/feedbacks/error.svg?react';
@@ -74,7 +73,7 @@ const NoAuth: ReactCFC<FeedbackProps> = ({ children, title }) => {
           {children}
           <IButton
             onClick={() => {
-              window.location.href = '/api/signin/github';
+              window.location.href = USER_OAUTH_GITHUB_API;
             }}
           >
             {t('common:Login')}

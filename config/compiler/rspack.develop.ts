@@ -20,6 +20,9 @@ const create = (params: AppDevParams = {}): Configuration => ({
   optimization: {
     minimize: false,
   },
+  output: {
+    assetModuleFilename: 'assets/[name].[ext]',
+  },
   experiments: {
     incremental: true,
   },
