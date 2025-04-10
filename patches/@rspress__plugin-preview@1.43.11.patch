@@ -1,0 +1,68 @@
+diff --git a/dist/index.js b/dist/index.js
+index 70bab73dbbc2a59500944f004fc915dbf82d1a98..19fe2a32723da2a1e9d692fd4660c5d412ef7c26 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -96,11 +96,18 @@ var __webpack_exports__ = {};
+         import Demo from ${JSON.stringify(demoPath)};
+         render(() => <Demo />, document.getElementById('root'));
+         `;
++        //         const reactEntry = `
++        // import { render } from 'react-dom';
++        // import ${JSON.stringify(entryCssPath)};
++        // import Demo from ${JSON.stringify(demoPath)};
++        // render(<Demo />, document.getElementById('root'));
++        // `;
+                 const reactEntry = `
+-        import { render } from 'react-dom';
++        import { createRoot } from 'react-dom/client';
+         import ${JSON.stringify(entryCssPath)};
+         import Demo from ${JSON.stringify(demoPath)};
+-        render(<Demo />, document.getElementById('root'));
++        const container = document.getElementById('root');
++        if (container) createRoot(container).render(<Demo />);
+         `;
+                 const entryContent = 'react' === framework ? reactEntry : solidEntry;
+                 (0, external_node_fs_namespaceObject.writeFileSync)(entry, entryContent);
+@@ -109,20 +116,35 @@ var __webpack_exports__ = {};
+         });
+         else Object.entries(demos).forEach(([key, routes])=>{
+             if (0 === routes.length) return;
++    //         const reactContent = `
++    //     import { render } from 'react-dom';
++    //     import ${JSON.stringify(entryCssPath)};
++    //     ${routes.map((demo, index)=>`import Demo_${index} from ${JSON.stringify(demo.path)}`).join('\n')}
++    //     function App() {
++    //       return (
++    //         <div className="preview-container">
++    //           <div className="preview-nav">{"${routes[0].title}"}</div>
++    //           ${routes.map((_demo, index)=>`<Demo_${index} />`).join('\n')}
++    //         </div>
++    //       )
++    //     }
++    //     render(<App /> , document.getElementById('root'));
++    //   `;
+             const reactContent = `
+-        import { render } from 'react-dom';
++        import { createRoot } from 'react-dom/client';
+         import ${JSON.stringify(entryCssPath)};
+         ${routes.map((demo, index)=>`import Demo_${index} from ${JSON.stringify(demo.path)}`).join('\n')}
+         function App() {
+-          return (
++            return (
+             <div className="preview-container">
+-              <div className="preview-nav">{"${routes[0].title}"}</div>
+-              ${routes.map((_demo, index)=>`<Demo_${index} />`).join('\n')}
++                <div className="preview-nav">{"${routes[0].title}"}</div>
++                ${routes.map((_demo, index)=>`<Demo_${index} />`).join('\n')}
+             </div>
+-          )
++            )
+         }
+-        render(<App /> , document.getElementById('root'));
+-      `;
++        const container = document.getElementById('root');
++        if (container) createRoot(container).render(<App />);
++        `;
+             const solidContent = `
+         import { render } from 'solid-js/web';
+         import ${JSON.stringify(entryCssPath)};

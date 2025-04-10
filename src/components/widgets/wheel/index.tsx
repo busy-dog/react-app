@@ -1,6 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { motion, useScroll, useTransform } from 'motion/react';
 
 import {
   isArray,
@@ -27,34 +26,21 @@ import type { IWheelOptionProps, IWheelProps } from './models';
 import * as styles from './index.scss';
 
 const IWheelOption: ReactCFC<IWheelOptionProps> = (props) => {
-  const { container, children, isFocus, ...others } = props;
+  const { children, isFocus, ...others } = props;
 
   const target = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target,
-    container,
-    layoutEffect: false,
-    offset: ['end end', 'start start'],
-  });
-
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
-
   return (
-    <motion.div
+    <div
       ref={target}
-      animate={{ rotateX: rotateX.get(), scale: 1 }}
       className={classNames(styles.option, isFocus && styles.focus)}
-      exit={{ opacity: 0.36, scale: 0 }}
-      initial={{ opacity: 0.88, scale: 0 }}
-      transition={{ ease: 'linear', duration: 0.128 }}
       onClick={() => {
         iScrollIntoView(target);
       }}
       {...others}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import type { AnimationDefinition } from 'motion/react';
 import { AnimatePresence, motion } from 'motion/react';
 
+import { isHTMLElement } from '@busymango/is-esm';
 import { compact, isEqual } from '@busymango/utils';
 import {
   useClick,
@@ -12,6 +13,7 @@ import {
 } from '@floating-ui/react';
 
 import { useMemoFunc, useToggle } from '@/hooks';
+import { iFindElement } from '@/utils';
 
 import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
@@ -104,6 +106,7 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
         scroll
         className={styles.overlay}
         open={context.open || isPlaying}
+        relative={isHTMLElement(iFindElement(root))}
         root={root}
       >
         <AnimatePresence>
