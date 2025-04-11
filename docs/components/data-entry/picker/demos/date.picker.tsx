@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import minmax from 'dayjs/plugin/minMax';
@@ -9,13 +9,15 @@ import { isEqual, type OmitOf } from '@busymango/utils';
 import type { ControlOption, IPickerProps } from '@/components';
 import {
   IControlWrap,
-  IFlex,
   IPicker,
   ISignLine,
   useControlState,
 } from '@/components';
 import { useMemoFunc } from '@/hooks';
 import { iThemeVariable } from '@/utils';
+
+import 'assets/themes/light.css';
+import 'assets/themes/dark.css';
 
 dayjs.extend(minmax);
 
@@ -148,28 +150,21 @@ const DatePicker: React.FC<
   );
 };
 
-const App: React.FC = () => {
-  const ref = useRef(null);
-
-  return (
-    <IFlex centered>
-      <article
-        ref={ref}
-        style={{
-          width: 375,
-          height: 667,
-          position: 'relative',
-          margin: iThemeVariable('--gap-02'),
-          padding: iThemeVariable('--gap-04'),
-          boxShadow: iThemeVariable('--shadow-06'),
-          borderRadius: iThemeVariable('--border-radius-03'),
-          backgroundColor: iThemeVariable('--bg-color-normal'),
-        }}
-      >
-        <DatePicker root={ref} />
-      </article>
-    </IFlex>
-  );
-};
+const App: React.FC = () => (
+  <article
+    style={{
+      width: '100vw',
+      height: '100vh',
+      position: 'relative',
+      boxSizing: 'border-box',
+      padding: iThemeVariable('--gap-04'),
+      boxShadow: iThemeVariable('--shadow-06'),
+      borderRadius: iThemeVariable('--border-radius-03'),
+      backgroundColor: iThemeVariable('--bg-color-normal'),
+    }}
+  >
+    <DatePicker />
+  </article>
+);
 
 export default App;
