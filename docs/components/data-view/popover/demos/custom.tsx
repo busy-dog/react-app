@@ -3,7 +3,6 @@ import { useRef, useState } from 'react';
 import type { Placement } from '@floating-ui/react';
 
 import { IButton, IFlex, IPopover, IRadioGroup } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => {
   const ref = useRef(null);
@@ -37,7 +36,7 @@ const App: React.FC = () => {
       <IFlex
         ref={ref}
         centered
-        style={{ position: 'relative', padding: iThemeVariable('--gap-10') }}
+        style={{ position: 'relative', padding: 'var(--gap-10)' }}
       >
         <IPopover
           open

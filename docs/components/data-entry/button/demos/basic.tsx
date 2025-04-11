@@ -2,7 +2,6 @@ import { AnimatePresence } from 'motion/react';
 
 import { IButton, IFlex, ISignLine, ISwitch } from '@/components';
 import { useToggle } from '@/hooks';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => {
   const [enabled, { iCheck }] = useToggle();
@@ -15,11 +14,7 @@ const App: React.FC = () => {
           icon: (_, { checked }) => (
             <AnimatePresence>
               {!checked && (
-                <ISignLine
-                  ring
-                  color={iThemeVariable('--danger-color-active')}
-                  type="ban"
-                />
+                <ISignLine ring color="var(--danger-color-active)" type="ban" />
               )}
             </AnimatePresence>
           ),

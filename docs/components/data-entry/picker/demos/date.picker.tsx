@@ -14,7 +14,6 @@ import {
   useControlState,
 } from '@/components';
 import { useMemoFunc } from '@/hooks';
-import { iThemeVariable } from '@/utils';
 
 import 'assets/themes/light.css';
 import 'assets/themes/dark.css';
@@ -157,10 +156,10 @@ const App: React.FC = () => (
       height: '100vh',
       position: 'relative',
       boxSizing: 'border-box',
-      padding: iThemeVariable('--gap-04'),
-      boxShadow: iThemeVariable('--shadow-06'),
-      borderRadius: iThemeVariable('--border-radius-03'),
-      backgroundColor: iThemeVariable('--bg-color-normal'),
+      padding: 'var(--gap-04)',
+      boxShadow: 'var(--shadow-06)',
+      borderRadius: 'var(--border-radius-03)',
+      backgroundColor: 'var(--bg-color-normal)',
     }}
   >
     <DatePicker />

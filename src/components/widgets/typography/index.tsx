@@ -5,8 +5,6 @@ import { motion } from 'motion/react';
 
 import { ifnot } from '@busymango/utils';
 
-import { iThemeVariable } from '@/utils';
-
 import type { ITypographyElement, ITypographyProps } from './models';
 
 import * as styles from './index.scss';
@@ -39,9 +37,7 @@ export const ITypography = forwardRef<ITypographyElement, ITypographyProps>(
       ),
       style: {
         WebkitLineClamp: ifnot(maxRow !== Infinity && maxRow),
-        backgroundColor: ifnot(
-          mark && `rgb(${iThemeVariable(`--${mark}-color-500`)}/ 1)`
-        ),
+        backgroundColor: ifnot(mark && `rgb(var(--${mark}-color-500)}/ 1)`),
         textAlign: align,
         ...style,
       } satisfies React.CSSProperties,

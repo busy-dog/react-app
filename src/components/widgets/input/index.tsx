@@ -108,6 +108,7 @@ export const IInput: React.FC<IInputProps> = (props) => {
     pattern,
     onPrefixClick,
     onSuffixClick,
+    isSuffixClickable,
     ...others
   } = props;
 

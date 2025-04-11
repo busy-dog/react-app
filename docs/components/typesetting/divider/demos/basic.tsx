@@ -1,9 +1,8 @@
 import { ICard, IChip, IDivider, IFlex, ITypography } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => (
   <ICard style={{ maxWidth: 360 }}>
-    <div style={{ padding: iThemeVariable('--gap-06') }}>
+    <div style={{ padding: 'var(--gap-06)' }}>
       <IFlex align="center" justify="space-between">
         <ITypography variant="h5">Toothbrush</ITypography>
         <ITypography variant="h6">$4.50</ITypography>
@@ -14,9 +13,9 @@ const App: React.FC = () => (
       </ITypography>
     </div>
     <IDivider />
-    <div style={{ padding: iThemeVariable('--gap-06') }}>
+    <div style={{ padding: 'var(--gap-06)' }}>
       <ITypography variant="body">Select type</ITypography>
-      <IFlex gap={iThemeVariable('--gap-03')}>
+      <IFlex gap="var(--gap-03)">
         <IChip color="purple">{'Soft'}</IChip>
         <IChip>Medium</IChip>
         <IChip>Hard</IChip>

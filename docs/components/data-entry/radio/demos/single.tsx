@@ -1,7 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 
 import { IFieldCell, IFlex, IFormWrap, IRadio } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => {
   const { Field } = useForm<{
@@ -13,7 +12,7 @@ const App: React.FC = () => {
       <IFieldCell title="字段">
         <Field name="fir">
           {({ state, setValue }) => (
-            <IFlex gap={iThemeVariable('--gap-03')}>
+            <IFlex gap="var(--gap-03)">
               {['A', 'C'].map((value) => (
                 <IRadio
                   key={value}

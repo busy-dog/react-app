@@ -1,10 +1,9 @@
 import { BaseLineWrap } from 'docs/widgets';
 
 import { IFlex, ISignLine, ISVGWrap } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => (
-  <IFlex vertical gap={iThemeVariable('--gap-06')}>
+  <IFlex vertical gap={'var(--gap-06)'}>
     <BaseLineWrap>
       <ISignLine ring type="helper" />
       帮助

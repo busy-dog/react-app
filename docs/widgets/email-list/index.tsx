@@ -15,7 +15,6 @@ import {
   ITypography,
   IVirtualizer,
 } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 import { emails } from '../data';
 
@@ -47,7 +46,7 @@ export const EmailList: React.FC = () => {
       <div
         style={{
           height: '100%',
-          padding: `${iThemeVariable('--gap-03')} 0`,
+          padding: `$'var(--gap-03)' 0`,
         }}
       >
         <IEmptyWrap isEmpty={isEmpty(data)} isLoading={isLoading}>
@@ -66,7 +65,7 @@ export const EmailList: React.FC = () => {
                       </ITypography>
                     }
                     footer={
-                      <IFlex gap={iThemeVariable('--gap-02')}>
+                      <IFlex gap="var(--gap-02)">
                         <IChip>会议</IChip>
                         <IChip>工作</IChip>
                         <IChip>重要</IChip>

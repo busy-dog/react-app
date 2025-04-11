@@ -4,7 +4,7 @@ import { isHTMLElement } from '@busymango/is-esm';
 import { ifnot } from '@busymango/utils';
 
 import { ICard, IFlex, IPopover, ITypography } from '@/components';
-import { ellipsis, iThemeVariable } from '@/utils';
+import { ellipsis } from '@/utils';
 
 const string = `各位同事领导好\r\n\r\n\r\n\r\n\r\n\r\nEAST本月报送即将开始，提醒您及时在PLMS系统中完成以下事项，谢谢!(PLMS系统地址：http://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)
 EAST本月报送即将开始，提醒您及时在PLMS系统中完成以下事项，谢谢!(PLMS系统地址：http://ivs-plms.paic.com.cn)
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       ref={ref}
       vertical
       gap={16}
-      style={{ padding: `${iThemeVariable('--gap-03')} 0` }}
+      style={{ padding: `$'var(--gap-03)' 0` }}
     >
       <IPopover
         content={string}

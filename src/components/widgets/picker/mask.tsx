@@ -1,7 +1,5 @@
 import { nanoid } from 'nanoid';
 
-import { iThemeVariable } from '@/utils';
-
 import { IFlex } from '../flex';
 
 import * as styles from './mask.scss';
@@ -11,7 +9,7 @@ const iLinearGradientTop = nanoid();
 const iLinearGradientBottom = nanoid();
 
 export const IPickerMask: React.FC = () => {
-  const stopColor = iThemeVariable('--bg-color-widgets');
+  const stopColor = 'var(--bg-color-widgets)';
 
   return (
     <IFlex vertical className={styles.mask} justify="space-between">

@@ -1,5 +1,4 @@
 import { ICard, IChip, ITypography } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 const App: React.FC = () => (
   <ICard>
@@ -8,13 +7,13 @@ const App: React.FC = () => (
       <ITypography variant="inherit">success</ITypography>
     </ITypography>
     <ITypography variant="body">
-      <IChip size="mini" style={{ margin: `0 ${iThemeVariable('--gap-02')}` }}>
+      <IChip size="mini" style={{ margin: `0 $'var(--gap-02)'` }}>
         Typography
       </IChip>
       允许您创建
       <IChip
         size="mini"
-        style={{ margin: `0 ${iThemeVariable('--gap-02')}` }}
+        style={{ margin: `0 $'var(--gap-02)'` }}
         variant="bordered"
       >
         嵌套

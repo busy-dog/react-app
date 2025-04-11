@@ -23,7 +23,6 @@ import {
   ISuspense,
   ISVGWrap,
 } from '@/components';
-import { iThemeVariable } from '@/utils';
 
 import { EmialBody } from '../email-body';
 import { EmailList } from '../email-list';
@@ -34,7 +33,7 @@ const options: ControlOption[] = [
   {
     value: 'mango@gmail.com',
     label: (
-      <IFlex centered gap={iThemeVariable('--gap-02')}>
+      <IFlex centered gap="var(--gap-02)">
         <ISVGWrap>
           <GmailSVG />
         </ISVGWrap>
@@ -45,7 +44,7 @@ const options: ControlOption[] = [
   {
     value: 'mango@cloud.com',
     label: (
-      <IFlex centered gap={iThemeVariable('--gap-02')}>
+      <IFlex centered gap="var(--gap-02)">
         <ISVGWrap>
           <CloudSVG />
         </ISVGWrap>
@@ -101,7 +100,7 @@ export const EmailApp: React.FC = () => (
       justify="space-between"
       style={{ padding: 8, height: '100%', width: '100%' }}
     >
-      <IFlex gap={iThemeVariable('--gap-03')} style={{ fontSize: 16 }}>
+      <IFlex gap="var(--gap-03)" style={{ fontSize: 16 }}>
         <IPopover
           content="archive"
           render={{

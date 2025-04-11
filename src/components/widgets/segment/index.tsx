@@ -2,7 +2,7 @@ import { Fragment, useId } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { iPressEvent, iThemeVariable } from '@/utils';
+import { iPressEvent } from '@/utils';
 
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
@@ -41,7 +41,7 @@ const iItemRender: ISegmentItemRender = (
   <motion.div
     className={styles.itemWrap}
     whileHover={{
-      backgroundColor: iThemeVariable('--fill-color-hover'),
+      backgroundColor: 'var(--fill-color-hover)',
     }}
   >
     {thumb}
@@ -96,7 +96,7 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
     defaultValue,
     value: _value,
     size = 'medium',
-    gap = iThemeVariable('--gap-02'),
+    gap = 'var(--gap-02)',
     onChange: _onChange,
     render,
     ...others

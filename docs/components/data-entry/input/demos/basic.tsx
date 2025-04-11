@@ -6,7 +6,7 @@ import { isEmpty } from '@busymango/is-esm';
 import type { IControlWrapProps, IInputProps } from '@/components';
 import { IInput, ISignLine, onInputCatch, useControlState } from '@/components';
 
-import AccountSVG from '@/icons/identifier/account.svg';
+import AccountSVG from '@/icons/identifier/account.svg?react';
 
 const Input: React.FC<
   IInputProps &
