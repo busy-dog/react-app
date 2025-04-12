@@ -6,11 +6,15 @@ import { initReactI18next } from 'react-i18next';
 import dayjs from 'dayjs';
 import type { InitOptions } from 'i18next';
 import i18n, { t } from 'i18next';
+import { isString, omit } from 'remeda';
 
-import { isHTMLElement, isString } from '@busymango/is-esm';
-import { dom, ifnot, omit } from '@busymango/utils';
-
-import { iThemeDefault, iThemeRoot } from './utils';
+import {
+  createDom,
+  ensure,
+  isHTMLElement,
+  iThemeDefault,
+  iThemeRoot,
+} from './utils';
 
 import 'dayjs/locale/zh-cn';
 
@@ -66,8 +70,8 @@ const existing = document.querySelector(`#${env.root}`);
 
 /** 创建应用容器 */
 export const container =
-  ifnot(isHTMLElement(existing) && existing) ??
-  dom.create('div', { id: env.root }, document.body);
+  ensure(isHTMLElement(existing) && existing) ??
+  createDom('div', { id: env.root }, document.body);
 
 export const i18nInit = async () => {
   const ns: InitOptions['ns'] = ['common', 'fallback'];

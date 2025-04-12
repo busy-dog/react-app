@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
-
-import { isFunction, isHTMLElement } from '@busymango/is-esm';
-import { debounce, theLast } from '@busymango/utils';
+import { funnel, isFunction, last } from 'remeda';
 
 import type { ReactTargetType } from '@/models';
-import { iFindElement } from '@/utils';
+import { iFindElement, isHTMLElement } from '@/utils';
 
 export type ResizeObserverOpts = {
   enabled?: boolean;
@@ -25,10 +23,12 @@ export function useResizeObserver(
     const element = iFindElement(target);
 
     if (enabled && isFunction(func) && isHTMLElement(element)) {
-      const callback = wait ? debounce(func, wait).starer : func;
+      const callback = wait
+        ? funnel(func, { minQuietPeriodMs: wait }).call
+        : func;
 
       const observer = new ResizeObserver((entries) => {
-        callback(theLast(entries)!);
+        callback(last(entries)!);
       });
 
       observer.observe(element);

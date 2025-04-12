@@ -2,7 +2,7 @@ import { Fragment, useMemo } from 'react';
 import { motion } from 'motion/react';
 import type { Easing } from 'motion-dom';
 
-import { compact, iCSSVariable, ifnot } from '@busymango/utils';
+import { compact, ensure, iCSSVariable } from 'src/utils';
 
 import { colors } from '../color-disc';
 import { bezierToSVGPath, isBezier, parseCubicBezier } from './helpers';
@@ -34,7 +34,7 @@ const Slide: React.FC<CubicBezierDemonstrateProps> = ({
         animate="end"
         className={styles.slideSlider}
         style={{
-          backgroundColor: ifnot(fill && `rgba(var(--${fill}-color-500) / 1)`),
+          backgroundColor: ensure(fill && `rgba(var(--${fill}-color-500) / 1)`),
         }}
         transition={{
           ease: value,

@@ -1,10 +1,7 @@
 import { useRef } from 'react';
 
-import { isHTMLElement } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
-
 import { ICard, IFlex, IPopover, ITypography } from '@/components';
-import { ellipsis } from '@/utils';
+import { ellipsis, ensure, isHTMLElement } from 'src/utils';
 
 const string = `各位同事领导好\r\n\r\n\r\n\r\n\r\n\r\nEAST本月报送即将开始，提醒您及时在PLMS系统中完成以下事项，谢谢!(PLMS系统地址：http://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)tp://ivs-plms.paic.com.cn)
 EAST本月报送即将开始，提醒您及时在PLMS系统中完成以下事项，谢谢!(PLMS系统地址：http://ivs-plms.paic.com.cn)
@@ -15,7 +12,7 @@ const App: React.FC = () => {
 
   const root = () => {
     const { parentNode } = ref.current ?? {};
-    return ifnot(isHTMLElement(parentNode) && parentNode) ?? null;
+    return ensure(isHTMLElement(parentNode) && parentNode) ?? null;
   };
 
   return (

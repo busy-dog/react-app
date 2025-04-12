@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import { theFirst, theLast } from '@busymango/utils';
+import { first, last } from 'remeda';
 
 import { IFlex, IRadioGroup } from '@/components';
 
@@ -36,7 +35,7 @@ const App: React.FC = () => {
             style={{
               width: '25%',
               height: 64,
-              backgroundColor: i % 2 ? theFirst(palette) : theLast(palette),
+              backgroundColor: i % 2 ? first(palette) : last(palette),
             }}
           />
         ))}

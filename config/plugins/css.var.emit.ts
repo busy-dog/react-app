@@ -2,19 +2,16 @@ import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { transform } from 'lightningcss';
+import { isArray, isNullish, isString, unique } from 'remeda';
 
-import {
-  isArray,
-  isBufferSource,
-  isNil,
-  isNonEmptyArray,
-  isRegExp,
-  isString,
-} from '@busymango/is-esm';
-import { dedup } from '@busymango/utils';
 import type { Asset, Compiler, RspackPluginInstance } from '@rspack/core';
 
-import { isSubdirectory } from '../../helpers';
+import {
+  isBufferSource,
+  isNonEmptyArray,
+  isRegExp,
+  isSubdirectory,
+} from '../../helpers';
 
 type PluginOptions = {
   dirname: string;
@@ -65,7 +62,7 @@ const compile = async (assets: readonly Asset[], includes?: string[]) => {
       )
   );
 
-  return isNonEmptyArray(names) && template(dedup(names));
+  return isNonEmptyArray(names) && template(unique(names));
 };
 
 export class CSSVarTSEmitPlugin implements RspackPluginInstance {
@@ -82,7 +79,7 @@ export class CSSVarTSEmitPlugin implements RspackPluginInstance {
       filename = 'react.css.vars.d.ts',
     } = this.options;
 
-    if (isNil(options.watchOptions.ignored)) {
+    if (isNullish(options.watchOptions.ignored)) {
       options.watchOptions.ignored = [];
     }
 

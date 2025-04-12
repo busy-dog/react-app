@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { funnel } from 'remeda';
 
-import type { ConstrainedFunc } from '@busymango/utils';
-import { debounce } from '@busymango/utils';
+import type { ConstrainedFunc } from '@/utils';
 
 export function useDebounceFunc<T extends ConstrainedFunc<T>>(
   func?: T,
@@ -14,25 +14,22 @@ export function useDebounceFunc<T extends ConstrainedFunc<T>>(
   });
 
   const memo = useRef(
-    debounce(
+    funnel<Parameters<T>>(
       function (this: unknown, ...args) {
         return ref.current?.call(this, ...args);
       } as T,
-      wait
+      { minQuietPeriodMs: wait }
     )
   );
 
   useEffect(() => {
-    const { params } = memo.current ?? {};
-    if (params?.wait !== wait) {
-      memo.current?.cancel();
-      memo.current = debounce(
-        function (this: unknown, ...args) {
-          return ref.current?.call(this, ...args);
-        } as T,
-        wait
-      );
-    }
+    memo.current?.cancel();
+    memo.current = funnel<Parameters<T>>(
+      function (this: unknown, ...args) {
+        return ref.current?.call(this, ...args);
+      } as T,
+      { minQuietPeriodMs: wait }
+    );
   }, [wait]);
 
   return memo.current;

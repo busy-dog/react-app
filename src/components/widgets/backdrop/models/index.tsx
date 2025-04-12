@@ -1,9 +1,9 @@
 import type { HTMLMotionProps } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
 import type { FloatingPortalProps } from '@floating-ui/react';
 
 import type { ReactTargetType } from '@/models';
+import type { OmitOf } from '@/utils';
 
 export interface IOverlayProps extends HTMLMotionProps<'div'> {
   /**

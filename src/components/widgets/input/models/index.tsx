@@ -1,6 +1,5 @@
-import { type OmitOf } from '@busymango/utils';
-
 import type { ReactInputProps } from '@/models';
+import type { OmitOf } from '@/utils';
 
 import type { ControlPattern, IControlWrapProps } from '../../control';
 

@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from 'react';
+import { isString } from 'remeda';
 
-import { isString } from '@busymango/is-esm';
 import {
   autoUpdate,
   flip,

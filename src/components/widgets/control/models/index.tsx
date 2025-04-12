@@ -1,10 +1,8 @@
 import type React from 'react';
 import type { FocusEvent } from 'react';
 
-import type { Nil } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactHTMLRef, ReactRender, ReactWrapProps } from '@/models';
+import type { Nil, OmitOf } from '@/utils';
 
 /** 控件大小 */
 export type ControlUISize = 'mini' | 'medium' | 'huge';

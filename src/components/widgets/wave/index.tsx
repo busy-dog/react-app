@@ -1,9 +1,7 @@
 import { Fragment, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { motion, useAnimate } from 'motion/react';
-
-import { isString } from '@busymango/is-esm';
-import { compact, FRAME2MS } from '@busymango/utils';
+import { isString } from 'remeda';
 
 import {
   useAppTheme,
@@ -12,7 +10,7 @@ import {
   useResizeObserver,
 } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { iThemeVariable } from '@/utils';
+import { compact, FRAME2MS, iThemeVariable } from '@/utils';
 
 import type { IWaveProps, IWaveWrapProps } from './models';
 

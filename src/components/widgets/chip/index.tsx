@@ -2,10 +2,8 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { ifnot } from '@busymango/utils';
-
 import { useMemoFunc } from '@/hooks';
-import { iEscapeEvent, iPropagation } from '@/utils';
+import { ensure, iEscapeEvent, iPropagation } from '@/utils';
 
 import { ISignLine } from '../sign';
 import { ISpinner } from '../spin-loading';
@@ -104,7 +102,7 @@ export const IChip = forwardRef<
       initial={initial}
       style={style}
       transition={transition}
-      onClick={ifnot(iClickable && onClick)}
+      onClick={ensure(iClickable && onClick)}
       onKeyDown={iEscapeEvent(onClose, onKeyDown)}
       {...others}
     >

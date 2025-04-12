@@ -14,7 +14,7 @@ import {
 } from 'fs';
 import { join, normalize, resolve } from 'path';
 
-import { isFalse } from '@busymango/is-esm';
+import { isFalse } from './tools';
 
 const options = { withFileTypes: true } as const;
 

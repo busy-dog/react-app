@@ -1,8 +1,9 @@
-import type { PartialPick } from '@busymango/utils';
 import type {
   DefinedInitialDataOptions,
   UndefinedInitialDataOptions,
 } from '@tanstack/react-query';
+
+import type { PartialPick } from '@/utils';
 
 export type QueryHooksParams<T = null> = T extends null
   ? PartialPick<

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf } from '@/utils';
 
 export type ICollapsibleKey = string | number;
 

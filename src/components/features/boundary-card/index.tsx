@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
-
-import { isArray } from '@busymango/is-esm';
+import { isArray } from 'remeda';
 
 import {
   type BoundaryProps,

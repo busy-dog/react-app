@@ -2,8 +2,7 @@ import { useMemo } from 'react';
 import classNames from 'classnames';
 import { motion } from 'motion/react';
 
-import { isFalse, isTrue } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import { ensure, isFalse, isTrue } from '@/utils';
 
 import type { IFlexProps, IFlexRootRender } from './models';
 
@@ -33,9 +32,9 @@ export const IFlex: React.FC<IFlexProps> = (props) => {
 
   const flexWrap = isTrue(wrap) ? 'wrap' : wrap;
 
-  const alignItems = align ?? ifnot(centered && 'center');
+  const alignItems = align ?? ensure(centered && 'center');
 
-  const justifyContent = justify ?? ifnot(centered && 'center');
+  const justifyContent = justify ?? ensure(centered && 'center');
 
   return (renders?.root ?? iRootRender)(
     {

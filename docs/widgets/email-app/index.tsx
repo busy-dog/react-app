@@ -7,7 +7,6 @@ import JunkSVG from 'docs/icons/junk.svg?react';
 import SentSVG from 'docs/icons/sent.svg?react';
 import TrashSVG from 'docs/icons/trash.svg?react';
 
-import { sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption } from '@/components';
@@ -58,7 +57,7 @@ const Count: React.FC<{ type?: string }> = ({ type }) => {
   const { data, isLoading } = useQuery({
     queryKey: ['COUNT_API', type],
     queryFn: async () => {
-      await sleep(1000);
+      // await sleep(1000);
       switch (type) {
         case 'inbox':
           return 128;

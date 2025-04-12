@@ -1,7 +1,5 @@
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactRender, ReactWrapProps } from '@/models';
-import type { RecipeModel } from '@/utils';
+import type { OmitOf, RecipeModel } from '@/utils';
 
 import type { ControlOption, ControlValue, ControlValues } from '../../control';
 import type { IEmptyWrapProps } from '../../empty';

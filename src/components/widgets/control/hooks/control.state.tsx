@@ -1,9 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-
-import { isFunction, isUndefined } from '@busymango/is-esm';
+import { isFunction } from 'remeda';
 
 import { useMemoFunc } from '@/hooks';
-import { isInputElement, isTextAreaElement } from '@/utils';
+import { isInputElement, isTextAreaElement, isUndefined } from '@/utils';
 
 export interface ControlParams {
   /** 输入法是否介入中 */

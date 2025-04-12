@@ -1,6 +1,6 @@
 import type { HTMLMotionProps } from 'motion/react';
 
-import { type OmitOf } from '@busymango/utils';
+import type { OmitOf } from '@/utils';
 
 import type { ControlUISize } from '../../control';
 

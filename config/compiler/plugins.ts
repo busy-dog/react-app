@@ -6,8 +6,6 @@ import { readdirSync, readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-import { isTrue, type PlainObject } from '@busymango/is-esm';
-import { compact } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
 import type {
@@ -18,6 +16,8 @@ import type {
 import { rspack } from '@rspack/core';
 import ReactRefreshRspackPlugin from '@rspack/plugin-react-refresh';
 
+import type { PlainObject } from '../../helpers';
+import { compact, isTrue } from '../../helpers';
 import { CSSVarTSEmitPlugin } from '../plugins';
 import { app, dir } from '../project';
 

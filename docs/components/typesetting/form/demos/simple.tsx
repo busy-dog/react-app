@@ -1,6 +1,4 @@
-import { isEmpty } from '@busymango/is-esm';
-import { sleep } from '@busymango/utils';
-import type { FieldState, Updater } from '@tanstack/react-form';
+import type { Updater } from '@tanstack/react-form';
 import { useForm } from '@tanstack/react-form';
 
 import {
@@ -13,7 +11,7 @@ import {
   IInput,
 } from '@/components';
 import { iTanstackFieldCellAdapter } from '@/helpers';
-import { iPropagation } from '@/utils';
+import { iPropagation, isEmptyValue } from '@/utils';
 
 const render = (
   {
@@ -23,7 +21,14 @@ const render = (
     handleChange,
   }: {
     name: string;
-    state: FieldState<string>;
+    state: {
+      meta: {
+        isValidating: boolean;
+        isTouched: boolean;
+        errors: unknown[];
+      };
+      value: string;
+    };
     handleBlur: () => void;
     handleChange: (updater: Updater<string>) => void;
   },
@@ -64,10 +69,9 @@ const App: React.FC = () => {
           <Field
             name="firstName"
             validators={{
-              onChange: ({ value }) => isEmpty(value) && '该字段必填',
+              onChange: ({ value }) => isEmptyValue(value) && '该字段必填',
               onChangeAsyncDebounceMs: 500,
               onChangeAsync: async ({ value }) => {
-                await sleep(1000);
                 return value.includes('?') && '不允许输入特殊字符';
               },
             }}

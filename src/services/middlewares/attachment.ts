@@ -1,7 +1,7 @@
 import type { DriveMiddleware } from '@busymango/fetch-driver';
-import { downloader, src2name } from '@busymango/fetch-driver';
-import { isBlob, isTrue } from '@busymango/is-esm';
-import { iSearchParams } from '@busymango/utils';
+import { downloader } from '@busymango/fetch-driver';
+
+import { isBlob, iSearchParams, isTrue } from '@/utils';
 
 export const attachment: DriveMiddleware = async (context, next) => {
   // 请求开始前
@@ -20,7 +20,7 @@ export const attachment: DriveMiddleware = async (context, next) => {
         const params = iSearchParams(attrList);
         const name = params?.get('filename');
         const src = URL.createObjectURL(context.body);
-        downloader(src, name ?? src2name(api));
+        downloader(src, name ?? api);
       }
     }
   }

@@ -1,12 +1,11 @@
 import { useDeferredValue, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { motion } from 'motion/react';
-
-import { isFunction, isTrue } from '@busymango/is-esm';
+import { isFunction } from 'remeda';
 
 import { useResizeObserver } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { isReactChildren, isReactNode } from '@/utils';
+import { isReactChildren, isReactNode, isTrue } from '@/utils';
 
 import { IFlex } from '../flex';
 import { IMarker } from '../marker';
@@ -134,7 +133,7 @@ export const IFieldCell: ReactCFC<IFieldCellProps> = (props) => {
                 styles.feedback,
                 margin === 'feedback' && styles.withMargin
               )}
-              visible={isReactChildren(feedback)}
+              open={isReactChildren(feedback)}
             >
               {feedback}
             </IPanel>

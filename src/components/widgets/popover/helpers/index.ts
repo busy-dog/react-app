@@ -1,8 +1,9 @@
-import { capitalize, compact } from '@busymango/utils';
+import { capitalize } from 'remeda';
+
 import type { Placement } from '@floating-ui/react';
 import { arrow, flip, hide, offset, shift, size } from '@floating-ui/react';
 
-import { iFindElement } from '@/utils';
+import { compact, iFindElement } from '@/utils';
 
 import type {
   ApplyFloatingStyle,

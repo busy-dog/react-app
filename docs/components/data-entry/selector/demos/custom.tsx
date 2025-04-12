@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { produce } from 'immer';
 import { motion } from 'motion/react';
+import { isString } from 'remeda';
 import { create } from 'zustand';
-
-import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';
-import { iArray, ifnot } from '@busymango/utils';
 
 import type {
   ControlOption,
@@ -26,7 +24,15 @@ import {
   ISignLine,
   IWaveShell,
 } from '@/components';
-import { iCompact, iPropagation, iThemeVariable } from '@/utils';
+import {
+  ensure,
+  iArray,
+  iCompact,
+  iPropagation,
+  isEmptyValue,
+  isNonEmptyString,
+  iThemeVariable,
+} from 'src/utils';
 
 import * as styles from './custom.scss';
 
@@ -171,7 +177,7 @@ const iOptionRender: ISelectorOptionRender = (
                     ref={ref}
                     animate={{
                       scale: option.color === color ? 1.1 : 1,
-                      borderColor: ifnot(
+                      borderColor: ensure(
                         option.color === color && 'var(--border-color-active)'
                       ),
                     }}
@@ -242,7 +248,7 @@ const App: React.FC = () => {
             <b style={{ color: 'var(--font-color-10)' }}>{keyword}</b>
           </IFlex>
         }
-        isEmpty={isEmpty(filtered)}
+        isEmpty={isEmptyValue(filtered)}
         isLoading={isLoading}
       >
         {virtualizer}
@@ -252,7 +258,7 @@ const App: React.FC = () => {
 
   const predicate: ISelectorPredicate = ({ label, title }) => {
     if (!isNonEmptyString(keyword)) return true;
-    const text = title ?? ifnot(isString(label) && label);
+    const text = title ?? ensure(isString(label) && label);
     return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
   };
 

@@ -1,10 +1,9 @@
 import { useRef } from 'react';
 import { Variants } from 'docs/widgets';
 
-import { isEmpty } from '@busymango/is-esm';
-
 import type { IControlWrapProps, IInputProps } from '@/components';
 import { IInput, ISignLine, onInputCatch, useControlState } from '@/components';
+import { isEmptyValue } from 'src/utils';
 
 import AccountSVG from '@/icons/identifier/account.svg?react';
 
@@ -33,7 +32,7 @@ const Input: React.FC<
     onCatch: onInputCatch,
   });
 
-  const isSuffixClickable = !isEmpty(text);
+  const isSuffixClickable = !isEmptyValue(text);
 
   //    <IInput ref={ref} pattern={pattern} {...others} />
   return (

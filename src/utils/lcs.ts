@@ -1,6 +1,6 @@
-import { sizeOf } from '@busymango/utils';
+import { crdnl } from './tools';
 
-const iterator = <T>(source: ArrayLike<T>) => ({ length: sizeOf(source) });
+const iterator = <T>(source: ArrayLike<T>) => ({ length: crdnl(source) });
 
 /**
  * 初始化DP
@@ -9,8 +9,8 @@ const iterator = <T>(source: ArrayLike<T>) => ({ length: sizeOf(source) });
  * @returns
  */
 const init = (source: string, target: string) =>
-  (Array(sizeOf(source) + 1).fill(null) as null[]).map(
-    () => Array(sizeOf(target) + 1).fill(0) as number[]
+  (Array(crdnl(source) + 1).fill(null) as null[]).map(
+    () => Array(crdnl(target) + 1).fill(0) as number[]
   );
 
 /**
@@ -110,7 +110,7 @@ export const iLCSubSeq = (
     table(source, target, compare),
     source,
     target,
-    [sizeOf(source), sizeOf(target)],
+    [crdnl(source), crdnl(target)],
     compare
   );
 

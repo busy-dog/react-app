@@ -1,8 +1,7 @@
 import type { HTMLMotionProps } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactRender, ReactTargetType, ReactWrapProps } from '@/models';
+import type { OmitOf } from '@/utils';
 
 import type { ControlOption } from '../../control';
 

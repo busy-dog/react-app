@@ -1,4 +1,4 @@
-import { isCSSStyleRule } from '@busymango/is-esm';
+import { isCSSStyleRule } from 'src/utils';
 
 const isCSSVarKey = (keyname: string) => keyname.startsWith('--');
 

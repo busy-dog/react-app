@@ -1,6 +1,4 @@
-import { isHTMLElement } from '@busymango/is-esm';
-
-import { iStyleLenValue } from '@/utils';
+import { isHTMLElement, iStyleLenValue } from '@/utils';
 
 export const iTextSize = (
   input: HTMLTextAreaElement | HTMLInputElement | null,

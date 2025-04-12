@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-
-import { shuffle } from '@busymango/utils';
+import { shuffle } from 'remeda';
 
 import { IButton, ICard, IFlex } from '@/components';
 import { useToggle } from '@/hooks';

@@ -1,10 +1,8 @@
 import { Fragment } from 'react';
-import { capitalCase } from 'change-case';
 import classNames from 'classnames';
 
-import { iCSSVariable, sizeOf } from '@busymango/utils';
-
 import { IFlex, IPopover } from '@/components';
+import { crdnl, iCSSVariable, toCapitalCase } from 'src/utils';
 
 import * as styles from './index.scss';
 
@@ -34,8 +32,8 @@ export const ColorDisc: React.FC = () => (
   <div
     className={styles.wrap}
     style={{
-      gridTemplateRows: `2.5em repeat(${sizeOf(colors)}, 4em)`,
-      gridTemplateColumns: `5em repeat(${sizeOf(scales)}, 4em)`,
+      gridTemplateRows: `2.5em repeat(${crdnl(colors)}, 4em)`,
+      gridTemplateColumns: `5em repeat(${crdnl(scales)}, 4em)`,
     }}
   >
     <div />
@@ -44,7 +42,7 @@ export const ColorDisc: React.FC = () => (
         key={scale}
         centered
         className={classNames(styles.cell, {
-          [styles.colEnd]: index === sizeOf(scales) - 1,
+          [styles.colEnd]: index === crdnl(scales) - 1,
         })}
       >
         {scale}
@@ -54,19 +52,19 @@ export const ColorDisc: React.FC = () => (
       <Fragment key={value}>
         <div
           className={classNames(styles.title, styles.cell, {
-            [styles.rowEnd]: xIndex === sizeOf(colors) - 1,
+            [styles.rowEnd]: xIndex === crdnl(colors) - 1,
           })}
         >
           {label}
           {'\n'}
-          {capitalCase(value)}
+          {toCapitalCase(value)}
         </div>
         {scales.map((scale, yIndex) => (
           <div
             key={scale}
             className={classNames(styles.scale, styles.cell, {
-              [styles.rowEnd]: xIndex === sizeOf(colors) - 1,
-              [styles.colEnd]: yIndex === sizeOf(scales) - 1,
+              [styles.rowEnd]: xIndex === crdnl(colors) - 1,
+              [styles.colEnd]: yIndex === crdnl(scales) - 1,
             })}
           >
             <IPopover

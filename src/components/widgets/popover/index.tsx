@@ -2,12 +2,18 @@ import { Fragment, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { motion } from 'motion/react';
 
-import { isElement, isHTMLElement } from '@busymango/is-esm';
-import { compact, iArray } from '@busymango/utils';
 import { autoUpdate, FloatingArrow, useFloating } from '@floating-ui/react';
 
 import { container } from '@/init';
-import { iFindElement, iPropagation, isOverflow } from '@/utils';
+import {
+  compact,
+  iArray,
+  iFindElement,
+  iPropagation,
+  isElement,
+  isHTMLElement,
+  isOverflow,
+} from '@/utils';
 
 import { useControlState } from '../control';
 import { IFloating } from '../floating';

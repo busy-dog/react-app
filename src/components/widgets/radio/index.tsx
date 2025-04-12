@@ -1,8 +1,8 @@
 import { forwardRef, useId, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
+import { isBigInt } from 'remeda';
 
-import { isBigInt } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import { ensure } from '@/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISVGWrap } from '../svg-wrap';
@@ -48,7 +48,7 @@ const iInputRender: IRadioInputRender = (
     readOnly={readOnly}
     type="radio"
     value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
-    onChange={ifnot(!disabled && !readOnly && onChange)}
+    onChange={ensure(!disabled && !readOnly && onChange)}
     {...others}
     checked={checked ?? false}
   />

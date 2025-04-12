@@ -1,6 +1,11 @@
 [
   {
     "type": "file",
+    "name": "card/index",
+    "label": "Card 卡片"
+  },
+  {
+    "type": "file",
     "name": "chip/index",
     "label": "Chip 标签"
   },

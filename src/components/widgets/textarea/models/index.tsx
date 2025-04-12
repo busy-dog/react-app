@@ -1,4 +1,4 @@
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf } from '@/utils';
 
 import type { ControlPattern } from '../../control';
 

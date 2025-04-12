@@ -4,12 +4,18 @@
 
 import { useEffect } from 'react';
 import { t } from 'i18next';
+import { isNullish } from 'remeda';
 
-import { isCSSStyleRule, isCSSStyleSheet, isNil } from '@busymango/is-esm';
 import { useMutation } from '@tanstack/react-query';
 
 import { drive } from '@/services';
-import { iThemeDefault, iThemeRoot, iThemeSheet } from '@/utils';
+import {
+  isCSSStyleRule,
+  isCSSStyleSheet,
+  iThemeDefault,
+  iThemeRoot,
+  iThemeSheet,
+} from '@/utils';
 
 /**
  * 动态主题
@@ -39,7 +45,7 @@ export default function useColorTheme<T extends string = string>() {
   const classname = res?.data ?? iThemeDefault<T>();
 
   useEffect(() => {
-    if (isNil(classname)) return;
+    if (isNullish(classname)) return;
 
     iThemeRoot.classList.add(classname);
 

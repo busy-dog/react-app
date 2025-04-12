@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { produce } from 'immer';
+import { isBoolean, isString } from 'remeda';
 import type { StoreApi } from 'zustand';
 import { create } from 'zustand';
 
-import { isBoolean, isFalse, isString, isTrue } from '@busymango/is-esm';
-
-import { iThemeDefault } from '@/utils';
+import { isFalse, isTrue, iThemeDefault } from '@/utils';
 
 import { useEffectOnce, useMemoFunc } from '../basic';
 

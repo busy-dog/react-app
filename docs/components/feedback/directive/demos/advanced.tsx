@@ -2,8 +2,6 @@ import { produce } from 'immer';
 import { AnimatePresence } from 'motion/react';
 import { create } from 'zustand';
 
-import { isNonEmptyString } from '@busymango/is-esm';
-
 import {
   IControlWrap,
   IDirective,
@@ -11,6 +9,7 @@ import {
   ISignLine,
   ITextArea,
 } from '@/components';
+import { isNonEmptyString } from 'src/utils';
 
 type DirectiveStore = {
   directive?: string;

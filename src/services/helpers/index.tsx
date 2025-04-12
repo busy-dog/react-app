@@ -1,8 +1,7 @@
 import { FetchError } from '@busymango/fetch-driver';
-import { compact } from '@busymango/utils';
 
 import { domain, prefix } from '@/init';
-import { catchMsg } from '@/utils';
+import { catchMsg, compact } from '@/utils';
 
 import type { IServerModel } from '../models';
 

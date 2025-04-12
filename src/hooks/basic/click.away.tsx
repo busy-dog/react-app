@@ -3,12 +3,10 @@
  */
 
 import { useEffect } from 'react';
-
-import { isArray, isHTMLElement, isNil, isTrue } from '@busymango/is-esm';
-import { compact } from '@busymango/utils';
+import { isArray, isNullish } from 'remeda';
 
 import type { ReactTargetType } from '@/models';
-import { iFindElement } from '@/utils';
+import { compact, iFindElement, isHTMLElement, isTrue } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 
@@ -30,7 +28,7 @@ export function useClickAway(
       const targets = isArray(target) ? target : [target];
       const elements = compact(targets.map(iFindElement));
       const parent = elements.find((item) => item.contains?.(current));
-      isNil(parent) && event?.(e);
+      isNullish(parent) && event?.(e);
     }
   });
 

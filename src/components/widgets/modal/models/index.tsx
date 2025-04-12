@@ -1,8 +1,7 @@
-import { type PlainObject } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
 import type { OpenChangeReason, UseFloatingReturn } from '@floating-ui/react';
 
 import type { ReactRender, ReactWrapProps } from '@/models';
+import type { OmitOf, PlainObject } from '@/utils';
 
 export type IModalRef = UseFloatingReturn['refs'] & {
   getReferenceProps: (props?: React.HTMLProps<Element>) => PlainObject;

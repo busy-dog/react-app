@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import minmax from 'dayjs/plugin/minMax';
+import { isDeepEqual } from 'remeda';
 import { useImmer } from 'use-immer';
-
-import { isEqual, type OmitOf } from '@busymango/utils';
 
 import type { ControlOption, IPickerProps } from '@/components';
 import {
@@ -14,6 +13,7 @@ import {
   useControlState,
 } from '@/components';
 import { useMemoFunc } from '@/hooks';
+import type { OmitOf } from 'src/utils';
 
 import 'assets/themes/light.css';
 import 'assets/themes/dark.css';
@@ -95,7 +95,7 @@ const useDateWheels = (
   const [wheels, dispatch] = useImmer<ControlOption[][]>([[], [], []]);
 
   const setWheel = useMemoFunc((index: number, wheel?: ControlOption[]) => {
-    if (wheel && !isEqual(wheel, wheels[index])) {
+    if (wheel && !isDeepEqual(wheel, wheels[index])) {
       dispatch((ref) => {
         ref[index] = wheel;
       });

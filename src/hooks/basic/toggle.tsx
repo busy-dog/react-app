@@ -1,7 +1,6 @@
 import type { ChangeEvent } from 'react';
 import { useMemo, useState } from 'react';
-
-import { isBoolean } from '@busymango/is-esm';
+import { isBoolean } from 'remeda';
 
 import { isInputElement } from '@/utils';
 

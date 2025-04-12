@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { ForwardRefComponent, HTMLMotionProps } from 'motion/react';
 import { motion } from 'motion/react';
 
-import { ifnot } from '@busymango/utils';
+import { ensure } from '@/utils';
 
 import type { ITypographyElement, ITypographyProps } from './models';
 
@@ -36,8 +36,8 @@ export const ITypography = forwardRef<ITypographyElement, ITypographyProps>(
         className
       ),
       style: {
-        WebkitLineClamp: ifnot(maxRow !== Infinity && maxRow),
-        backgroundColor: ifnot(mark && `rgb(var(--${mark}-color-500)}/ 1)`),
+        WebkitLineClamp: ensure(maxRow !== Infinity && maxRow),
+        backgroundColor: ensure(mark && `rgb(var(--${mark}-color-500)}/ 1)`),
         textAlign: align,
         ...style,
       } satisfies React.CSSProperties,

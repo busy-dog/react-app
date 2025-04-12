@@ -3,7 +3,7 @@ import { createHash } from 'crypto';
 import { readdirSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 
-import { isEmptyString } from '@busymango/is-esm';
+import { isEmptyString } from './tools';
 
 const exec = (cmd: string) => execSync(cmd, { encoding: 'utf8' }).trim();
 

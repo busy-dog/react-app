@@ -6,9 +6,8 @@ import { t } from 'i18next'; // 新增导入i18n
 
 import type { DriveMiddleware } from '@busymango/fetch-driver';
 import { FetchError } from '@busymango/fetch-driver';
-import { isTrue } from '@busymango/is-esm';
 
-import { catchMsg } from '@/utils';
+import { catchMsg, isTrue } from '@/utils';
 
 export const exception: DriveMiddleware = async (context, next) => {
   await next();

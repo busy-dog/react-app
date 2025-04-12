@@ -1,22 +1,25 @@
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import mime from 'mime';
+import { isNullish, isString } from 'remeda';
 
-import {
-  isFalse,
-  isNil,
-  isNonEmptyString,
-  isString,
-  isTrue,
-} from '@busymango/is-esm';
-import { compact, iSearchParams, S2MS } from '@busymango/utils';
 import type { UndefinedInitialDataOptions } from '@tanstack/react-query';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { ICON_LOADER_KEY, PAGE_LOADER_KEY, SNIFFER_KEY } from '@/constants';
 import { env } from '@/init';
 import type { ReactComponentType } from '@/models';
-import { iconAsync, isNotFoundError, routeAsync } from '@/utils';
+import {
+  compact,
+  iconAsync,
+  iSearchParams,
+  isFalse,
+  isNonEmptyString,
+  isNotFoundError,
+  isTrue,
+  routeAsync,
+  S2MS,
+} from '@/utils';
 
 import { reset, update } from '../helpers';
 
@@ -44,7 +47,7 @@ export function useLazyIcon(route?: string) {
     queryKey: [ICON_LOADER_KEY, env.version, route],
     queryFn: async () => {
       const chunk = await iconAsync(route!);
-      if (!isNil(chunk.default)) return chunk.default;
+      if (!isNullish(chunk.default)) return chunk.default;
       throw new Error(`Loading icon ${route} failed`);
     },
     throwOnError: false,
@@ -99,7 +102,7 @@ export function useLazyComponent(route?: string, func = routeAsync) {
     queryFn: async () => {
       if (isLatest && isString(route)) {
         const chunk = await func(route);
-        if (!isNil(chunk.default)) return chunk.default;
+        if (!isNullish(chunk.default)) return chunk.default;
         throw new Error(`Loading chunk ${route} failed`);
       }
       return null;

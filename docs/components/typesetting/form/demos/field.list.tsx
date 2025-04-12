@@ -1,7 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
+import { isNullish, omitBy } from 'remeda';
 
-import { isEmpty, isInteger, isNil } from '@busymango/is-esm';
-import { ifnot, iOmit, sleep } from '@busymango/utils';
 import { useForm } from '@tanstack/react-form';
 
 import {
@@ -16,7 +15,7 @@ import {
   ISignLine,
 } from '@/components';
 import { iTanstackFieldCellAdapter } from '@/helpers';
-import { iPropagation } from '@/utils';
+import { ensure, iPropagation, isEmptyValue, isSafeInteger } from 'src/utils';
 
 export interface PeopleInfo {
   name: string;
@@ -27,16 +26,16 @@ const initial = { name: '', age: 0 } satisfies PeopleInfo;
 
 const formatAge = (data: unknown) => {
   const num = Number(data);
-  return isInteger(num) ? num : 0;
+  return isSafeInteger(num) ? num : 0;
 };
 
 async function checkAge(age: number) {
-  await sleep(Math.floor(Math.random() * 1000));
+  // await sleep(Math.floor(Math.random() * 1000));
   return age >= 13;
 }
 
 async function checkRenaming(name: string) {
-  await sleep(Math.floor(Math.random() * 5000));
+  // await sleep(Math.floor(Math.random() * 5000));
   const usernames = ['张三', '李四', '王五'];
   return !usernames.includes(name);
 }
@@ -52,12 +51,12 @@ const App: React.FC = () => {
     validators: {
       onSubmitAsync: async ({ value }) => {
         const { people } = value;
-        const errors = iOmit(
+        const errors = omitBy(
           (
             await Promise.all(
               people.map(async ({ age, name }) => ({
                 age: !(await checkAge(age)) && 'Must be 13 or older to sign',
-                name: isEmpty(name)
+                name: isEmptyValue(name)
                   ? 'Username is required'
                   : !(await checkRenaming(name)) && 'Username is renaming',
               }))
@@ -65,15 +64,15 @@ const App: React.FC = () => {
           ).reduce(
             (acc, cur, index) => ({
               ...acc,
-              [`people[${index}].age`]: ifnot(cur.age),
-              [`people[${index}].name`]: ifnot(cur.name),
+              [`people[${index}].age`]: ensure(cur.age),
+              [`people[${index}].name`]: ensure(cur.name),
             }),
             {}
           ),
-          isNil
+          isNullish
         );
 
-        if (isEmpty(errors)) return null;
+        if (isEmptyValue(errors)) return null;
 
         return {
           form: 'Invalid data',

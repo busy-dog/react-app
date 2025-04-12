@@ -2,9 +2,8 @@ import { Fragment, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import type { AnimationDefinition } from 'motion/react';
 import { AnimatePresence, motion } from 'motion/react';
+import { isDeepEqual } from 'remeda';
 
-import { isHTMLElement } from '@busymango/is-esm';
-import { compact, isEqual } from '@busymango/utils';
 import {
   useClick,
   useDismiss,
@@ -13,7 +12,7 @@ import {
 } from '@floating-ui/react';
 
 import { useMemoFunc, useToggle } from '@/hooks';
-import { iFindElement } from '@/utils';
+import { compact, iFindElement, isHTMLElement } from '@/utils';
 
 import { IBackdrop } from '../backdrop';
 import { IButton } from '../button';
@@ -78,8 +77,8 @@ export const IPicker: React.FC<IPickerProps> = (props) => {
   });
 
   const onAnimationStart = useMemoFunc((animate: AnimationDefinition) => {
-    isEqual(animate, iWrapExit) && off();
-    isEqual(animate, iWrapAnimate) && on();
+    isDeepEqual(animate, iWrapExit) && off();
+    isDeepEqual(animate, iWrapAnimate) && on();
   });
 
   const inner = useMemo(

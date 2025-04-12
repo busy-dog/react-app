@@ -1,9 +1,10 @@
 import type { HTMLMotionProps } from 'motion/react';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { isElement } from '@busymango/is-esm';
 import type { FloatingContext, FloatingPortalProps } from '@floating-ui/react';
 import { FloatingPortal } from '@floating-ui/react';
+
+import { isElement } from '@/utils';
 
 export interface IFloatingProps extends HTMLMotionProps<'div'> {
   style?: React.CSSProperties;

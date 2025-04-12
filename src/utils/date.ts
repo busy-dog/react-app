@@ -1,13 +1,12 @@
 import type { Dayjs } from 'dayjs';
-import dayjs, { isDayjs } from 'dayjs';
-
-import { isDate, isNonEmptyString, isSafeInteger } from '@busymango/is-esm';
-import { ifnot } from '@busymango/utils';
+import dayjs from 'dayjs';
+import { isDate } from 'remeda';
 
 import { DateFormatEn } from '@/constants';
+import { ensure, isNonEmptyString, isSafeInteger } from '@/utils';
 
 function toValidDayjs(source: Dayjs) {
-  return ifnot(source.isValid() && source);
+  return ensure(source.isValid() && source);
 }
 
 export function iDayjs(
@@ -17,7 +16,7 @@ export function iDayjs(
   format: string = DateFormatEn.DateSec
 ) {
   // 处理字符串
-  if (isDayjs(source)) {
+  if (dayjs.isDayjs(source)) {
     return toValidDayjs(source);
   }
   // 处理日期对象
@@ -32,7 +31,7 @@ export function iDayjs(
   if (isSafeInteger(source)) {
     const { length: size } = source.toString();
     return toValidDayjs(
-      dayjs(ifnot(size > 10 && size < 13 ? source * 1000 : source))
+      dayjs(ensure(size > 10 && size < 13 ? source * 1000 : source))
     );
   }
 }

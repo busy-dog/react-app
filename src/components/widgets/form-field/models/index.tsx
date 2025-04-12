@@ -1,6 +1,5 @@
-import type { OmitOf, PartialPick } from '@busymango/utils';
-
 import type { ReactWrapProps } from '@/models';
+import type { OmitOf, PartialPick } from '@/utils';
 
 import type {
   ControlPattern,

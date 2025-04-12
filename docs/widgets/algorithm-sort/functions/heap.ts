@@ -1,4 +1,4 @@
-import { isNil } from '@busymango/is-esm';
+import { isNullish } from 'remeda';
 
 function* sink<T>(
   data: T[],
@@ -10,7 +10,7 @@ function* sink<T>(
   while (index <= end) {
     const childs = [2 * index + 1, 2 * index + 2];
     const target =
-      !isNil(data[childs[1]]) && childs[1] <= end
+      !isNullish(data[childs[1]]) && childs[1] <= end
         ? compare(...(childs.map((index) => data[index]) as [T, T])) > 0
           ? childs[0]
           : childs[1]

@@ -1,4 +1,4 @@
-import { isArray, isNumber } from '@busymango/is-esm';
+import { isArray, isNumber } from 'remeda';
 
 type Bezier = readonly [number, number, number, number];
 

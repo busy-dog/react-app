@@ -7,13 +7,12 @@ import type {
   Transition,
 } from 'motion/react';
 import { motion } from 'motion/react';
-
-import { isFinite, isObject, isTrue } from '@busymango/is-esm';
-import { isEqual } from '@busymango/utils';
+import { isDeepEqual, isObjectType } from 'remeda';
 
 import type { EventStateParams } from '@/hooks';
 import { useEventState, useMemoFunc, useTimeout } from '@/hooks';
 import type { ReactTargetType } from '@/models';
+import { isFinite, isTrue } from '@/utils';
 
 import type { ISignType } from '../sign';
 import { ISignLine } from '../sign';
@@ -108,7 +107,7 @@ export const ISnackbar = forwardRef<HTMLDivElement, ISnackbarProps>(
 
     const onAnimationComplete = useMemoFunc(
       (animation: AnimationDefinition) => {
-        if (isObject(animation) && isEqual(animation, initial)) {
+        if (isObjectType(animation) && isDeepEqual(animation, initial)) {
           onExit?.(api.current);
         }
       }

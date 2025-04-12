@@ -3,7 +3,8 @@
  */
 
 import type { DriveMiddleware } from '@busymango/fetch-driver';
-import { isFalse, isUndefined } from '@busymango/is-esm';
+
+import { isFalse, isUndefined } from '@/utils';
 
 function theLanguage() {
   return document.querySelector('html')?.lang ?? 'zh-Hans-CN';

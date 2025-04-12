@@ -1,23 +1,20 @@
-import { isNumber, isObject, isString, isValidKey } from '@busymango/is-esm';
-
-export const isStringKey = <T extends string>(
-  key: T,
-  source: object
-): source is Record<T, string> => isValidKey(key, source, isString);
-
-export const isNumberKey = <T extends string>(
-  key: T,
-  source: object
-): source is Record<T, string> => isValidKey(key, source, isNumber);
+import { isError, isString } from 'remeda';
+import { z } from 'zod';
 
 export function catchMsg(error: unknown) {
   if (isString(error)) return error;
 
-  if (isObject(error)) {
-    if (isStringKey('msg', error)) return error.msg;
-    if (isStringKey('errMsg', error)) return error.errMsg;
-    if (isStringKey('message', error)) return error.message;
-  }
+  if (isError(error)) return error.message;
+
+  const { success, data } = z
+    .object({
+      msg: z.string().optional(),
+      errMsg: z.string().optional(),
+      message: z.string().optional(),
+    })
+    .safeParse(error);
+
+  if (success) return data.message ?? data.errMsg ?? data.msg;
 
   return undefined;
 }

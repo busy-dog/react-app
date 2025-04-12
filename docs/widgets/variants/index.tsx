@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
 
-import { isNonEmptyArray } from '@busymango/is-esm';
-
 import type {
   ControlAlign,
   ControlPattern,
@@ -11,6 +9,7 @@ import type {
 } from '@/components';
 import { ICard, IFlex, IRadioGroup, ISwitch } from '@/components';
 import { useToggle } from '@/hooks';
+import { isNonEmptyArray } from 'src/utils';
 
 type ControlWidth = 'auto-width' | 'full-width';
 

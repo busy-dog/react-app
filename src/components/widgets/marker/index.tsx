@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { isFinite } from '@busymango/is-esm';
-
 import type { ReactCFC, ReactWrapProps } from '@/models';
+import { isFinite } from '@/utils';
 
 import * as styles from './index.scss';
 

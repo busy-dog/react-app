@@ -3,13 +3,10 @@ import { AnimatePresence } from 'motion/react';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
 
-import { isEmpty } from '@busymango/is-esm';
-import { sizeOf } from '@busymango/utils';
-
 import type { IChipCloseFunc, IChipProps } from '@/components';
 import { IChip, IFlex, IInputCore, ISignLine } from '@/components';
 import { COLOR_DISC } from '@/constants';
-import { isInputElement } from '@/utils';
+import { crdnl, isEmptyValue, isInputElement } from 'src/utils';
 
 import PictureSVG from '@/icons/identifier/picture.svg?react';
 
@@ -51,13 +48,13 @@ const onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
 const creator = (previous: IChipConfig[], label: React.ReactNode) => ({
   value: nanoid(),
   label,
-  color: COLOR_DISC[sizeOf(previous) % sizeOf(COLOR_DISC)],
+  color: COLOR_DISC[crdnl(previous) % crdnl(COLOR_DISC)],
 });
 
 const onBlur: React.FocusEventHandler<HTMLInputElement> = ({ target }) => {
   const { mutation } = useChipGroup.getState();
   const { value: label } = target;
-  if (!isEmpty(label)) {
+  if (!isEmptyValue(label)) {
     mutation((store) => {
       store.keyword = '';
       store.chips.push(creator(store.chips, label));
@@ -69,7 +66,7 @@ const onPressEnter: React.KeyboardEventHandler<HTMLInputElement> = ({
   target,
 }) => {
   const { mutation } = useChipGroup.getState();
-  if (isInputElement(target) && !isEmpty(target.value)) {
+  if (isInputElement(target) && !isEmptyValue(target.value)) {
     const { value: label } = target;
     mutation((store) => {
       store.keyword = '';

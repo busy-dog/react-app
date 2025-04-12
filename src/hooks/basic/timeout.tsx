@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import type { ConstrainedFunc } from '@busymango/utils';
+import type { ConstrainedFunc } from '@/utils';
 
 import { useMemoFunc } from './memo.func';
 

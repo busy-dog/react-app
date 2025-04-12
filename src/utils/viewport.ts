@@ -1,4 +1,4 @@
-import { isMobile } from './assert';
+import { isMobile } from './guard';
 
 /**
  * 从当前设备显示的vw尺寸转换到实际像素

@@ -1,5 +1,3 @@
-import { isEmpty } from '@busymango/is-esm';
-import { ifnot, sleep } from '@busymango/utils';
 import { useForm } from '@tanstack/react-form';
 
 import type { ControlUIStatus } from '@/components';
@@ -15,17 +13,20 @@ import {
   onInputCatch,
 } from '@/components';
 import { useToggle } from '@/hooks';
-import { isEmailString } from '@/utils';
+import { ensure, isEmptyValue } from '@/utils';
+
+type FormData = {
+  email?: string;
+};
 
 const App: React.FC = () => {
   const [open, { on, toggle }] = useToggle();
 
-  const { Field, handleSubmit, Subscribe } = useForm<{
-    email?: string;
-  }>({
+  const { Field, handleSubmit, Subscribe } = useForm({
+    defaultValues: {} as FormData,
     onSubmit: async ({ value }) => {
       console.info(value);
-      await sleep(3000);
+      // await sleep(3000);
     },
   });
 
@@ -67,12 +68,13 @@ const App: React.FC = () => {
                   name="email"
                   validators={{
                     onBlur: ({ value }) => {
-                      if (!isEmailString(value)) {
-                        return '请输入有效的电子邮件地址';
-                      }
+                      return '';
+                      // if (!isEmailString(value)) {
+                      //   return '请输入有效的电子邮件地址';
+                      // }
                     },
                     onChange: ({ value, fieldApi }) => {
-                      if (isEmpty(value)) return '请输入您的电子邮件地址';
+                      if (isEmptyValue(value)) return '请输入您的电子邮件地址';
                       const { isBlurred } = fieldApi.state.meta;
                       if (isBlurred) fieldApi.validate('blur');
                     },
@@ -81,7 +83,7 @@ const App: React.FC = () => {
                   {({ state: { meta, value }, handleBlur, handleChange }) => {
                     const { errors, isDirty } = meta;
                     const isError = isDirty && errors.length > 0;
-                    const status: ControlUIStatus = ifnot(isError && 'danger');
+                    const status: ControlUIStatus = ensure(isError && 'danger');
                     return (
                       <IFieldCell
                         feedback={isError && meta.errors.join(', ')}

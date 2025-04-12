@@ -1,7 +1,7 @@
 import type { SVGMotionProps, Variants } from 'motion/react';
 import { motion } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf } from '@/utils';
 
 import { IFlex } from '../flex';
 

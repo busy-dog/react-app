@@ -1,8 +1,6 @@
 import dayjs from 'dayjs';
 import relative from 'dayjs/plugin/relativeTime';
 
-import { isEmpty } from '@busymango/is-esm';
-import { sleep } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -15,6 +13,7 @@ import {
   ITypography,
   IVirtualizer,
 } from '@/components';
+import { isEmptyValue } from 'src/utils';
 
 import { emails } from '../data';
 
@@ -25,7 +24,6 @@ export const EmailList: React.FC = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['EMAIL_QUERY'],
     queryFn: async () => {
-      await sleep(2000);
       return emails.map(({ id, ...item }) => ({
         value: id,
         ...item,
@@ -49,7 +47,7 @@ export const EmailList: React.FC = () => {
           padding: `$'var(--gap-03)' 0`,
         }}
       >
-        <IEmptyWrap isEmpty={isEmpty(data)} isLoading={isLoading}>
+        <IEmptyWrap isEmpty={isEmptyValue(data)} isLoading={isLoading}>
           <IVirtualizer
             data={data}
             estimateSize={() => 150}

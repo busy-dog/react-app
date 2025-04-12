@@ -1,6 +1,5 @@
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactButtonProps, ReactRender } from '@/models';
+import type { OmitOf } from '@/utils';
 
 import type { ControlOption, ControlUISize, ControlValue } from '../../control';
 import type { IFlexProps } from '../../flex';

@@ -8,11 +8,8 @@ import {
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { isEmpty } from '@busymango/is-esm';
-import { iArray, ifnot } from '@busymango/utils';
-
 import { iFocusParams, iHoverParams, useEventState } from '@/hooks';
-import { iCompact } from '@/utils';
+import { ensure, iArray, iCompact, isEmptyValue } from '@/utils';
 
 import { IChip } from '../chip';
 import { IControlWrap, onInputCatch, useControlState } from '../control';
@@ -145,7 +142,7 @@ const iRootRender: ISelectorRootRender = (
     {...others}
   >
     <motion.div className={styles.wrap}>
-      {!multiple && isEmpty(keyword) && chips}
+      {!multiple && isEmptyValue(keyword) && chips}
       <AnimatePresence presenceAffectsLayout mode="popLayout">
         {multiple && chips}
       </AnimatePresence>
@@ -159,7 +156,7 @@ const iFloatingRender: ISelectorFloatingRender = (
   { isLoading, filtered }
 ) => (
   <IFloating {...others}>
-    <IEmptyWrap isEmpty={isEmpty(filtered)} isLoading={isLoading}>
+    <IEmptyWrap isEmpty={isEmptyValue(filtered)} isLoading={isLoading}>
       {virtualizer}
     </IEmptyWrap>
   </IFloating>
@@ -293,7 +290,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                 autoFocus,
                 value: keyword,
                 className: styles.search,
-                placeholder: ifnot(isEmpty(iSelectedList) && placeholder),
+                placeholder: ensure(isEmptyValue(iSelectedList) && placeholder),
                 onChange: handleSearch,
                 onKeyDown: handleArrowKeyDown,
                 onFocus,
@@ -337,7 +334,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                     const isSelected = iSelectedList.includes(option.value);
                     return (
                       <Container
-                        ref={ifnot(measure && measureElement)}
+                        ref={ensure(measure && measureElement)}
                         {...item}
                       >
                         {(render?.option ?? iOptionRender)(

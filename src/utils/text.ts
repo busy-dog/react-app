@@ -1,5 +1,5 @@
-import { isEmpty } from '@busymango/is-esm';
-import { compact, sizeOf } from '@busymango/utils';
+import { isEmptyValue } from './guard';
+import { compact, crdnl } from './tools';
 
 export interface TruncateOpts {
   /** 展示的最大行数 */
@@ -31,13 +31,13 @@ export const ellipsis = (text: string, options: TruncateOpts = {}) => {
       ?.replace(/\r/g, '')
       ?.split('\n');
     // 如果 isMergeBreak 为 true，则过滤掉空行或仅包含空白字符的行
-    return isMergeBreak ? res.filter((e) => !isEmpty(e.trim())) : res;
+    return isMergeBreak ? res.filter((e) => !isEmptyValue(e.trim())) : res;
   })().slice(0, max);
 
   const extremity = compact([
     rows[max]?.slice(
       0,
-      rows.reduce((accom, current) => Math.max(accom, sizeOf(current)), 0)
+      rows.reduce((accom, current) => Math.max(accom, crdnl(current)), 0)
     ),
   ]);
 

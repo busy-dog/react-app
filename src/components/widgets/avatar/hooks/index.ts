@@ -1,6 +1,8 @@
-import { isString } from '@busymango/is-esm';
-import type { PartialPick } from '@busymango/utils';
+import { isString } from 'remeda';
+
 import { useQuery } from '@tanstack/react-query';
+
+import type { PartialPick } from '@/utils';
 
 type NormalKey = 'alt' | 'src' | 'srcset' | 'crossOrigin' | 'referrerPolicy';
 

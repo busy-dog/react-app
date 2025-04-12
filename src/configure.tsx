@@ -5,7 +5,6 @@
 import { useEffect } from 'react';
 
 import { FetchError } from '@busymango/fetch-driver';
-import { S2MS } from '@busymango/utils';
 import {
   QueryCache,
   QueryClient,
@@ -15,7 +14,7 @@ import {
 import { ISnackbarPortal, ReactQueryDevtools } from '@/components';
 import { useAppAction, useMemoFunc } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { catchMsg } from '@/utils';
+import { catchMsg, S2MS } from '@/utils';
 
 export const client = new QueryClient({
   queryCache: new QueryCache({}),

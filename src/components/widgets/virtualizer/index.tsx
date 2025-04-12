@@ -1,13 +1,12 @@
 import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 
-import type { OmitOf } from '@busymango/utils';
-import { sizeOf } from '@busymango/utils';
 import type { VirtualItem } from '@tanstack/react-virtual';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import type { ReactWrapProps } from '@/models';
-import { iPropagation } from '@/utils';
+import type { OmitOf } from '@/utils';
+import { crdnl, iPropagation } from '@/utils';
 
 import type { IVirtualizerProps } from './models';
 
@@ -50,7 +49,7 @@ export const IVirtualizer = <T,>(props: IVirtualizerProps<T>) => {
     ...others
   } = props;
 
-  const count = sizeOf(data);
+  const count = crdnl(data);
 
   const container = useRef<HTMLDivElement>(null);
 

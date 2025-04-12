@@ -1,9 +1,9 @@
 import { useState } from 'react';
-
-import { iArray, theFirst } from '@busymango/utils';
+import { first } from 'remeda';
 
 import type { ISignType } from '@/components';
 import { ICard, ISelector, ISignLine } from '@/components';
+import { iArray } from 'src/utils';
 
 const options = [
   { value: 'ban' },
@@ -35,7 +35,7 @@ const Welcome: React.FC = () => {
         size="huge"
         value={sign}
         onChange={(val) => {
-          setSign(theFirst(iArray(val)) as ISignType);
+          setSign(first(iArray(val)) as ISignType);
         }}
       />
     </ICard>

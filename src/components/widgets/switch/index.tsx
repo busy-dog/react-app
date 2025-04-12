@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { Transition } from 'motion/react';
 import { motion } from 'motion/react';
 
-import { ifnot } from '@busymango/utils';
+import { ensure } from '@/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISpinner } from '../spin-loading';
@@ -123,7 +123,7 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
             ...others,
             ref: input,
             className: classNames(styles.input, className),
-            onChange: ifnot(pattren === 'editable' && iChange),
+            onChange: ensure(pattren === 'editable' && iChange),
           },
           states
         ),

@@ -1,5 +1,5 @@
-import type { RequiredPick } from '@busymango/utils';
-import { compact } from '@busymango/utils';
+import type { RequiredPick } from '@/utils';
+import { compact } from '@/utils';
 
 import type { ICellGridModel, IFieldCellProps } from '../models';
 

@@ -1,4 +1,3 @@
-import type { OmitOf } from '@busymango/utils';
 import type { ReferenceType } from '@floating-ui/react';
 
 import type {
@@ -7,7 +6,7 @@ import type {
   ReactTargetFunc,
   ReactWrapProps,
 } from '@/models';
-import type { RecipeModel } from '@/utils';
+import type { OmitOf, RecipeModel } from '@/utils';
 
 import type {
   ControlOption,

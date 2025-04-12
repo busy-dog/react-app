@@ -2,9 +2,8 @@ import { useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence } from 'motion/react';
 
-import { ifnot } from '@busymango/utils';
-
 import { useEventState } from '@/hooks';
+import { ensure } from '@/utils';
 
 import { ISpinner } from '../spin-loading';
 import { ISVGWrap } from '../svg-wrap';
@@ -96,7 +95,7 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
               className={classNames(styles.iconWrap, styles.prefix, {
                 [styles.clickable]: isPrefixClickable,
               })}
-              onClick={ifnot(isPrefixClickable && onPrefixClick)}
+              onClick={ensure(isPrefixClickable && onPrefixClick)}
             >
               {prefix}
             </ISVGWrap>
@@ -112,7 +111,7 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
               className={classNames(styles.iconWrap, styles.suffix, {
                 [styles.clickable]: isSuffixClickable,
               })}
-              onClick={ifnot(isSuffixClickable && onSuffixClick)}
+              onClick={ensure(isSuffixClickable && onSuffixClick)}
             >
               {isLoading ? <ISpinner /> : suffix}
             </ISVGWrap>

@@ -3,9 +3,8 @@ import classNames from 'classnames';
 import type { HTMLMotionProps } from 'motion/react';
 import { motion } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactCFC } from '@/models';
+import type { OmitOf } from '@/utils';
 import { isReactNode } from '@/utils';
 
 import { ISVGWrap } from '../svg-wrap';

@@ -1,4 +1,4 @@
-import { isHTMLElement } from '@busymango/is-esm';
+import { isHTMLElement } from '@/utils';
 
 const iStyleValue = (value: string) => {
   return parseInt(value, 10) || 0;

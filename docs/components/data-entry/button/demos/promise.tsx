@@ -1,6 +1,5 @@
 import { configure } from 'docs/widgets';
 
-import { sleep } from '@busymango/utils';
 import { useMutation } from '@tanstack/react-query';
 
 import { IButton, IFlex, ISignLine } from '@/components';
@@ -8,7 +7,7 @@ import { IButton, IFlex, ISignLine } from '@/components';
 const App: React.FC = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (_: React.UIEvent) => {
-      await sleep(3000);
+      // await sleep(3000);
     },
   });
 

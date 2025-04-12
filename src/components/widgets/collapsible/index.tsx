@@ -1,10 +1,8 @@
 import { memo } from 'react';
-
-import { isTrue } from '@busymango/is-esm';
-import { dedup } from '@busymango/utils';
+import { unique } from 'remeda';
 
 import { useMemoFunc } from '@/hooks';
-import { iPropsAreEqual } from '@/utils';
+import { iPropsAreEqual, isTrue } from '@/utils';
 
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
@@ -53,7 +51,7 @@ const Collapsible: React.FC<ICollapsibleProps> = ({
           )}
         </div>
       </IFlex>
-      <IPanel visible={iOpen}>
+      <IPanel open={iOpen}>
         <div className={styles.content}>{children}</div>
       </IPanel>
     </div>
@@ -70,7 +68,7 @@ export const ICollapseGroup: React.FC<ICollapseGroupProps> = (props) => {
   const onArrowClick = useMemoFunc((name: ICollapsibleKey, val?: boolean) => {
     const prev = value ?? [];
     onChange?.(
-      dedup(
+      unique(
         isTrue(val) ? prev.concat(name) : prev.filter((key) => key !== name)
       )
     );

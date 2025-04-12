@@ -4,7 +4,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import type { ConstrainedFunc } from '@busymango/utils';
+import type { ConstrainedFunc } from '@/utils';
 
 export function useMemoFunc<T extends ConstrainedFunc<T>>(func?: T) {
   const ref = useRef<T | undefined>(func);

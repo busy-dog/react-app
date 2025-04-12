@@ -1,12 +1,15 @@
-import type { PlainObject } from '@busymango/is-esm';
-import { isFunction, isHTMLElement, isNull, isTrue } from '@busymango/is-esm';
-import { contains, sizeOf } from '@busymango/utils';
+import { Children, isValidElement } from 'react';
+import { isFunction, isNullish, isString } from 'remeda';
 
 import type { ReactTargetType } from '@/models';
 
+import { isFalse, isFinite, isHTMLElement, isTrue } from './guard';
+import { contains, crdnl } from './tools';
+import type { PlainObject } from './types';
+
 /** 从ReactTargetType中获取HTMLElement */
 export function iFindElement(target?: ReactTargetType) {
-  if (isNull(target)) return target;
+  if (isNullish(target)) return target;
   if (isHTMLElement(target)) return target;
   if (isFunction(target)) return iFindElement(target());
   return target?.current ?? null;
@@ -27,7 +30,7 @@ export function iPropagation(
 export function iPropsAreEqual(pre: PlainObject, cur: PlainObject) {
   const { keys, is } = Object;
   return (
-    sizeOf(pre) === sizeOf(cur) &&
+    crdnl(pre) === crdnl(cur) &&
     keys(cur).every((key) => is(pre[key], cur[key]))
   );
 }
@@ -76,3 +79,21 @@ export const iScrollBottomEvent =
       Math.abs(offset) <= tolerance && callback(event);
     }
   };
+
+/**
+ * 断言目标变量为React子组件
+ */
+export function isReactChildren(source?: unknown) {
+  return Children.count(source) > 0;
+}
+
+/**
+ * 断言目标元素为ReactNode
+ */
+export function isReactNode(source: unknown): source is React.ReactNode {
+  if (isFinite(source)) return true;
+  if (isString(source)) return true;
+  if (isValidElement(source)) return true;
+  if (isNullish(source) || isFalse(source)) return false;
+  return isReactChildren(source);
+}

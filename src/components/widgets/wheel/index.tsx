@@ -1,17 +1,10 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-
-import {
-  isArray,
-  isHTMLElement,
-  isNil,
-  isNonEmptyArray,
-} from '@busymango/is-esm';
-import { FRAME2MS, isEqual } from '@busymango/utils';
+import { isDeepEqual, isNullish } from 'remeda';
 
 import { useDebounceFunc, useEffectOnce } from '@/hooks';
 import type { ReactCFC } from '@/models';
-import { isCentered } from '@/utils';
+import { FRAME2MS, isCentered, isHTMLElement, isNonEmptyArray } from '@/utils';
 
 import { useControlState } from '../control';
 import {
@@ -56,7 +49,7 @@ const Wheel: React.FC<IWheelProps> = (props) => {
   const [value, onChange] = useControlState(props);
 
   const iEventListener = useDebounceFunc(() => {
-    if (!isNil(focus)) {
+    if (!isNullish(focus)) {
       const { current } = container;
       const element = iTarget({ id: focus, current, options });
       if (isHTMLElement(element) && view.current !== focus) {
@@ -69,11 +62,11 @@ const Wheel: React.FC<IWheelProps> = (props) => {
   useEffect(() => {
     const { current } = container;
     if (current && !isScrollSnape) {
-      const { starer, cancel } = iEventListener;
-      current?.addEventListener('scrollend', starer);
+      const { call, cancel } = iEventListener;
+      current?.addEventListener('scrollend', call);
       return () => {
         cancel();
-        current?.removeEventListener('scrollend', starer);
+        current?.removeEventListener('scrollend', call);
       };
     }
   }, [container, iEventListener, isScrollSnape]);
@@ -86,14 +79,14 @@ const Wheel: React.FC<IWheelProps> = (props) => {
       return isCentered(element, container.current);
     });
 
-    if (!isNil(index) && options?.[index]) {
+    if (!isNullish(index) && options?.[index]) {
       onChange(options[index].value);
       setFocus(identified(options[index]?.value, index));
     }
   }, 1 * FRAME2MS);
 
   useEffect(() => {
-    isNonEmptyArray(options) && iScroll.starer();
+    isNonEmptyArray(options) && iScroll.call();
   }, [iScroll, options]);
 
   useEffectOnce(
@@ -103,7 +96,7 @@ const Wheel: React.FC<IWheelProps> = (props) => {
       const element = iTarget({ index, current, options });
       isHTMLElement(element) && iScrollIntoView(element);
     },
-    !isNil(value) && isArray(options)
+    !isNullish(value) && isNonEmptyArray(options)
   );
 
   return (
@@ -112,7 +105,7 @@ const Wheel: React.FC<IWheelProps> = (props) => {
       className={classNames(styles.wheel, {
         [styles.isScrollSnap]: isScrollSnape,
       })}
-      onScroll={iScroll.starer}
+      onScroll={iScroll.call}
     >
       <IWheelOption key={-3} container={container} />
       <IWheelOption key={-2} container={container} />
@@ -137,4 +130,4 @@ const Wheel: React.FC<IWheelProps> = (props) => {
   );
 };
 
-export const IWheel = memo(Wheel, isEqual);
+export const IWheel = memo(Wheel, isDeepEqual);

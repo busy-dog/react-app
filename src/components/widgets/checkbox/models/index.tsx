@@ -1,9 +1,7 @@
 import type { SVGMotionProps } from 'motion/react';
 
-import type { PlainObject } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactInputProps, ReactWrapProps } from '@/models';
+import type { OmitOf, PlainObject } from '@/utils';
 
 import type {
   ControlPattern,

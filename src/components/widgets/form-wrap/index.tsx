@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { motion } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
-
 import type { ReactCFC, ReactWrapProps } from '@/models';
+import type { OmitOf } from '@/utils';
 import { iPressEvent } from '@/utils';
 
 import type { IFlexProps } from '../flex';

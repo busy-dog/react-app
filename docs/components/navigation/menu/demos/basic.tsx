@@ -1,7 +1,6 @@
-import { isEmpty } from '@busymango/is-esm';
-
 import { IButton, IMenu, IPopover } from '@/components';
 import { useToggle } from '@/hooks';
+import { isEmptyValue } from 'src/utils';
 
 const App: React.FC = () => {
   const [open, { toggle, off }] = useToggle();
@@ -17,7 +16,7 @@ const App: React.FC = () => {
           ]}
           style={{ padding: 'var(--gap-03) 0' }}
           onChange={(value) => {
-            !isEmpty(value) && off();
+            !isEmptyValue(value) && off();
           }}
         />
       }

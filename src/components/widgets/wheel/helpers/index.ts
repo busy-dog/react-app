@@ -1,8 +1,7 @@
-import { isNumber, isString } from '@busymango/is-esm';
-import { and, compact } from '@busymango/utils';
+import { isNumber, isString } from 'remeda';
 
 import type { ReactTargetType } from '@/models';
-import { iFindElement } from '@/utils';
+import { compact, iFindElement } from '@/utils';
 
 import type { ControlOption } from '../../control';
 
@@ -49,11 +48,10 @@ export const iScrollIntoView = (target?: ReactTargetType) => {
 };
 
 export const isSupportSnape = () =>
-  and(
+  (
     [
       ['scroll-snap-type', 'y mandatory'],
       ['scroll-snap-stop', 'normal'],
       ['scroll-snap-align', 'center'],
-    ] satisfies [string, string][],
-    (args) => CSS.supports(...args)
-  );
+    ] as const
+  ).every((args) => CSS.supports(args[0], args[1]));

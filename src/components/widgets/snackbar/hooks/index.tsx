@@ -2,13 +2,11 @@ import { useMemo } from 'react';
 import { produce } from 'immer';
 import { useAnimate } from 'motion/react';
 import { nanoid } from 'nanoid';
+import { first, isNumber, merge } from 'remeda';
 import { create } from 'zustand';
 
-import { isNumber } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
-import { assign, contains, sizeOf, theFirst, theLast } from '@busymango/utils';
-
 import { useMemoFunc } from '@/hooks';
+import { contains, crdnl, type OmitOf } from '@/utils';
 
 import type {
   ISnackbarActions,
@@ -22,7 +20,7 @@ export const snackbar = {
   apis: new Map<React.Key, ISnackbarAPI>(),
   emit: async (config: Partial<ISnackbarProps>) => {
     const initial: ISnackbarProps = { id: nanoid(), duration: 3000 };
-    const options = assign<ISnackbarProps>(initial, config);
+    const options = merge(initial, config as ISnackbarProps);
     return await useSnackbars.getState().emit(options);
   },
   ...(() =>
@@ -33,7 +31,7 @@ export const snackbar = {
           const id = nanoid();
           const duration = 3000;
           const initial: ISnackbarProps = { id, status, duration };
-          const options = assign<ISnackbarProps>(initial, config);
+          const options = merge(initial, config as ISnackbarProps);
           return await useSnackbars.getState().emit(options);
         },
       }),
@@ -72,8 +70,10 @@ export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(
             const current = snackbars.find(assert)!;
             const api = snackbar.apis.get(current.id);
             Object.entries(config).forEach((attr) => {
-              const key = theFirst(attr) as keyof ISnackbarProps;
-              current[key] = theLast(attr) as ISnackbarProps;
+              const key = first(attr) as keyof ISnackbarProps;
+              // if (key in current && current[key]) {
+              //   current[key] = last(attr) as ISnackbarProps[typeof key];
+              // }
             });
             api?.reset();
           })
@@ -83,7 +83,7 @@ export const useSnackbars = create<ISnackbarStore & ISnackbarActions>(
           set(
             produce(({ snackbars }: ISnackbarStore) => {
               snackbars.push({ ...config, onExit });
-              const count = sizeOf(snackbars);
+              const count = crdnl(snackbars);
               if (isNumber(max) && count > max) {
                 snackbars.splice(0, count - max);
               }

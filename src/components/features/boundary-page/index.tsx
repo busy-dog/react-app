@@ -3,13 +3,11 @@ import type { TranslationProps } from 'react-i18next';
 import { Translation, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { isTrue } from '@busymango/is-esm';
-
 import type { BoundaryProps } from '@/components/widgets';
 import { Boundary, IButton, IFlex, useBoundary } from '@/components/widgets';
 import type { ReactCFC } from '@/models';
 import { isFetchError, USER_OAUTH_GITHUB_API } from '@/services';
-import { catchMsg, isNotFoundError } from '@/utils';
+import { catchMsg, isNotFoundError, isTrue } from '@/utils';
 
 import ErrorSVG from '@/icons/feedbacks/error.svg?react';
 import NoConnectionSVG from '@/icons/feedbacks/no.connection.svg?react';

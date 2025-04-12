@@ -1,5 +1,12 @@
-import { isEmpty, isNonEmptyString, isString } from '@busymango/is-esm';
-import { compact, iArray, ifnot } from '@busymango/utils';
+import { isString } from 'remeda';
+
+import {
+  compact,
+  ensure,
+  iArray,
+  isEmptyValue,
+  isNonEmptyString,
+} from '@/utils';
 
 import type { ControlOption } from '../../control';
 import type { ISignType } from '../../sign';
@@ -20,7 +27,7 @@ export const iSignType = ({
 
   const isShowClear = clearable && (isFocus || isHover || open);
 
-  return isShowClear && !isEmpty(value || keyword) ? 'cross' : iArrow;
+  return isShowClear && !isEmptyValue(value || keyword) ? 'cross' : iArrow;
 };
 
 export const iPredicate = (
@@ -28,7 +35,7 @@ export const iPredicate = (
   keyword?: string
 ) => {
   if (!isNonEmptyString(keyword)) return true;
-  const text = title ?? ifnot(isString(label) && label);
+  const text = title ?? ensure(isString(label) && label);
   return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
 };
 

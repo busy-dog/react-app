@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import { flushSync } from 'react-dom';
+import { isNumber, isObjectType } from 'remeda';
 
-import { isEmpty, isNumber, isObject, isTrue } from '@busymango/is-esm';
-import { compact, iArray } from '@busymango/utils';
 import type { FloatingContext, MiddlewareState } from '@floating-ui/react';
 import {
   autoUpdate,
@@ -17,7 +16,7 @@ import {
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
 import type { ReactAction } from '@/models';
-import { size2px } from '@/utils';
+import { compact, iArray, isEmptyValue, isTrue, size2px } from '@/utils';
 
 import type { ControlOption, ControlValues } from '../../control';
 import { iPredicate } from '../helpers';
@@ -49,7 +48,7 @@ export const useIFloating = (params: {
       availableHeight: number;
     }) => {
       const rect = reference.getBoundingClientRect();
-      sync.starer({ floating, rect: rect as DOMRect });
+      sync.call({ floating, rect: rect as DOMRect });
       if (floating.getAttribute('data-resize') !== 'true') {
         floating.setAttribute('data-resize', 'true');
         sync.flush();
@@ -95,7 +94,7 @@ export const useFilterOptions = (
 
   const predicate = useMemo<ISelectorPredicate | undefined>(() => {
     if (isTrue(filter)) return iPredicate;
-    if (isObject(filter)) return filter?.predicate;
+    if (isObjectType(filter)) return filter?.predicate;
   }, [filter]);
 
   return useMemo(() => {
@@ -124,11 +123,14 @@ export const useArrowKeyDown = ({
   useMemoFunc((event: React.KeyboardEvent<HTMLInputElement>) => {
     const { code } = event;
     event.stopPropagation();
-    if (!isEmpty(options)) {
+    if (!isEmptyValue(options)) {
       switch (code) {
         case 'Backspace':
           if (multiple) {
-            onChange((cur) => compact(iArray(cur)).slice(0, -1));
+            onChange((cur) => {
+              const curs = compact(iArray(cur));
+              return curs.slice(0, -1);
+            });
           }
           break;
         case 'Enter':

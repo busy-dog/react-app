@@ -1,10 +1,8 @@
 import { forwardRef, Fragment, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
+import { isFunction } from 'remeda';
 
-import { isEmpty, isFunction } from '@busymango/is-esm';
-import { iArray } from '@busymango/utils';
-
-import { iCompact, iPropagation } from '@/utils';
+import { iArray, iCompact, iPropagation, isEmptyValue } from '@/utils';
 
 import { useControlState } from '../control';
 import { IEmptyWrap } from '../empty';
@@ -81,7 +79,7 @@ export const IMenu = forwardRef<IMenuRef, IMenuProps>(
         onClick={onClick}
         {...others}
       >
-        {isEmpty(options) && (render?.empty ?? iEmptyRender)({}, states)}
+        {isEmptyValue(options) && (render?.empty ?? iEmptyRender)({}, states)}
         {options?.map((option, index) => (
           <Fragment key={option.value?.toString()}>
             {(render?.option ?? iOptionRender)(

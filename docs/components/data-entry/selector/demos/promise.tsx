@@ -1,14 +1,13 @@
 import { useMemo, useState } from 'react';
 import { configure } from 'docs/widgets';
 
-import { iArray, iSearchParams } from '@busymango/utils';
 import { useQuery } from '@tanstack/react-query';
 
 import type { ControlOption, ISelectorChipsRender } from '@/components';
 import { IChip, IPopover, ISelector, ITypography } from '@/components';
 import { useToggle } from '@/hooks';
 import { drive } from '@/services';
-import { iCompact } from '@/utils';
+import { iArray, iCompact, iSearchParams } from 'src/utils';
 
 import universities from '../data/universities.json';
 

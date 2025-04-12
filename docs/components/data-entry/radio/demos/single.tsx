@@ -2,11 +2,15 @@ import { useForm } from '@tanstack/react-form';
 
 import { IFieldCell, IFlex, IFormWrap, IRadio } from '@/components';
 
+type FormData = {
+  fir?: string;
+  sec?: string;
+};
+
 const App: React.FC = () => {
-  const { Field } = useForm<{
-    fir?: string;
-    sec?: string;
-  }>({});
+  const { Field } = useForm({
+    defaultValues: {} as FormData,
+  });
   return (
     <IFormWrap>
       <IFieldCell title="字段">

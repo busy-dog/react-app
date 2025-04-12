@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
-
-import { debounce } from '@busymango/utils';
+import { funnel } from 'remeda';
 
 export function useDebounceState<T = unknown>(state?: T, wait = 300) {
   const [iState, setMemoState] = useState<T | undefined>(state);
 
-  const func = useMemo(() => debounce(setMemoState, wait), [wait]);
+  const func = useMemo(
+    () =>
+      funnel<Parameters<typeof setMemoState>>(setMemoState, {
+        minQuietPeriodMs: wait,
+      }),
+    [wait]
+  );
 
   useEffect(() => {
-    func.starer(state);
+    func.call(state);
   }, [state, func]);
 
   return iState;

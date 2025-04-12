@@ -1,4 +1,4 @@
-import type { PartialPick } from '@busymango/utils';
+import type { PartialPick } from '@/utils';
 
 import type { ControlOption, ControlPattern } from '../../control';
 import type { IRadioProps } from '../../radio';

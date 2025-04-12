@@ -1,18 +1,19 @@
-import { isTrue } from '@busymango/is-esm';
-import { theLast } from '@busymango/utils';
+import { last } from 'remeda';
+
 import { useForm } from '@tanstack/react-form';
 
-import { ICheckbox, IFlex, IFormWrap } from '@/components';
+import { ICheckbox, IFlex, IFormWrap } from 'src/components';
+import { isTrue } from 'src/utils';
 
 type FormData = {
   childs: boolean[];
 };
 
 const App: React.FC = () => {
-  const api = useForm<FormData>({
+  const api = useForm({
     defaultValues: {
       childs: [false, false, false],
-    },
+    } as FormData,
   });
 
   const { Field, Subscribe, setFieldValue } = api;
@@ -23,7 +24,7 @@ const App: React.FC = () => {
         {(childs) => (
           <ICheckbox
             checked={childs.every(isTrue)}
-            indeterminate={childs.some((val) => val !== theLast(childs))}
+            indeterminate={childs.some((val) => val !== last(childs))}
             label="全选"
             onChange={({ target }) => {
               setFieldValue('childs', (pre) => pre.map(() => target.checked));

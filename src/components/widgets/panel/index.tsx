@@ -2,64 +2,89 @@
  * @description 消息反馈组件
  */
 
-import { useRef } from 'react';
+import { useId, useMemo, useRef } from 'react';
 import classNames from 'classnames';
-import type { Target, Transition } from 'motion/react';
-import { AnimatePresence, motion } from 'motion/react';
+import type { Transition } from 'motion/react';
+import { motion, MotionConfig } from 'motion/react';
 
 import { useRecord } from '@/hooks';
-import type { ReactCFC, ReactTargetType } from '@/models';
-import { iFindElement } from '@/utils';
+import type { ReactCFC } from '@/models';
 
-import type { IPanelProps, IPanelRender } from './models';
+import type { IPanelContentRender, IPanelProps } from './models';
 
 import * as styles from './index.scss';
 
-const initial: Target = { opacity: 0, height: 0 };
-
 const transition: Transition = { ease: 'circIn' };
 
-const iRender: IPanelRender = (props) => <div {...props} />;
-
-const iTargetHeight = (target: ReactTargetType) =>
-  iFindElement(target)?.getBoundingClientRect().height;
+const iContentRender: IPanelContentRender = (props) => (
+  <motion.div
+    variants={{
+      on: {
+        filter: 'blur(0px)',
+        opacity: 1,
+      },
+      off: {
+        filter: 'blur(2px)',
+        opacity: 0,
+      },
+    }}
+    {...props}
+  />
+);
 
 export const IPanel: ReactCFC<IPanelProps> = (props) => {
   const {
     children,
     className,
-    visible = true,
+    open = true,
     ghosting = true,
-    render,
+    renders,
     ...others
   } = props;
 
+  const id = useId();
+
+  const state = useMemo(
+    () => ({
+      open,
+      ghosting,
+    }),
+    [open, ghosting]
+  );
+
   const target = useRef<HTMLDivElement>(null);
 
-  const record = useRecord(children, visible && ghosting);
+  const record = useRecord(children, open && ghosting);
 
   return (
-    <AnimatePresence>
-      {visible && (
+    <MotionConfig transition={transition}>
+      <motion.section
+        animate={open ? 'on' : 'off'}
+        className={classNames(styles.wrap, className)}
+        initial={false}
+        {...others}
+      >
+        {renders?.header?.({}, state)}
         <motion.div
-          animate={{
-            opacity: 1,
-            height: iTargetHeight(target),
+          aria-labelledby={id}
+          className={styles.content}
+          id={id}
+          variants={{
+            on: { height: 'auto' },
+            off: { height: 0 },
           }}
-          className={classNames(styles.wrap, className)}
-          exit={initial}
-          initial={initial}
-          transition={transition}
-          {...others}
         >
-          {(render ?? iRender)({
-            ref: target,
-            className: styles.content,
-            children: children || record,
-          })}
+          {(renders?.content ?? iContentRender)(
+            {
+              ref: target,
+              className: styles.content,
+              children: children || record,
+            },
+            state
+          )}
         </motion.div>
-      )}
-    </AnimatePresence>
+      </motion.section>
+    </MotionConfig>
   );
 };
 

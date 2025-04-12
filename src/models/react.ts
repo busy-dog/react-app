@@ -12,8 +12,7 @@ import type {
   TapHandlers,
 } from 'motion/react';
 
-import type { PlainObject } from '@busymango/is-esm';
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf, PlainObject } from '@/utils';
 
 /** HTML元素尺寸 */
 export type RectSize = {

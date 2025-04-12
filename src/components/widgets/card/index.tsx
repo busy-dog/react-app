@@ -1,48 +1,51 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
-import { motion } from 'motion/react';
-
+import { IButton } from '../button';
+import { useControlState } from '../control';
 import { IFlex } from '../flex';
-import type { ICardProps, ICardRootRender } from './models';
+import { IPanel } from '../panel';
+import { ISignLine } from '../sign';
+import type { ICardProps } from './models';
 
 import * as styles from './index.scss';
 
-const iRootRender: ICardRootRender = ({
-  ref,
-  header,
-  footer,
-  children,
-  ...others
-}) => (
-  <motion.div ref={ref} className={styles.wrap} {...others}>
-    {header}
-    {children}
-    {footer}
-  </motion.div>
-);
-export const ICard: React.FC<ICardProps> = forwardRef<
-  HTMLDivElement,
-  ICardProps
->(function ICard(props, iForwardRef) {
-  const { title, extra, children, footer, render, ...others } = props;
+export const ICard: React.FC<ICardProps> = (props) => {
+  const { ref, title, extra, children, footer, render, open, ...others } =
+    props;
 
-  const ref = useRef<HTMLDivElement>(null);
+  const [innerOpen, onOpenChange] = useControlState({
+    value: open,
+    defaultValue: true,
+    onChange: props.onOpenChange,
+  });
 
-  useImperativeHandle(iForwardRef, () => ref.current!);
-
-  return (render?.root ?? iRootRender)(
-    {
-      ref,
-      footer,
-      children,
-      className: styles.wrap,
-      header: (
-        <IFlex align="center" justify="space-between">
-          {title}
-          <i>{extra}</i>
-        </IFlex>
-      ),
-      ...others,
-    },
-    {}
+  return (
+    <IPanel
+      ref={ref}
+      className={styles.wrap}
+      open={innerOpen}
+      renders={{
+        header: () => (
+          <IFlex align="center" justify="space-between">
+            {title}
+            <i>
+              {extra ?? (
+                <IButton capsule size="mini" variant="filled">
+                  <ISignLine
+                    type={innerOpen ? 'arrowTop' : 'arrowBottom'}
+                    onClick={() => {
+                      console.log('click', !innerOpen);
+                      onOpenChange(!innerOpen);
+                    }}
+                  />
+                </IButton>
+              )}
+            </i>
+          </IFlex>
+        ),
+      }}
+      {...others}
+    >
+      {children}
+      {footer}
+    </IPanel>
   );
-});
+};

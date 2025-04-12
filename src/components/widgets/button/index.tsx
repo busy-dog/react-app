@@ -1,12 +1,16 @@
 import { useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
-
-import { isNumber, isTrue } from '@busymango/is-esm';
-import { FRAME2MS, ifnot } from '@busymango/utils';
+import { isNumber } from 'remeda';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
-import { iPropagation, isReactChildren } from '@/utils';
+import {
+  ensure,
+  FRAME2MS,
+  iPropagation,
+  isReactChildren,
+  isTrue,
+} from '@/utils';
 
 import { ISpinner } from '../spin-loading';
 import { IWave } from '../wave';
@@ -44,7 +48,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
 
   const wait = isNumber(debounce) ? debounce : 5 * FRAME2MS;
 
-  const { starer } = useDebounceFunc(onClick, wait);
+  const { call: starer } = useDebounceFunc(onClick, wait);
 
   useImperativeHandle(ref, () => button.current!, [button]);
 
@@ -92,7 +96,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
         {icon && (
           <motion.i
             animate={animate}
-            className={ifnot(isNonEmptyChild && styles.gap)}
+            className={ensure(isNonEmptyChild && styles.gap)}
           >
             {icon}
           </motion.i>

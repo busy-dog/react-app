@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { ThemeContext } from 'rspress/runtime';
 
-import { iThemeRoot } from '@/utils';
+import { iThemeRoot } from 'src/utils';
 
 const setIframeTheme = (
   element: HTMLElement,

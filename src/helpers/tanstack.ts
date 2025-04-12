@@ -1,19 +1,21 @@
-import type { FieldMeta } from '@tanstack/react-form';
-import { isNonEmptyArray } from '@tanstack/react-form';
+import { first } from 'remeda';
 
 import type { IFieldCellProps } from '@/components';
+import { compact, isStringArray } from '@/utils';
 
 export const iTanstackFieldCellAdapter = ({
   isValidating,
   isTouched,
   errors,
-}: FieldMeta): Pick<IFieldCellProps, 'status' | 'feedback'> => {
+}: {
+  isValidating: boolean;
+  isTouched: boolean;
+  errors: unknown[];
+}): Pick<IFieldCellProps, 'status' | 'feedback'> => {
+  const current = compact(errors);
+  const isError = isStringArray(current);
   return {
-    status: isValidating
-      ? 'vaildating'
-      : isNonEmptyArray(errors)
-        ? 'danger'
-        : 'success',
-    feedback: isTouched && errors?.[0]?.toString(),
+    status: isValidating ? 'vaildating' : isError ? 'danger' : 'success',
+    feedback: isTouched && isError ? first(current) : null,
   };
 };

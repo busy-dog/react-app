@@ -1,24 +1,25 @@
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
+import { isObjectType, merge } from 'remeda';
 import { defineConfig } from 'rspress/config';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
-import { isObject, isRegExp } from '@busymango/is-esm';
-import { assign, or } from '@busymango/utils';
 import { parse } from '@dotenvx/dotenvx';
 import { pluginPreview } from '@rspress/plugin-preview';
 
 import { dir } from './config';
+import { isRegExp } from './helpers';
 
-const dotenv = assign<{
+type Env = {
   THEME: string;
   ENV_NAME: string;
   CONTAINER_ID: string;
   SERVER_DOMAIN?: string;
   SERVER_PREFIX?: string;
-}>(
-  process.env,
-  parse(readFileSync(resolve(dir.envs, 'comm.env'))),
+};
+
+const dotenv = merge(
+  merge(process.env as Env, parse(readFileSync(resolve(dir.envs, 'comm.env')))),
   parse(readFileSync(resolve(dir.envs, 'prod.env')))
 );
 
@@ -51,7 +52,7 @@ export default defineConfig({
     tools: {
       rspack: (config) => {
         config.module?.rules
-          ?.filter((rule) => isObject(rule))
+          ?.filter((rule) => isObjectType(rule))
           ?.find(({ test }) => isRegExp(test) && test.test('.svg'))
           ?.oneOf?.unshift({
             loader: '@svgr/webpack',
@@ -86,7 +87,7 @@ export default defineConfig({
         exportLocalsConvention: 'camelCaseOnly',
         auto: (res) =>
           res.endsWith('.scss') &&
-          or(['src', 'docs', 'examples'], (val) => res.includes(val)),
+          ['src', 'docs', 'examples'].some((val) => res.includes(val)),
       },
     },
   },

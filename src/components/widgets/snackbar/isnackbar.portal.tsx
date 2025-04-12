@@ -1,7 +1,7 @@
 import { useDeferredValue, useEffect } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
+import { isNumber } from 'remeda';
 
-import { isNumber } from '@busymango/is-esm';
 import { FloatingPortal } from '@floating-ui/react';
 
 import { container } from '@/init';

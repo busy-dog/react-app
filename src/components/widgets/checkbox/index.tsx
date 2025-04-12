@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
-import { ifnot } from '@busymango/utils';
+import { ensure } from '@/utils';
 
 import { onCheckCatch, useControlState } from '../control';
 import { ISignLine } from '../sign';
@@ -67,7 +67,7 @@ const iInputRender: ICheckInputRender = (
     readOnly={pattren === 'readOnly' || pattren === 'readPretty'}
     type="checkbox"
     value={value?.toLocaleString()}
-    onChange={ifnot(pattren === 'editable' && onChange)}
+    onChange={ensure(pattren === 'editable' && onChange)}
     {...others}
   />
 );

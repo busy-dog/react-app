@@ -1,6 +1,6 @@
 import type { SVGMotionProps, Target } from 'motion/react';
 
-import type { OmitOf } from '@busymango/utils';
+import type { OmitOf } from '@/utils';
 
 export type ISignType =
   | 'ban'

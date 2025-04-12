@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { standardSchemaValidator, useForm } from '@tanstack/react-form';
+import { useForm } from '@tanstack/react-form';
 
 import {
   IButton,
@@ -31,8 +31,6 @@ export default function App() {
       // Do something with form data
       console.log(value);
     },
-    // Add a validator to support Zod usage in Form and Field (no longer needed with zod@3.24.0 or higher)
-    validatorAdapter: standardSchemaValidator(),
     validators: {
       onChange: userSchema,
     },

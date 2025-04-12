@@ -1,6 +1,5 @@
 import type { Target, Transition } from 'motion/react';
-
-import { assign, compact } from '@busymango/utils';
+import { isString, merge, pipe } from 'remeda';
 
 import { size2px } from '@/utils';
 
@@ -14,23 +13,28 @@ export const iAnimate = ({
   color,
   variant,
   disabled,
-}: Pick<IChipProps, 'color' | 'variant' | 'disabled'>) =>
-  assign<Target>(
+}: Pick<IChipProps, 'color' | 'variant' | 'disabled'>) => {
+  return pipe(
     {
       x: 0,
       opacity: 1,
-    },
-    ...(color && variant && !disabled
-      ? compact([
-          variant === 'bordered' && {
-            borderColor: `currentColor`,
-            color: `rgb(var(--${color}-color-600) / 1)`,
-          },
-          variant === 'filled' && {
-            borderColor: 'transparent',
-            color: 'var(--font-color-b8)',
-            backgroundColor: `rgb(var(--${color}-color-300) / 1)`,
-          },
-        ])
-      : [])
+    } as Target,
+    merge(
+      !disabled &&
+        isString(color) &&
+        variant === 'bordered' && {
+          borderColor: `currentColor`,
+          color: `rgb(var(--${color}-color-600) / 1)`,
+        }
+    ),
+    merge(
+      !disabled &&
+        isString(color) &&
+        variant === 'filled' && {
+          borderColor: 'transparent',
+          color: 'var(--font-color-b8)',
+          backgroundColor: `rgb(var(--${color}-color-300) / 1)`,
+        }
+    )
   );
+};
