@@ -1,12 +1,11 @@
-import { Fragment } from 'react/jsx-runtime';
+import { Fragment } from 'react';
 import { Variants } from 'docs/widgets';
 
-import { ISpinner, ITypography } from '@/components';
-import { IBackdrop } from '@/components/widgets/backdrop';
-import { iPropagation } from 'src/utils';
+import { IBackdrop, ISpinner, ITypography } from '@/components';
+import { iPropagation } from '@/utils';
 
 const App: React.FC = () => (
-  <Variants switchable>
+  <Variants switchable card={false}>
     {({ open, toggle }) => (
       <Fragment>
         <ITypography margin={false} variant="body">

@@ -13,7 +13,7 @@ const options = [
   { value: 'cross' },
   { value: 'clock' },
   { value: 'helper' },
-  { value: 'informer' },
+  { value: 'info' },
   { value: 'magnifier' },
   { value: 'arrowTop' },
   { value: 'arrowLeft' },

@@ -36,14 +36,6 @@ export const AlgorithmSort: React.FC<{
   return (
     <ICard
       extra={`第${count}步`}
-      footer={
-        <IFlex gap={8} justify="flex-end">
-          <IButton onClick={reset}>重置</IButton>
-          <IButton disabled={done} variant="filled" onClick={next}>
-            下一步
-          </IButton>
-        </IFlex>
-      }
       style={{ width: 'max-content' }}
       title={title}
     >
@@ -66,6 +58,12 @@ export const AlgorithmSort: React.FC<{
             {item}
           </motion.div>
         ))}
+      </IFlex>
+      <IFlex gap={8} justify="flex-end">
+        <IButton onClick={reset}>重置</IButton>
+        <IButton disabled={done} variant="filled" onClick={next}>
+          下一步
+        </IButton>
       </IFlex>
     </ICard>
   );

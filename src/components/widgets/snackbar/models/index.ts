@@ -1,8 +1,5 @@
-import type { HTMLMotionProps } from 'motion/react';
-
+import type { ReactMotionProps } from '@/models';
 import type { OmitOf } from '@/utils';
-
-import type { ControlUISize } from '../../control';
 
 export type ISnackbarAPI = {
   id: React.Key;
@@ -12,16 +9,15 @@ export type ISnackbarAPI = {
 
 export type ISnackbarStatus = 'success' | 'info' | 'danger' | 'warn';
 
-export interface ISnackbarProps extends OmitOf<HTMLMotionProps<'div'>, 'id'> {
+export interface ISnackbarProps extends OmitOf<ReactMotionProps, 'id'> {
   id: React.Key;
+  ref?: React.RefObject<HTMLLIElement>;
   /** 自动关闭的延时，单位秒。设为 0 时不自动关闭	number	3 */
   duration?: number;
   /** 自定义图标 */
   icon?: React.ReactNode;
   /** 自定义关闭图标 */
   close?: React.ReactNode;
-  /** 控件尺寸 */
-  size?: ControlUISize;
   /** 变体 */
   variant?: 'filled' | 'bordered';
   /** 状态 */

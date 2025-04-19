@@ -7,6 +7,8 @@ import type { ControlUISize } from '../../control';
 type MotionButtonProps = React.PropsWithChildren &
   OmitOf<HTMLMotionProps<'button'>, 'children'>;
 
+export type IButtonVariant = 'filled' | 'bordered' | 'text';
+
 export interface IButtonProps extends MotionButtonProps {
   capsule?: boolean;
   danger?: boolean;
@@ -15,6 +17,6 @@ export interface IButtonProps extends MotionButtonProps {
   isFullWidth?: boolean;
   isLoading?: boolean;
   size?: ControlUISize;
-  variant?: 'filled' | 'bordered' | 'text';
+  variant?: IButtonVariant;
   wave?: boolean;
 }

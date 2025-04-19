@@ -1,6 +1,7 @@
 import type { HTMLMotionProps } from 'motion/react';
 
 import type { ReactRender, ReactWrapProps } from '@/models';
+import type { OmitOf } from '@/utils';
 
 export type IPanelState = {
   /** 展示内容 */
@@ -19,18 +20,23 @@ export type IPanelContentRender = ReactRender<
 >;
 
 export type IPanelHeaderRender = ReactRender<
-  React.PropsWithChildren<ReactWrapProps>,
+  React.PropsWithChildren<{
+    title?: React.ReactNode;
+    extra?: React.ReactNode;
+  }>,
   IPanelState
 >;
 
-type IPanelRenders = {
+export type IPanelRenders = {
   header?: IPanelHeaderRender;
   content?: IPanelContentRender;
 };
 
 export interface IPanelProps
   extends Partial<IPanelState>,
-    HTMLMotionProps<'div'> {
+    OmitOf<HTMLMotionProps<'div'>, 'title'> {
+  title?: React.ReactNode;
+  extra?: React.ReactNode;
   /** 自定义UI */
   renders?: IPanelRenders;
 }

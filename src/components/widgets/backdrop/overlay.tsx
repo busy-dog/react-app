@@ -22,11 +22,12 @@ const iScrollbarWidth = () => {
 };
 
 export const IOverlay: React.FC<IOverlayProps> = (props) => {
-  const { ref, scroll = false, className, ...rest } = props;
+  const { ref, open, scroll = false, className, ...rest } = props;
 
   const id = useId();
 
   useLayoutEffect(() => {
+    if (!open) return;
     if (scroll) return;
 
     iLocks.add(id);
@@ -65,7 +66,6 @@ export const IOverlay: React.FC<IOverlayProps> = (props) => {
 
     return () => {
       iLocks.delete(id);
-
       if (iLocks.size === 0) {
         Object.assign(style, {
           [name]: '',
@@ -83,15 +83,27 @@ export const IOverlay: React.FC<IOverlayProps> = (props) => {
         }
       }
     };
-  }, [id, scroll]);
+  }, [id, scroll, open]);
 
   return (
     <motion.div
       ref={ref}
-      animate={{ opacity: 1 }}
+      animate={open ? 'on' : 'off'}
       className={classNames(styles.wrap, className)}
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
+      variants={{
+        on: {
+          opacity: 1,
+          filter: 'blur(0px)',
+          pointerEvents: 'auto',
+        },
+        off: {
+          opacity: 0,
+          filter: 'blur(2px)',
+          pointerEvents: 'none',
+        },
+      }}
       {...rest}
     />
   );

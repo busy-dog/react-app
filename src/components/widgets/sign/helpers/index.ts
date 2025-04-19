@@ -143,8 +143,10 @@ export const iAnimateLine = (type?: ISignType): Target[] => {
         { d: 'M320 320 L512 512 L704 704' },
         { d: 'M704 320 L512 512 L320 704' },
       ];
-    case 'informer':
-      return [{ d: 'M512 256 L512 256 L512 608' }, { d: iTrigon(512, 768, 8) }];
+    case 'interj':
+      return [{ d: 'M512 320 L512 320 L512 582' }, { d: iTrigon(512, 702, 6) }];
+    case 'info':
+      return [{ d: iTrigon(512, 320, 6) }, { d: 'M512 480 L512 512 L512 702' }];
     default:
       return [];
   }

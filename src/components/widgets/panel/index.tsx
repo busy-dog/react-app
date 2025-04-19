@@ -9,8 +9,14 @@ import { motion, MotionConfig } from 'motion/react';
 
 import { useRecord } from '@/hooks';
 import type { ReactCFC } from '@/models';
+import { isReactNode } from '@/utils';
 
-import type { IPanelContentRender, IPanelProps } from './models';
+import { ITypography } from '../typography';
+import type {
+  IPanelContentRender,
+  IPanelHeaderRender,
+  IPanelProps,
+} from './models';
 
 import * as styles from './index.scss';
 
@@ -32,8 +38,17 @@ const iContentRender: IPanelContentRender = (props) => (
   />
 );
 
+const iHeaderRender: IPanelHeaderRender = ({ title, extra }) => (
+  <ITypography variant="h3">
+    <span>{title}</span>
+    {extra}
+  </ITypography>
+);
+
 export const IPanel: ReactCFC<IPanelProps> = (props) => {
   const {
+    title,
+    extra,
     children,
     className,
     open = true,
@@ -56,6 +71,8 @@ export const IPanel: ReactCFC<IPanelProps> = (props) => {
 
   const record = useRecord(children, open && ghosting);
 
+  const isRenderHeader = isReactNode(title) || isReactNode(extra);
+
   return (
     <MotionConfig transition={transition}>
       <motion.section
@@ -64,7 +81,8 @@ export const IPanel: ReactCFC<IPanelProps> = (props) => {
         initial={false}
         {...others}
       >
-        {renders?.header?.({}, state)}
+        {isRenderHeader &&
+          (renders?.header ?? iHeaderRender)({ extra, title }, state)}
         <motion.div
           aria-labelledby={id}
           className={styles.content}

@@ -3,8 +3,12 @@
   align-items: flex-start;
   justify-content: flex-start;
 
+  width: max-content;
+
+  flex-shrink: 0;
+  box-shadow: var(--shadow-04);
   border-radius: var(--border-radius-02);
-  background-color: rgb(var(--comp-bg-color));
+  background-color: var(--bg-color-normal);
 
   cursor: pointer;
   box-sizing: border-box;
@@ -15,23 +19,6 @@
   -webkit-box-pack: start;
   -webkit-box-align: center;
   -webkit-tap-highlight-color: transparent;
-
-  box-shadow: var(--shadow-04);
-
-  &.mini {
-    margin-top: var(--gap-04);
-    padding: var(--gap-02) var(--gap-04);
-  }
-  &.medium {
-    margin-top: var(--gap-05);
-    line-height: var(--control-size-03);
-    padding: var(--gap-03) var(--gap-05);
-    max-width: calc(100% - 2 * var(--gap-04));
-  }
-  &.huge {
-    margin-top: var(--gap-07);
-    padding: var(--gap-04) var(--gap-06);
-  }
 }
 
 .overlay {
@@ -41,10 +28,44 @@
 .container {
   width: 100%;
   height: 100%;
-
+  list-style: none;
   pointer-events: none;
 
+  inset: 0;
+  margin: 0;
+  padding: var(--gap-10);
+  position: fixed;
+
+  gap: var(--gap-06);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+
   z-index: var(--z-index-toast);
+
+  &.mini {
+    margin-top: var(--gap-04);
+
+    .snackbar {
+      padding: var(--gap-02) var(--gap-04);
+    }
+  }
+  &.medium {
+    margin-top: var(--gap-05);
+
+    .snackbar {
+      line-height: var(--control-size-03);
+      padding: var(--gap-03) var(--gap-05);
+    }
+  }
+  &.huge {
+    margin-top: var(--gap-07);
+
+    .snackbar {
+      padding: var(--gap-04) var(--gap-06);
+    }
+  }
 }
 
 .icon {

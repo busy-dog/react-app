@@ -27,8 +27,8 @@ const App: React.FC = () => {
         render={{
           reference: (props) => (
             <ICard
-              render={{
-                root: ({ className }) => (
+              renders={{
+                content: ({ className }) => (
                   <ITypography className={className} maxRow={3} {...props}>
                     {ellipsis(string)}
                   </ITypography>

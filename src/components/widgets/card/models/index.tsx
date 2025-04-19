@@ -1,35 +1,23 @@
 import type { PropsWithChildren } from 'react';
 import type { HTMLMotionProps } from 'motion/react';
 
-import type { ReactRender } from '@/models';
 import type { OmitOf } from '@/utils';
 
-export interface ICardState {}
+import type { IPanelRenders, IPanelState } from '../../panel';
 
-export type ICardRootRender = ReactRender<
-  HTMLMotionProps<'div'> & {
-    ref: React.RefObject<HTMLDivElement | null>;
-    header: React.ReactNode;
-    footer?: React.ReactNode;
-    children?: React.ReactNode;
-  },
-  ICardState
->;
-
-export type ICardRenders = {
-  root?: ICardRootRender;
-};
+export interface ICardState extends IPanelState {}
 
 export interface ICardProps
-  extends PropsWithChildren,
+  extends Partial<ICardState>,
+    PropsWithChildren,
     OmitOf<HTMLMotionProps<'div'>, 'children' | 'title'> {
   ref?: React.RefObject<HTMLDivElement | null>;
-  open?: boolean;
+  maxTilt?: number;
+  tiltTrigger?: 'mouse' | 'touch' | 'pointer';
+  collapsible?: boolean;
   title?: React.ReactNode;
   extra?: React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
   variant?: 'filled' | 'bordered';
-  render?: ICardRenders;
+  renders?: IPanelRenders;
   onOpenChange?: (open: boolean) => void;
 }

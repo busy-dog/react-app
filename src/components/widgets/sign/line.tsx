@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import { IDollarPath } from './dollar';
 import { IHelperPath } from './helper';
-import { iAnimateLine, initial, iTrigon, transition } from './helpers';
+import { iAnimateLine, initial, transition } from './helpers';
 import { IMagnifierPath } from './magnifier';
 import type { ISignLineProps } from './models';
 
@@ -48,9 +48,10 @@ export const ISignLine = forwardRef<SVGSVGElement, ISignLineProps>(
           {trigon && (
             <motion.path
               key="trigon"
-              animate={{ d: iTrigon(512, 512 + 128, 464 + 64) }}
-              exit={initial}
-              initial={initial}
+              animate={{ opacity: 1 }}
+              d="M926.93 768 585.6 170.67a85.33 85.33 0 0 0-148.16 0L96.53 768A85.33 85.33 0 0 0 170.67 896h682.66A85.33 85.33 0 0 0 926.93 768Z"
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
             />
           )}
         </AnimatePresence>

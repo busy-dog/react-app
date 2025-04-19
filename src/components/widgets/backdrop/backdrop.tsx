@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence } from 'motion/react';
 
 import { FloatingPortal } from '@floating-ui/react';
 
@@ -33,21 +32,18 @@ export const IBackdrop: ReactCFC<IBackdropProps> = ({
   if (isTrue(mounted)) {
     return (
       <FloatingPortal root={iFindElement(root) ?? container}>
-        <AnimatePresence>
-          {open && (
-            <IOverlay
-              ref={ref}
-              className={classNames(
-                styles.wrap,
-                relative && styles.relative,
-                className
-              )}
-              {...others}
-            >
-              {children}
-            </IOverlay>
+        <IOverlay
+          ref={ref}
+          className={classNames(
+            styles.wrap,
+            relative && styles.relative,
+            className
           )}
-        </AnimatePresence>
+          open={open}
+          {...others}
+        >
+          {children}
+        </IOverlay>
       </FloatingPortal>
     );
   }

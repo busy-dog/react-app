@@ -30,10 +30,6 @@
 
   flex-shrink: 0;
 
-  transition-duration: 200ms;
-  transition-property: color border-color background-color;
-  transition-timing-function: var(--ease-in-out-cubic);
-
   &::-moz-focus-inner {
     border-style: none;
   }
@@ -95,99 +91,20 @@
   }
 }
 
-/** variant */
-.text {
-  flex-shrink: 0;
-  &:not(.disabled):not(.danger) {
-    color: inherit;
-    &:hover {
-      background-color: var(--fill-color-hover);
-    }
-    // &:focus-within {
-    //   background-color: var(--fill-color-active);
-    // }
-  }
-  &.danger:not(.disabled) {
-    color: var(--font-color-danger);
-    &:hover {
-      background-color: var(--fill-color-hover);
-    }
-    &:focus-within {
-      background-color: var(--fill-color-active);
-    }
-  }
-  &.danger.disabled {
-    color: var(--danger-color-disabled);
-  }
-  &.disabled {
-    color: var(--font-color-disabled);
-  }
-}
-
+.text,
 .filled {
-  color: var(--font-color-b8);
-
-  &.disabled {
-    color: var(--font-color-disabled);
-  }
-  &:not(.danger):not(.disabled) {
-    background-color: var(--primary-color);
-    &:hover {
-      background-color: var(--primary-color-hover);
-    }
-    &:focus-within {
-      background-color: var(--primary-color-active);
-    }
-  }
-  &.danger:not(.disabled) {
-    background-color: var(--danger-color);
-    &:hover {
-      background-color: var(--danger-color-hover);
-    }
-    &:focus-within {
-      background-color: var(--danger-color-active);
-    }
-  }
-  &.danger.disabled {
-    background-color: var(--danger-color-disabled);
-  }
-  &.disabled {
-    background-color: var(--primary-color-disabled);
-  }
+  flex-shrink: 0;
 }
 
 .bordered {
   border-width: 1px;
   border-style: solid;
   border-color: var(--border-color-3);
+}
 
+.text {
   &:not(.disabled):not(.danger) {
-    color: var(--font-size-06);
-
-    background-color: var(--bg-color-warp);
-
-    &:hover {
-      color: var(--font-color-info);
-      background-color: var(--fill-color-hover);
-    }
-    &:focus-within {
-      background-color: var(--fill-color-active);
-    }
-  }
-  &.danger:not(.disabled) {
-    &:hover {
-      color: var(--font-color-danger);
-      background-color: var(--fill-color-hover);
-    }
-    &:focus-within {
-      background-color: var(--fill-color-active);
-    }
-  }
-  &.danger.disabled {
-    color: var(--danger-color-disabled);
-  }
-  &.disabled:not(.danger) {
-    color: var(--font-color-disabled);
+    color: inherit;
   }
 }
 
@@ -197,5 +114,12 @@
 
 .spin {
   z-index: 9;
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 100%;
+
   position: absolute;
+  pointer-events: none;
 }

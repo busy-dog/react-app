@@ -56,7 +56,7 @@ const Fallback: React.FC = () => {
           {t('common:Reset')}
         </IButton>
       }
-      icon={<ISignLine trigon type="informer" />}
+      icon={<ISignLine trigon type="info" />}
       status="danger"
       title={catchMsg(error)}
     />

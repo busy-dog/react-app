@@ -1,6 +1,6 @@
-import { useImperativeHandle, useMemo, useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, MotionConfig } from 'motion/react';
 import { isNumber } from 'remeda';
 
 import { useDebounceFunc, useMemoFunc } from '@/hooks';
@@ -14,6 +14,7 @@ import {
 
 import { ISpinner } from '../spin-loading';
 import { IWave } from '../wave';
+import { iAnimate, whileHover, whileTap } from './helpers';
 import type { IButtonProps } from './models';
 
 import * as styles from './index.scss';
@@ -22,23 +23,22 @@ export const IButton: React.FC<IButtonProps> = (props) => {
   const {
     ref,
     icon,
-    danger,
     capsule,
     children,
-    disabled,
     debounce,
     className,
     isLoading,
     isFullWidth,
     wave: iWave,
+    danger = false,
+    type = 'button',
     size = 'medium',
+    disabled = false,
     variant = 'bordered',
     onPointerDownCapture,
     onClick,
     ...others
   } = props;
-
-  const isText = variant === 'text';
 
   const clickable = !isLoading && !disabled;
 
@@ -61,65 +61,75 @@ export const IButton: React.FC<IButtonProps> = (props) => {
 
   const isNonEmptyChild = isReactChildren(children);
 
-  const animate = useMemo(() => ({ opacity: isLoading ? 0 : 1 }), [isLoading]);
-
   return (
-    <motion.button
-      ref={button}
-      className={classNames(
-        styles.wrap,
-        styles[size],
-        styles[variant],
-        {
-          [styles.danger]: danger,
-          [styles.capsule]: capsule,
-          [styles.disabled]: disabled,
-          [styles.padding]: !!children,
-          [styles.fullWidth]: isFullWidth,
-        },
-        className
-      )}
-      disabled={disabled}
-      type="button"
-      whileTap={{
-        scale: !isText ? [null, 0.98] : undefined,
-      }}
-      onClick={onTap}
-      onPointerDownCapture={(event) => {
-        if (!clickable) iPropagation(event);
-        onPointerDownCapture?.(event);
-      }}
-      {...others}
-    >
-      {wave && <IWave target={button} />}
-      <AnimatePresence>
-        {icon && (
-          <motion.i
-            animate={animate}
-            className={ensure(isNonEmptyChild && styles.gap)}
-          >
-            {icon}
-          </motion.i>
+    <MotionConfig transition={{ ease: 'easeOut' }}>
+      <motion.button
+        ref={button}
+        animate={iAnimate({ variant, danger, disabled })}
+        className={classNames(
+          styles.wrap,
+          styles[size],
+          styles[variant],
+          {
+            [styles.danger]: danger,
+            [styles.capsule]: capsule,
+            [styles.disabled]: disabled,
+            [styles.padding]: !!children,
+            [styles.fullWidth]: isFullWidth,
+          },
+          className
         )}
-      </AnimatePresence>
-      <AnimatePresence>
+        disabled={disabled}
+        type={type}
+        whileHover={whileHover({ variant, danger, disabled })}
+        whileTap={whileTap({ variant, danger, disabled })}
+        onClick={onTap}
+        onPointerDownCapture={(event) => {
+          if (!clickable) iPropagation(event);
+          onPointerDownCapture?.(event);
+        }}
+        {...others}
+      >
+        {wave && <IWave target={button} />}
+        <motion.i
+          animate={isLoading ? 'visible' : 'hidden'}
+          className={styles.spin}
+          variants={{
+            hidden: { scale: 0.64, x: '-1em', opacity: 0 },
+            visible: { scale: 1, x: 0, opacity: 1 },
+          }}
+        >
+          <ISpinner />
+        </motion.i>
+        <AnimatePresence>
+          {icon && (
+            <motion.i
+              animate={
+                isLoading
+                  ? { scale: 0.64, x: '1em', opacity: 0 }
+                  : { scale: 1, x: 0, opacity: 1 }
+              }
+              className={ensure(isNonEmptyChild && styles.gap)}
+              exit={{ scale: 0.64, x: '1em', opacity: 0 }}
+              initial={false}
+            >
+              {icon}
+            </motion.i>
+          )}
+        </AnimatePresence>
         {isNonEmptyChild && (
-          <motion.span animate={animate}>{children}</motion.span>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isLoading && (
-          <motion.i
-            animate={{ scale: 1 }}
-            className={styles.spin}
-            exit={{ scale: 0 }}
-            initial={{ scale: 0 }}
+          <motion.span
+            animate={isLoading ? 'hidden' : 'visible'}
+            variants={{
+              hidden: { scale: 0.64, x: '1em', opacity: 0 },
+              visible: { scale: 1, x: 0, opacity: 1 },
+            }}
           >
-            <ISpinner />
-          </motion.i>
+            {children}
+          </motion.span>
         )}
-      </AnimatePresence>
-    </motion.button>
+      </motion.button>
+    </MotionConfig>
   );
 };
 

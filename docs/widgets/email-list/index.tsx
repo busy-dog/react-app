@@ -62,13 +62,6 @@ export const EmailList: React.FC = () => {
                         {dayjs(email.sendeTime).fromNow()}
                       </ITypography>
                     }
-                    footer={
-                      <IFlex gap="var(--gap-02)">
-                        <IChip>会议</IChip>
-                        <IChip>工作</IChip>
-                        <IChip>重要</IChip>
-                      </IFlex>
-                    }
                     title={
                       <ITypography variant="h6">
                         {email.sender.name}
@@ -78,6 +71,11 @@ export const EmailList: React.FC = () => {
                     <ITypography maxRow={3} variant="body">
                       {email.content}
                     </ITypography>
+                    <IFlex gap="var(--gap-02)">
+                      <IChip>会议</IChip>
+                      <IChip>工作</IChip>
+                      <IChip>重要</IChip>
+                    </IFlex>
                   </ICard>
                 </Container>
               );

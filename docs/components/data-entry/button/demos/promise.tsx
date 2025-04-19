@@ -3,11 +3,12 @@ import { configure } from 'docs/widgets';
 import { useMutation } from '@tanstack/react-query';
 
 import { IButton, IFlex, ISignLine } from '@/components';
+import { sleep } from '@/utils';
 
 const App: React.FC = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (_: React.UIEvent) => {
-      // await sleep(3000);
+      await sleep(3000);
     },
   });
 
@@ -22,7 +23,7 @@ const App: React.FC = () => {
       </IButton>
       <IButton
         debounce
-        icon={<ISignLine ring type="informer" />}
+        icon={<ISignLine ring type="info" />}
         isLoading={isPending}
         type="submit"
         variant="filled"

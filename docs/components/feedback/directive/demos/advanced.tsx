@@ -47,7 +47,7 @@ const App: React.FC = () => {
       </IControlWrap>
       <AnimatePresence>
         {isNonEmptyString(directive) && (
-          <IDirective icon={<ISignLine ring type="informer" />} title="通用">
+          <IDirective icon={<ISignLine ring type="info" />} title="通用">
             {directive}
           </IDirective>
         )}

@@ -6,6 +6,7 @@ import type { ReactTargetType } from '@/models';
 import type { OmitOf } from '@/utils';
 
 export interface IOverlayProps extends HTMLMotionProps<'div'> {
+  open?: boolean;
   /**
    * overlay will lock scrolling on the document body if is false.
    * @default false
@@ -19,5 +20,4 @@ export interface IBackdropProps
     OmitOf<FloatingPortalProps, 'children' | 'root'> {
   root?: ReactTargetType;
   relative?: boolean;
-  open?: boolean;
 }

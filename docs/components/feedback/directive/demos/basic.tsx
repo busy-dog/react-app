@@ -7,7 +7,7 @@ const App: React.FC = () => (
     {({ variant }) => (
       <IFlex vertical gap={16}>
         <IDirective
-          icon={<ISignLine ring type="informer" />}
+          icon={<ISignLine ring type="info" />}
           title="通用"
           variant={variant}
         >
@@ -30,7 +30,7 @@ const App: React.FC = () => (
           这是一个危险的指示。
         </IDirective>
         <IDirective
-          icon={<ISignLine trigon type="informer" />}
+          icon={<ISignLine trigon type="info" />}
           status="warn"
           title="警告"
           variant={variant}

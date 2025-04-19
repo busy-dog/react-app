@@ -4,4 +4,8 @@
   background-color: var(--bg-color-warp);
 
   padding: var(--gap-04);
+  position: relative;
+
+  overflow: hidden;
+  will-change: transform;
 }
