@@ -7,12 +7,12 @@ const App: React.FC = () => (
       <ITypography variant="inherit">success</ITypography>
     </ITypography>
     <ITypography variant="body">
-      <IChip size="mini" style={{ margin: `0 $'var(--gap-02)'` }}>
+      <IChip density="sm" style={{ margin: `0 $'var(--gap-02)'` }}>
         Typography
       </IChip>
       允许您创建
       <IChip
-        size="mini"
+        density="sm"
         style={{ margin: `0 $'var(--gap-02)'` }}
         variant="bordered"
       >

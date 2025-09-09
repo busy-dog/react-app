@@ -1,7 +1,11 @@
 import type { ReactButtonProps, ReactRender } from '@/models';
 import type { OmitOf } from '@/utils';
 
-import type { ControlOption, ControlUISize, ControlValue } from '../../control';
+import type {
+  ControlOption,
+  ControlUIDensity,
+  ControlValue,
+} from '../../control';
 import type { IFlexProps } from '../../flex';
 
 export interface ISegmentState {
@@ -20,7 +24,7 @@ export interface ISegmentState {
   /**
    * 控件尺寸
    */
-  size?: ControlUISize;
+  density?: ControlUIDensity;
   /**
    * 控件的值
    */
@@ -28,7 +32,7 @@ export interface ISegmentState {
 }
 
 export interface ISegmentChangeFunc {
-  (value: React.Key): void;
+  (value: ControlValue): void;
 }
 
 export type ISegmentThumbRender = ReactRender<
@@ -40,7 +44,7 @@ export type ISegmentThumbRender = ReactRender<
 >;
 
 export type ISegmentItemRender = ReactRender<
-  ReactButtonProps & {
+  OmitOf<ReactButtonProps, 'title'> & {
     thumb: React.ReactNode;
     onChange: ISegmentChangeFunc;
   } & ControlOption,

@@ -1,6 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 
-import type { ControlUIStatus } from '@/components';
+import type { ControlStatus } from '@/components';
 import {
   IButton,
   ICard,
@@ -83,7 +83,7 @@ const App: React.FC = () => {
                   {({ state: { meta, value }, handleBlur, handleChange }) => {
                     const { errors, isDirty } = meta;
                     const isError = isDirty && errors.length > 0;
-                    const status: ControlUIStatus = ensure(isError && 'danger');
+                    const status: ControlStatus = ensure(isError && 'danger');
                     return (
                       <IFieldCell
                         feedback={isError && meta.errors.join(', ')}

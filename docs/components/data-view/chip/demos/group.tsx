@@ -12,7 +12,13 @@ import PictureSVG from '@/icons/identifier/picture.svg?react';
 
 export type IChipConfig = Pick<
   IChipProps,
-  'isLoading' | 'variant' | 'size' | 'icon' | 'disabled' | 'clickable' | 'color'
+  | 'isLoading'
+  | 'variant'
+  | 'density'
+  | 'icon'
+  | 'disabled'
+  | 'clickable'
+  | 'color'
 > & {
   value: React.Key;
   label?: React.ReactNode;

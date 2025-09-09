@@ -30,9 +30,9 @@ const Welcome: React.FC = () => {
   return (
     <ICard>
       <ISelector
+        density="lg"
         options={options}
         prefix={<ISignLine ring type={sign} />}
-        size="huge"
         value={sign}
         onChange={(val) => {
           setSign(first(iArray(val)) as ISignType);

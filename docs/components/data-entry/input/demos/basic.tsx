@@ -9,12 +9,12 @@ import AccountSVG from '@/icons/identifier/account.svg?react';
 
 const Input: React.FC<
   IInputProps &
-    Pick<IControlWrapProps, 'size' | 'variant' | 'status'> & {
+    Pick<IControlWrapProps, 'density' | 'variant' | 'status'> & {
       onClear?: () => void;
     }
 > = (props) => {
   const {
-    size,
+    density,
     variant,
     status,
     value,
@@ -37,11 +37,11 @@ const Input: React.FC<
   //    <IInput ref={ref} pattern={pattern} {...others} />
   return (
     <IInput
+      density={density}
       isSuffixClickable={isSuffixClickable}
       pattern={pattern}
       placeholder="占位文本"
       prefix={<AccountSVG />}
-      size={size}
       status={status}
       suffix={isSuffixClickable && <ISignLine type="cross" />}
       value={text}
@@ -54,8 +54,8 @@ const Input: React.FC<
 
 const App: React.FC = () => (
   <Variants
+    densifiable
     patternable
-    sizeable
     statusable
     variants={
       [
@@ -65,8 +65,13 @@ const App: React.FC = () => (
       ] satisfies IControlWrapProps['variant'][]
     }
   >
-    {({ size, status, variant, pattern }) => (
-      <Input pattern={pattern} size={size} status={status} variant={variant} />
+    {({ density, status, variant, pattern }) => (
+      <Input
+        density={density}
+        pattern={pattern}
+        status={status}
+        variant={variant}
+      />
     )}
   </Variants>
 );

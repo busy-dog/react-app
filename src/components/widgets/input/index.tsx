@@ -99,11 +99,11 @@ export const IInputCore: React.FC<IInputCoreProps> = (props) => {
 export const IInput: React.FC<IInputProps> = (props) => {
   const {
     ref,
-    size,
     status,
     prefix,
     suffix,
     render,
+    density,
     variant,
     pattern,
     onPrefixClick,
@@ -124,9 +124,9 @@ export const IInput: React.FC<IInputProps> = (props) => {
   return (
     <IControlWrap
       ref={wrap}
+      density={density}
       pattern={pattern}
       prefix={prefix}
-      size={size}
       status={status}
       suffix={suffix}
       variant={variant}

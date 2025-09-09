@@ -5,8 +5,8 @@ import type { OmitOf } from '@/utils';
 
 import type {
   ControlPattern,
-  ControlUISize,
-  ControlUIStatus,
+  ControlStatus,
+  ControlUIDensity,
   ControlValue,
 } from '../../control';
 
@@ -26,18 +26,17 @@ interface ISwitchStatus {
   pattren: ControlPattern;
   /**
    * 控制控件的尺寸大小
-   * @default 'medium'
+   * @default 'md'
    */
-  size: ControlUISize;
+  density: ControlUIDensity;
   /**
    * 控制控件的校验状态。
    * @default 'success'
    */
-  status: ControlUIStatus;
+  status: ControlStatus;
 }
 
-export interface ISwitchInputProps
-  extends OmitOf<ReactInputProps, 'value' | 'size'> {
+export interface ISwitchInputProps extends OmitOf<ReactInputProps, 'value'> {
   /**
    * The `name` attribute of the input.
    */

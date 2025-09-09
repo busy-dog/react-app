@@ -27,7 +27,7 @@
     border-radius: var(--border-radius-03);
 
     /** size */
-    &.mini {
+    &.sm {
       font-size: var(--font-size-03);
       min-height: var(--control-size-03);
 
@@ -41,7 +41,7 @@
         margin: 0 var(--gap-01);
       }
     }
-    &.medium {
+    &.md {
       font-size: var(--font-size-04);
       padding: var(--gap-00) var(--gap-04);
       min-height: var(--control-size-06);
@@ -58,7 +58,7 @@
         margin-left: var(--gap-02);
       }
     }
-    &.huge {
+    &.lg {
       font-size: var(--font-size-05);
       min-height: var(--control-size-08);
       padding: var(--gap-00) var(--gap-04);

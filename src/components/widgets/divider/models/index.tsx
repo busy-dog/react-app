@@ -1,6 +1,6 @@
 import type { ReactRender, ReactWrapProps } from '@/models';
 
-import type { ControlAlign } from '../../control';
+import type { ControlUIAlign } from '../../control';
 
 export interface IDividerState {
   /**
@@ -17,7 +17,7 @@ export interface IDividerState {
   //  * The text alignment.
   //  * @default 'center'
   //  */
-  align: ControlAlign;
+  align: ControlUIAlign;
   vertical?: boolean;
 }
 

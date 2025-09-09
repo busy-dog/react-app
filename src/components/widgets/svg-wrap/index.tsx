@@ -1,4 +1,4 @@
-import type { Target, Transition } from 'motion/react';
+import type { Target, TargetAndTransition, Transition } from 'motion/react';
 import { motion } from 'motion/react';
 
 import type { ReactCFC } from '@/models';
@@ -7,7 +7,7 @@ import type { ISVGWrapProps } from './models';
 
 const transition: Transition = { ease: 'easeOut' };
 
-const iAnimate = ({ x = 0, y = 0 }: Partial<Target>): Target => ({
+const iAnimate = ({ x = 0, y = 0 }: Partial<Target>): TargetAndTransition => ({
   opacity: 1,
   scale: 1,
   x,

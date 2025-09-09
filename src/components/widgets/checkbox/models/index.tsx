@@ -5,8 +5,8 @@ import type { OmitOf, PlainObject } from '@/utils';
 
 import type {
   ControlPattern,
-  ControlUISize,
-  ControlUIStatus,
+  ControlStatus,
+  ControlUIDensity,
   ControlValue,
 } from '../../control';
 
@@ -27,11 +27,11 @@ interface CheckboxStatus {
   /**
    * 设置控件尺寸。
    */
-  size: ControlUISize;
+  density: ControlUIDensity;
   /**
    * 设置控件的校验状态。
    */
-  status: ControlUIStatus;
+  status: ControlStatus;
 }
 
 interface IRender<P = PlainObject, E = unknown> {
@@ -43,8 +43,7 @@ export interface ICheckboxRef {
   input?: HTMLInputElement;
 }
 
-export interface ICheckboxInputProps
-  extends OmitOf<ReactInputProps, 'value' | 'size'> {
+export interface ICheckboxInputProps extends OmitOf<ReactInputProps, 'value'> {
   /**
    * 控制控件 input 元素的值。
    */

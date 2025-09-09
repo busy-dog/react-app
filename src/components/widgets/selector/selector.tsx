@@ -7,11 +7,13 @@ import {
 } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
+import { isNullish } from 'remeda';
 
 import { iFocusParams, iHoverParams, useEventState } from '@/hooks';
 import { ensure, iArray, iCompact, isEmptyValue } from '@/utils';
 
 import { IChip } from '../chip';
+import type { ControlValues } from '../control';
 import { IControlWrap, onInputCatch, useControlState } from '../control';
 import { IEmptyWrap } from '../empty';
 import { IFlex } from '../flex';
@@ -79,23 +81,25 @@ const iChipListRender: ISelectorChipsRender = (
   values?.map((inner, index) => {
     const option = options?.find(({ value }) => value === inner);
     return (
-      <Fragment key={inner.toString()}>
-        <Container separator={index !== 0 && separator}>
-          {!multiple && (option?.label ?? option?.value?.toString())}
-          {multiple && (
-            <IChip
-              closeable
-              size="mini"
-              variant="filled"
-              onClose={() => {
-                handleChange(values.filter((v) => v !== inner));
-              }}
-            >
-              {option?.label ?? option?.value?.toString()}
-            </IChip>
-          )}
-        </Container>
-      </Fragment>
+      option && (
+        <Fragment key={inner?.toString()}>
+          <Container separator={index !== 0 && separator}>
+            {!multiple && (option?.label ?? option?.value?.toString())}
+            {multiple && (
+              <IChip
+                closeable
+                density="sm"
+                variant="filled"
+                onClose={() => {
+                  handleChange(values.filter((v) => v !== inner));
+                }}
+              >
+                {option?.label ?? option?.value?.toString()}
+              </IChip>
+            )}
+          </Container>
+        </Fragment>
+      )
     );
   });
 
@@ -105,7 +109,7 @@ const iRootRender: ISelectorRootRender = (
     clearable,
     isLoading,
     pattern,
-    size,
+    density,
     status,
     multiple,
     variant,
@@ -118,6 +122,7 @@ const iRootRender: ISelectorRootRender = (
 ) => (
   <IControlWrap
     ref={ref}
+    density={density}
     isFocusWithin={open}
     isLoading={isLoading}
     isSuffixClickable={
@@ -132,7 +137,6 @@ const iRootRender: ISelectorRootRender = (
     }
     pattern={pattern}
     prefix={prefix}
-    size={size}
     status={status}
     suffix={pattern !== 'readPretty' && suffix}
     variant={variant}
@@ -185,7 +189,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       iFloatingClassName,
       variant = 'bordered',
       pattern = 'editable',
-      size: _size = 'medium',
+      density: _density = 'md',
       onOpenChange: iOpenChange,
       estimateSize = () => 32,
       iFloatingRoot,
@@ -212,7 +216,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
       onChange: iOpenChange,
     });
 
-    const iSelectedList = iCompact(iArray(value) ?? []);
+    const iSelectedList: ControlValues = iCompact(iArray(value) ?? []);
 
     const { refs, context, floatingStyles } = useIFloating({
       open,
@@ -250,7 +254,7 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
 
     const states: ISelectorState = {
       open: context.open,
-      size: _size,
+      density: _density,
       filtered,
       clearable,
       isLoading,
@@ -331,7 +335,9 @@ export const ISelector = forwardRef<ISelectorRef, ISelectorProps>(
                     const { index } = item;
                     const option = filtered![index];
                     const isActive = active === index;
-                    const isSelected = iSelectedList.includes(option.value);
+                    const isSelected = !isNullish(option.value)
+                      ? iSelectedList.includes(option.value)
+                      : false;
                     return (
                       <Container
                         ref={ensure(measure && measureElement)}

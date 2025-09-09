@@ -3,8 +3,8 @@ import type { OmitOf, PartialPick } from '@/utils';
 
 import type {
   ControlPattern,
-  ControlUISize,
-  ControlUIStatus,
+  ControlStatus,
+  ControlUIDensity,
 } from '../../control';
 import type { IFlexProps } from '../../flex/models';
 
@@ -36,9 +36,9 @@ export interface IFieldCellProps
   /** 字段交互方式 */
   pattern?: ControlPattern;
   /** 字段校验状态 */
-  status?: ControlUIStatus;
+  status?: ControlStatus;
   /** 字段UI大小 */
-  size?: ControlUISize;
+  size?: ControlUIDensity;
   /** 字段额外空间 */
   extra?: React.ReactNode;
   /** 字段跨越多少列 */

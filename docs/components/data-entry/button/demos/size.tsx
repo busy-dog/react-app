@@ -15,8 +15,8 @@ const App: React.FC = () => {
   const [checked, { iCheck }] = useToggle();
 
   return (
-    <Variants sizeable>
-      {({ size }) => (
+    <Variants densifiable>
+      {({ density }) => (
         <Fragment>
           <IFieldStack>
             <IFieldCell title="启用大按钮">
@@ -25,27 +25,31 @@ const App: React.FC = () => {
           </IFieldStack>
           <IFlex vertical gap="var(--gap-04)">
             <IFlex wrap gap={8}>
-              <IButton isFullWidth={checked} size={size} variant="filled">
+              <IButton density={density} isFullWidth={checked} variant="filled">
                 主要按钮
               </IButton>
-              <IButton isFullWidth={checked} size={size} variant="bordered">
+              <IButton
+                density={density}
+                isFullWidth={checked}
+                variant="bordered"
+              >
                 次要按钮
               </IButton>
-              <IButton isFullWidth={checked} size={size} variant="text">
+              <IButton density={density} isFullWidth={checked} variant="text">
                 文本按钮
               </IButton>
             </IFlex>
             <IFlex gap={8}>
               <IButton
+                density="sm"
                 icon={<ISignLine ring type="helper" />}
-                size="mini"
                 variant="filled"
               >
                 图标
               </IButton>
               <span>
                 这是一段
-                <IButton size="mini" variant="text">
+                <IButton density="sm" variant="text">
                   按钮
                 </IButton>
                 文本

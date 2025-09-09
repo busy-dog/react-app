@@ -52,7 +52,7 @@ const Fallback: React.FC = () => {
     <IDirective
       className={styles.card}
       extra={
-        <IButton danger size="mini" variant="text" onClick={reset}>
+        <IButton danger density="sm" variant="text" onClick={reset}>
           {t('common:Reset')}
         </IButton>
       }

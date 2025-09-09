@@ -3,13 +3,13 @@
  */
 
 import type {
-  AnimationProps,
-  DraggableProps,
-  FocusHandlers,
-  HoverHandlers,
-  LayoutProps,
-  MotionAdvancedProps,
-  TapHandlers,
+  MotionNodeAdvancedOptions,
+  MotionNodeAnimationOptions,
+  MotionNodeDragHandlers,
+  MotionNodeFocusHandlers,
+  MotionNodeHoverHandlers,
+  MotionNodeLayoutOptions,
+  MotionNodeTapHandlers,
 } from 'motion/react';
 
 import type { OmitOf, PlainObject } from '@/utils';
@@ -69,14 +69,14 @@ export type ReactWrapProps<T extends HTMLElement = HTMLElement> = OmitOf<
 
 /** React framer motion props */
 export interface ReactMotionProps
-  extends MotionAdvancedProps,
-    DraggableProps,
+  extends MotionNodeAdvancedOptions,
+    MotionNodeDragHandlers,
     ReactWrapProps,
-    AnimationProps,
-    HoverHandlers,
-    FocusHandlers,
-    LayoutProps,
-    TapHandlers {}
+    MotionNodeAnimationOptions,
+    MotionNodeHoverHandlers,
+    MotionNodeFocusHandlers,
+    MotionNodeLayoutOptions,
+    MotionNodeTapHandlers {}
 
 /** React img props */
 export type ReactImgProps<T extends HTMLElement = HTMLImageElement> = OmitOf<

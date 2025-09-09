@@ -2,9 +2,10 @@ import { useEffect, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
 import type {
   AnimationDefinition,
-  AnimationProps,
   Target,
+  TargetAndTransition,
   Transition,
+  VariantLabels,
 } from 'motion/react';
 import { motion } from 'motion/react';
 import { isDeepEqual, isObjectType, isString } from 'remeda';
@@ -28,14 +29,18 @@ const iAnimate = (): Target => ({
   originY: 0,
 });
 
-const exit: AnimationProps['exit'] = {
+const exit: TargetAndTransition | VariantLabels = {
   scale: 0.36,
   height: 0,
   opacity: 0,
   y: -50,
 };
 
-const initial: AnimationProps['initial'] = { opacity: 0, y: 50, scale: 0.36 };
+const initial: TargetAndTransition | VariantLabels = {
+  opacity: 0,
+  y: 50,
+  scale: 0.36,
+};
 
 const transition: Transition = {
   type: 'spring',

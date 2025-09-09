@@ -24,7 +24,7 @@ export interface IInputRef {
 export interface IInputProps
   extends Pick<
       IControlWrapProps,
-      | 'size'
+      | 'density'
       | 'status'
       | 'prefix'
       | 'suffix'

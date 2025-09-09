@@ -1,17 +1,22 @@
 import type React from 'react';
-import type { FocusEvent } from 'react';
 
 import type { ReactHTMLRef, ReactRender, ReactWrapProps } from '@/models';
 import type { Nil, OmitOf } from '@/utils';
 
-/** 控件大小 */
-export type ControlUISize = 'mini' | 'medium' | 'huge';
+/** 控件排版方向 */
+export type ControlUIAlign = 'start' | 'center' | 'end';
 
-/** 控件大小 */
-export type ControlAlign = 'start' | 'center' | 'end';
+/** 控件密度 */
+export type ControlUIDensity = 'sm' | 'md' | 'lg';
+
+/** 控件变体 */
+export type ControlUIVariant = 'filled' | 'standard' | 'bordered';
 
 /** 控件排版方向 */
 export type ControlUIDirection = 'horizontal' | 'vertical';
+
+/** 控件校验状态 */
+export type ControlStatus = 'vaildating' | 'danger' | 'warn' | 'success';
 
 /** 控件交互方式 */
 export type ControlPattern =
@@ -20,16 +25,13 @@ export type ControlPattern =
   | 'readOnly'
   | 'readPretty';
 
-/** 控件校验状态 */
-export type ControlUIStatus = 'vaildating' | 'danger' | 'warn' | 'success';
+export type ControlValue = PropertyKey | Nil | bigint;
 
-export type ControlValue = React.Key | null | undefined;
-
-export type ControlValues = Exclude<ControlValue, Nil>[];
+export type ControlValues = ControlValue[];
 
 export type ControlOption = {
-  value: React.Key;
-  title?: string;
+  value: ControlValue;
+  title?: React.ReactNode;
   label?: React.ReactNode;
   disabled?: boolean;
   icon?: React.ReactNode;
@@ -50,18 +52,16 @@ export interface InteractionProps {
   onPointerEnter?(e: React.UIEvent): void;
 }
 
-export type IControlVariant = 'filled' | 'standard' | 'bordered';
-
 export type IControlWrapState = {
-  size?: ControlUISize;
-  status?: ControlUIStatus;
-  pattern?: ControlPattern;
   isFocus?: boolean;
   isLoading?: boolean;
   isFocusWithin?: boolean;
   isPrefixClickable?: boolean;
   isSuffixClickable?: boolean;
-  variant?: IControlVariant;
+  density?: ControlUIDensity;
+  variant?: ControlUIVariant;
+  pattern?: ControlPattern;
+  status?: ControlStatus;
 };
 
 export type IControlWrapRootRender = ReactRender<

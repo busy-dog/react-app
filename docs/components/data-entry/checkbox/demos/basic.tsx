@@ -3,10 +3,10 @@ import { Variants } from 'docs/widgets';
 import { ICheckbox, IFlex } from '@/components';
 
 const App: React.FC = () => (
-  <Variants patternable sizeable>
-    {({ pattern, size }) => (
+  <Variants densifiable patternable>
+    {({ pattern, density }) => (
       <IFlex gap={8}>
-        <ICheckbox label="Checkbox" pattren={pattern} size={size} />
+        <ICheckbox density={density} label="Checkbox" pattren={pattern} />
       </IFlex>
     )}
   </Variants>

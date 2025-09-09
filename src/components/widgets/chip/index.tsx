@@ -54,7 +54,7 @@ export const IChip = forwardRef<
     className,
     isLoading,
     closeable,
-    size = 'medium',
+    density = 'md',
     disabled = false,
     variant = 'filled',
     render,
@@ -74,7 +74,7 @@ export const IChip = forwardRef<
     closeable,
     isLoading,
     variant,
-    size,
+    density,
   };
 
   const iClickable = !disabled && clickable;
@@ -90,7 +90,7 @@ export const IChip = forwardRef<
       animate={iAnimate({ color, variant, disabled })}
       className={classNames(
         styles.chip,
-        styles[size],
+        styles[density],
         styles[variant],
         {
           [styles.disabled]: disabled,

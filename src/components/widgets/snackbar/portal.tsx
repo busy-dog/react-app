@@ -9,7 +9,7 @@ import { useEffectOnce } from '@/hooks';
 import { container } from '@/init';
 import type { ReactCFC } from '@/models';
 
-import type { ControlUISize } from '../control';
+import type { ControlUIDensity } from '../control';
 import { useSnackbars } from './hooks';
 import { ISnackbar } from './snackbar';
 
@@ -32,7 +32,7 @@ const useOnce = (() => {
 
 export const ISnackbarPortal: ReactCFC<{
   max?: number;
-  size?: ControlUISize;
+  size?: ControlUIDensity;
 }> = (props) => {
   const { size = 'medium', max } = props;
   const { snackbars, setMaxCount } = useSnackbars();

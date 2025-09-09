@@ -1,7 +1,7 @@
 import type { ReactInputProps, ReactRender, ReactWrapProps } from '@/models';
 import type { OmitOf } from '@/utils';
 
-import type { ControlOption, ControlUISize, ControlValue } from '../../control';
+import type { ControlUIDensity, ControlValue } from '../../control';
 
 interface InputProps extends OmitOf<ReactInputProps, 'size' | 'value'> {}
 
@@ -30,11 +30,11 @@ export interface IRadioState {
    * The size of the component.
    * @default 'medium'
    */
-  size: ControlUISize;
+  density: ControlUIDensity;
   /**
    * input标签的value
    */
-  value?: ControlValue | ControlOption['value'];
+  value?: ControlValue;
 }
 
 export type IRadioRootRender = ReactRender<

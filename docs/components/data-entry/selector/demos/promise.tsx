@@ -3,7 +3,11 @@ import { configure } from 'docs/widgets';
 
 import { useQuery } from '@tanstack/react-query';
 
-import type { ControlOption, ISelectorChipsRender } from '@/components';
+import type {
+  ControlOption,
+  ControlValues,
+  ISelectorChipsRender,
+} from '@/components';
 import { IChip, IPopover, ISelector, ITypography } from '@/components';
 import { useToggle } from '@/hooks';
 import { drive } from '@/services';
@@ -34,41 +38,43 @@ const iChipListRender: ISelectorChipsRender = (
     const { label } = option ?? {};
     const content = label ?? 'UnknownRender';
     return (
-      <Container key={inner.toString()} separator={index !== 0 && separator}>
-        {!multiple && content}
-        {multiple && (
-          <IChip
-            closeable
-            size="mini"
-            variant="filled"
-            onClose={() => {
-              handleChange(values.filter((v) => v !== inner));
-            }}
-          >
-            <IPopover
-              content={content}
-              placement="top"
-              render={{
-                reference: (props) => (
-                  <ITypography maxRow={1} variant="inherit" {...props}>
-                    {content}
-                  </ITypography>
-                ),
+      option && (
+        <Container key={inner?.toString()} separator={index !== 0 && separator}>
+          {!multiple && content}
+          {multiple && (
+            <IChip
+              closeable
+              density="sm"
+              variant="filled"
+              onClose={() => {
+                handleChange(values.filter((v) => v !== inner));
               }}
-              timing="overflow"
-              trigger="hover"
-              variant="tooltip"
-            />
-          </IChip>
-        )}
-      </Container>
+            >
+              <IPopover
+                content={content}
+                placement="top"
+                render={{
+                  reference: (props) => (
+                    <ITypography maxRow={1} variant="inherit" {...props}>
+                      {content}
+                    </ITypography>
+                  ),
+                }}
+                timing="overflow"
+                trigger="hover"
+                variant="tooltip"
+              />
+            </IChip>
+          )}
+        </Container>
+      )
     );
   });
 
 const App: React.FC = () => {
   const [open, { toggle }] = useToggle();
 
-  const [value, setValue] = useState<React.Key[]>(['unknown']);
+  const [value, setValue] = useState<ControlValues>(['unknown']);
 
   const { data, isLoading } = useQuery({
     queryKey: [api, search],

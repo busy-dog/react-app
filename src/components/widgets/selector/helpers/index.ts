@@ -35,7 +35,7 @@ export const iPredicate = (
   keyword?: string
 ) => {
   if (!isNonEmptyString(keyword)) return true;
-  const text = title ?? ensure(isString(label) && label);
+  const text = isString(title) ? title : ensure(isString(label) && label);
   return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
 };
 
@@ -56,6 +56,6 @@ export const iSelectorChangeHandler = (
     handleChange((pre) => compact(iArray(pre)).filter((val) => val !== value));
   }
   if (multiple && !isSelected) {
-    handleChange((pre) => compact(iArray(pre)).concat([value]));
+    handleChange((pre) => compact(iArray(pre).concat([value])));
   }
 };

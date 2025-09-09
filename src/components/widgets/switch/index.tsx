@@ -70,7 +70,7 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
       isLoading = false,
       pattren = 'editable',
       status = 'success',
-      size = 'medium',
+      density = 'md',
       onChange,
       ...others
     } = props;
@@ -92,9 +92,9 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
     });
 
     const states = {
-      size,
       status,
       pattren,
+      density,
       isLoading,
       checked: iChecked,
     };
@@ -104,7 +104,7 @@ export const ISwitch = forwardRef<ISwitchRef, ISwitchProps>(
         ref: root,
         className: classNames(
           styles.root,
-          styles[size],
+          styles[density],
           styles[pattren],
           iChecked && styles.checked
         ),

@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from 'react';
 import { motion } from 'motion/react';
-import type { Easing } from 'motion-dom';
+import type { Transition } from 'motion-dom';
 
 import { compact, ensure, iCSSVariable } from 'src/utils';
 
@@ -14,7 +14,7 @@ const viewBox = { x: 64, y: 64, padding: 8 };
 interface CubicBezierDemonstrateProps {
   fill?: string;
   label: string;
-  value: Easing;
+  value: Transition['ease'];
 }
 
 const Slide: React.FC<CubicBezierDemonstrateProps> = ({

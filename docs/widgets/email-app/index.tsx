@@ -121,6 +121,7 @@ export const EmailApp: React.FC = () => (
         isFullWidth
         vertical
         defaultValue="inbox"
+        density="lg"
         options={[
           {
             icon: <InboxSVG />,
@@ -159,7 +160,6 @@ export const EmailApp: React.FC = () => (
             extra: <Count type="archive" />,
           },
         ]}
-        size="huge"
       />
       <IDivider>分割线</IDivider>
       <IMenu

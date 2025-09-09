@@ -1,13 +1,13 @@
 import type { ReactImgProps, ReactRender, ReactWrapProps } from '@/models';
 
-import type { ControlUISize } from '../../control';
+import type { ControlUIDensity } from '../../control';
 
 type IAvatarState = {
   /**
    * The `src` attribute for the `img` element.
    */
   src?: string;
-  size?: ControlUISize;
+  size?: ControlUIDensity;
   /**
    * The `srcSet` attribute for the `img` element.
    * Use this attribute for responsive image display.

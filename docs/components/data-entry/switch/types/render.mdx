@@ -7,8 +7,8 @@ import type { ReactInputProps, ReactRender, ReactWrapProps } from '@/models';
 
 import type {
   ControlPattern,
-  ControlUISize,
-  ControlUIStatus,
+  ControlUIDensity,
+  ControlStatus,
   ControlValue,
 } from '../../control';
 
@@ -30,12 +30,12 @@ interface ISwitchStatus {
    * 控制控件的尺寸大小
    * @default 'medium'
    */
-  size: ControlUISize;
+  size: ControlUIDensity;
   /**
    * 控制控件的校验状态。
    * @default 'success'
    */
-  status: ControlUIStatus;
+  status: ControlStatus;
 }
 
 export interface ISwitchInputProps

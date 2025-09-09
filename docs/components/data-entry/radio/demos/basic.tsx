@@ -14,13 +14,13 @@ const options: ControlOption[] = [
 ];
 
 const App: React.FC = () => (
-  <Variants patternable sizeable>
-    {({ pattern, size }) => (
+  <Variants densifiable patternable>
+    {({ pattern, density }) => (
       <IRadioGroup
+        density={density}
         name="IRadioGroup"
         options={options}
         pattern={pattern}
-        size={size}
       />
     )}
   </Variants>

@@ -103,15 +103,15 @@ const App: React.FC = () => {
                     extra={
                       <IFlex gap="var(--gap-04)" justify="flex-end">
                         <IButton
+                          density="sm"
                           icon={<ISignLine type="plus" />}
-                          size="mini"
                           onClick={() => {
                             pushValue(initial);
                           }}
                         />
                         <IButton
+                          density="sm"
                           icon={<ISignLine type="minus" />}
-                          size="mini"
                           onClick={() => {
                             removeValue(i);
                           }}

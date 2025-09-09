@@ -29,7 +29,7 @@ export type ISelectorChangeHandle = (
 
 export type ISelectorState = Pick<
   IControlWrapProps,
-  'suffix' | 'prefix' | 'isLoading' | 'variant' | 'size' | 'status'
+  'suffix' | 'prefix' | 'isLoading' | 'variant' | 'density' | 'status'
 > & {
   /**
    * 控件是否呈现清空按钮。
@@ -75,7 +75,7 @@ export type ISelectorChipsRender = ReactRender<
     handleChange: ISelectorChangeHandle;
     options?: ControlOption[];
     separator?: React.ReactNode;
-    values?: React.Key[] | null;
+    values?: ControlValues | null;
   },
   ISelectorState
 >;
@@ -162,7 +162,7 @@ export interface ISelectorProps
   /**
    * 控件默认选中的值。
    */
-  defaultValue?: React.Key[] | React.Key;
+  defaultValue?: ControlValue | ControlValues;
   /**
    * 控件选项过滤配置。
    */

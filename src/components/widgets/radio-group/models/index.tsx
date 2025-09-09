@@ -8,7 +8,11 @@ interface IRadioChange {
 }
 
 export interface IRadioGroupProps
-  extends PartialPick<IRadioProps, 'render' | 'size' | 'name'> {
+  extends PartialPick<
+    IRadioProps,
+    //
+    'render' | 'density' | 'name'
+  > {
   /**
    * 默认选中的值
    */

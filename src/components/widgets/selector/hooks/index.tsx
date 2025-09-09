@@ -139,10 +139,12 @@ export const useArrowKeyDown = ({
             if (current) {
               onChange((cur) => {
                 if (multiple) {
-                  const curs = compact(iArray(cur));
-                  return values?.includes(current.value)
-                    ? curs.filter((val) => val !== current.value)
-                    : curs.concat([current.value]);
+                  const curs = iArray(cur);
+                  return compact(
+                    values?.includes(current.value)
+                      ? curs.filter((val) => val !== current.value)
+                      : curs.concat([current.value])
+                  );
                 }
                 return current.value;
               });

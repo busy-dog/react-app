@@ -57,7 +57,7 @@ const iIconRender: ICheckIconRender = (props, { checked, indeterminate }) => (
 
 const iInputRender: ICheckInputRender = (
   { ref, value, onChange, ...others },
-  { size: _size, status: _status, indeterminate, checked, pattren }
+  { density: _density, status: _status, indeterminate, checked, pattren }
 ) => (
   <input
     ref={ref}
@@ -83,7 +83,7 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
       indeterminate = false,
       pattren = 'editable',
       status = 'success',
-      size = 'medium',
+      density = 'md',
       wave = true,
       onChange,
       ...others
@@ -107,21 +107,21 @@ export const ICheckbox = forwardRef<ICheckboxRef, ICheckboxProps>(
 
     const states = useMemo(
       () => ({
-        size,
         label,
         status,
         pattren,
+        density,
         indeterminate,
         checked: iChecked,
       }),
-      [iChecked, indeterminate, size, status, pattren, label]
+      [iChecked, indeterminate, density, status, pattren, label]
     );
 
     return (render?.root ?? iRootRender)(
       {
         ref: root,
         label: label,
-        className: classNames(styles.root, styles[size], styles[pattren], {
+        className: classNames(styles.root, styles[density], styles[pattren], {
           [styles.checked]: iChecked && !indeterminate,
           [styles.indeterminate]: indeterminate,
         }),

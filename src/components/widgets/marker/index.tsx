@@ -2,11 +2,12 @@ import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
 import type { ReactCFC, ReactWrapProps } from '@/models';
+import type { OmitOf } from '@/utils';
 import { isFinite } from '@/utils';
 
 import * as styles from './index.scss';
 
-export interface IMarkerProps extends ReactWrapProps {
+export interface IMarkerProps extends OmitOf<ReactWrapProps, 'part'> {
   /** 序号标识 */
   no?: number;
   /** 章节标识 */

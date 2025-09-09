@@ -1,3 +1,7 @@
+import { isString } from 'remeda';
+
+import { ensure } from '@/utils';
+
 import { useControlState, usePatternAssert } from '../control';
 import { IRadio } from '../radio';
 import type { IRadioGroupProps } from './models';
@@ -5,11 +9,11 @@ import type { IRadioGroupProps } from './models';
 export const IRadioGroup: React.FC<IRadioGroupProps> = (props) => {
   const {
     name,
-    size,
     value,
     render,
     options,
     defaultValue,
+    density = 'md',
     pattern = 'editable',
     onChange,
   } = props;
@@ -27,21 +31,27 @@ export const IRadioGroup: React.FC<IRadioGroupProps> = (props) => {
     return option?.label ?? option?.title ?? option?.value?.toString();
   }
 
-  return options?.map((option) => (
+  return options?.map(({ title, value, disabled, ...rest }) => (
     <IRadio
-      key={option.value}
-      checked={current === option.value}
-      defaultChecked={defaultValue === option.value}
-      label={option.value?.toLocaleString()}
+      key={value?.toString()}
+      checked={current === value}
+      defaultChecked={defaultValue === value}
+      density={density}
+      label={value?.toLocaleString()}
       name={name}
       readOnly={assert.isReadOnly}
       render={render}
-      size={size}
+      title={ensure(isString(title) && title)}
       onChange={() => {
-        iChange?.(option.value, option);
+        iChange?.(value, {
+          title,
+          value,
+          disabled,
+          ...rest,
+        });
       }}
-      {...option}
-      disabled={option.disabled ?? assert.isDisabled}
+      {...rest}
+      disabled={disabled ?? assert.isDisabled}
     />
   ));
 };

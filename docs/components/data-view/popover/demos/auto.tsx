@@ -22,7 +22,7 @@ const App: React.FC = () => {
             content="我是文本"
             render={{
               reference: (props) => (
-                <IButton size="huge" tabIndex={0} {...props}>
+                <IButton density="lg" tabIndex={0} {...props}>
                   按钮
                 </IButton>
               ),

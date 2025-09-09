@@ -3,7 +3,7 @@ import type { HTMLMotionProps } from 'motion/react';
 import type { ReactRender, ReactTargetType, ReactWrapProps } from '@/models';
 import type { OmitOf } from '@/utils';
 
-import type { ControlOption } from '../../control';
+import type { ControlOption, ControlValues } from '../../control';
 
 export interface IWheelOptionProps {
   isFocus?: boolean;
@@ -31,13 +31,13 @@ export interface IPickerProps
   root?: ReactTargetType;
   title?: React.ReactNode;
   initialOpen?: boolean;
-  defaultValue?: ControlOption['value'][];
-  value?: ControlOption['value'][];
+  defaultValue?: ControlValues;
+  value?: ControlValues;
   columns?: ControlOption[][];
   render?: {
     root?: IPickerRootRender;
   };
-  onChange?: (value?: ControlOption['value'][]) => void;
-  onSelect?: (value?: ControlOption['value'][]) => void;
+  onChange?: (value?: ControlValues) => void;
+  onSelect?: (value?: ControlValues) => void;
   onOpenChange?: (open?: boolean) => void;
 }

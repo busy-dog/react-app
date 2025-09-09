@@ -32,7 +32,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
     wave: iWave,
     danger = false,
     type = 'button',
-    size = 'medium',
+    density = 'md',
     disabled = false,
     variant = 'bordered',
     onPointerDownCapture,
@@ -68,7 +68,7 @@ export const IButton: React.FC<IButtonProps> = (props) => {
         animate={iAnimate({ variant, danger, disabled })}
         className={classNames(
           styles.wrap,
-          styles[size],
+          styles[density],
           styles[variant],
           {
             [styles.danger]: danger,

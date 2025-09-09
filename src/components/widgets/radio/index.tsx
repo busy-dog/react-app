@@ -1,6 +1,6 @@
 import { forwardRef, useId, useImperativeHandle, useRef } from 'react';
 import classNames from 'classnames';
-import { isBigInt } from 'remeda';
+import { isBigInt, isNullish } from 'remeda';
 
 import { ensure } from '@/utils';
 
@@ -47,7 +47,13 @@ const iInputRender: IRadioInputRender = (
     disabled={disabled}
     readOnly={readOnly}
     type="radio"
-    value={isBigInt(value) ? value.toLocaleString() : (value ?? undefined)}
+    value={
+      !isNullish(value)
+        ? isBigInt(value)
+          ? value.toLocaleString()
+          : value.toString()
+        : undefined
+    }
     onChange={ensure(!disabled && !readOnly && onChange)}
     {...others}
     checked={checked ?? false}
@@ -65,7 +71,7 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
       defaultChecked,
       disabled = false,
       readOnly = false,
-      size = 'medium',
+      density = 'md',
       id: _id,
       onChange,
       ...others
@@ -85,7 +91,7 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     });
 
     const state: IRadioState = {
-      size,
+      density,
       value,
       readOnly,
       disabled,
@@ -103,7 +109,7 @@ export const IRadio = forwardRef<IRadioRef, IRadioProps>(
     return (render?.root ?? iRootRender)(
       {
         label: label,
-        className: classNames(styles.root, styles[size], {
+        className: classNames(styles.root, styles[density], {
           [styles.disabled]: disabled,
           [styles.readOnly]: readOnly,
         }),

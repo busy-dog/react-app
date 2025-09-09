@@ -44,7 +44,7 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
     status = 'success',
     variant = 'standard',
     pattern = 'editable',
-    size = 'medium',
+    density = 'md',
     onSuffixClick,
     onPrefixClick,
     render,
@@ -62,8 +62,8 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
   });
 
   const states: IControlWrapState = {
-    size,
     status,
+    density,
     pattern,
     isFocus,
     isLoading,
@@ -79,7 +79,7 @@ export const IControlWrap: React.FC<IControlWrapProps> = (props) => {
       ref: target,
       className: classNames(
         styles.wrap,
-        styles[size],
+        styles[density],
         styles[status],
         styles[pattern],
         styles[variant],

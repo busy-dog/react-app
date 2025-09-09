@@ -1,11 +1,11 @@
 import { Fragment, useRef, useState } from 'react';
 
 import type {
-  ControlAlign,
   ControlPattern,
+  ControlStatus,
+  ControlUIAlign,
+  ControlUIDensity,
   ControlUIDirection,
-  ControlUISize,
-  ControlUIStatus,
 } from '@/components';
 import { ICard, IFlex, IRadioGroup, ISwitch } from '@/components';
 import { useToggle } from '@/hooks';
@@ -16,20 +16,20 @@ type ControlWidth = 'auto-width' | 'full-width';
 interface Props<T extends string = never> {
   card?: boolean;
   variants?: T[];
-  sizeable?: boolean;
   alignable?: boolean;
   widthable?: boolean;
   switchable?: boolean;
   statusable?: boolean;
   patternable?: boolean;
+  densifiable?: boolean;
   directionable?: boolean;
   children: (props: {
     wrap: HTMLDivElement;
     toggle: (value?: boolean) => void;
     open?: boolean;
-    size?: ControlUISize;
-    align?: ControlAlign;
-    status?: ControlUIStatus;
+    density?: ControlUIDensity;
+    align?: ControlUIAlign;
+    status?: ControlStatus;
     pattern?: ControlPattern;
     direction?: ControlUIDirection;
     width?: ControlWidth;
@@ -43,11 +43,11 @@ export function Variants<T extends string = never>(
   const {
     variants,
     card = true,
-    sizeable = false,
     alignable = false,
     widthable = false,
     switchable = false,
     statusable = false,
+    densifiable = false,
     patternable = false,
     directionable = false,
     children,
@@ -59,13 +59,13 @@ export function Variants<T extends string = never>(
 
   const [variant, setVariant] = useState(variants?.[0]);
 
-  const [size, setSize] = useState<ControlUISize>('medium');
+  const [density, setDensity] = useState<ControlUIDensity>('md');
 
-  const [align, setAlign] = useState<ControlAlign>('center');
+  const [align, setAlign] = useState<ControlUIAlign>('center');
 
   const [width, setWidth] = useState<ControlWidth>('auto-width');
 
-  const [status, setStatus] = useState<ControlUIStatus>('success');
+  const [status, setStatus] = useState<ControlStatus>('success');
 
   const [pattern, setPattern] = useState<ControlPattern>('editable');
 
@@ -105,15 +105,15 @@ export function Variants<T extends string = never>(
           />
         </IFlex>
       )}
-      {sizeable && (
+      {densifiable && (
         <IFlex gap={8}>
           <IRadioGroup
-            options={(['mini', 'medium', 'huge'] satisfies ControlUISize[]).map(
+            options={(['sm', 'md', 'lg'] satisfies ControlUIDensity[]).map(
               (value) => ({ value })
             )}
-            value={size}
+            value={density}
             onChange={(value) => {
-              setSize(value as ControlUISize);
+              setDensity(value as ControlUIDensity);
             }}
           />
         </IFlex>
@@ -121,12 +121,12 @@ export function Variants<T extends string = never>(
       {alignable && (
         <IFlex gap={8}>
           <IRadioGroup
-            options={(['start', 'center', 'end'] satisfies ControlAlign[]).map(
-              (value) => ({ value })
-            )}
+            options={(
+              ['start', 'center', 'end'] satisfies ControlUIAlign[]
+            ).map((value) => ({ value }))}
             value={align}
             onChange={(value) => {
-              setAlign(value as ControlAlign);
+              setAlign(value as ControlUIAlign);
             }}
           />
         </IFlex>
@@ -151,11 +151,11 @@ export function Variants<T extends string = never>(
                 'success',
                 'warn',
                 'vaildating',
-              ] satisfies ControlUIStatus[]
+              ] satisfies ControlStatus[]
             ).map((value) => ({ value }))}
             value={status}
             onChange={(value) => {
-              setStatus(value as ControlUIStatus);
+              setStatus(value as ControlStatus);
             }}
           />
         </IFlex>
@@ -189,11 +189,11 @@ export function Variants<T extends string = never>(
       <ICard>
         {!card && controls()}
         {children({
-          size,
           open,
           align,
           width,
           status,
+          density,
           variant,
           pattern,
           direction,

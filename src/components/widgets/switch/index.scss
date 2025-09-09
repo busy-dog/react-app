@@ -107,7 +107,7 @@
       padding: 0 var(--gap-01);
     }
 
-    &.mini {
+    &.sm {
       padding: var(--gap-01);
       height: var(--control-size-02);
 
@@ -118,7 +118,7 @@
       }
     }
 
-    &.medium {
+    &.md {
       padding: calc(var(--gap-01) * 1.5);
       height: var(--control-size-03);
 
@@ -129,7 +129,7 @@
       }
     }
 
-    &.huge {
+    &.lg {
       padding: var(--gap-02);
       height: var(--control-size-05);
 

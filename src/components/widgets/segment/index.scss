@@ -29,7 +29,7 @@
   border-radius: inherit;
 }
 
-.mini {
+.sm {
   padding: var(--gap-01);
   font-size: var(--font-size-02);
   border-radius: var(--border-radius-02);
@@ -40,7 +40,7 @@
   }
 }
 
-.medium {
+.md {
   padding: var(--gap-01);
   font-size: var(--font-size-03);
   border-radius: var(--border-radius-03);
@@ -51,7 +51,7 @@
   }
 }
 
-.huge {
+.lg {
   padding: var(--gap-02);
   font-size: var(--font-size-04);
   border-radius: var(--border-radius-03);

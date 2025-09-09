@@ -5,7 +5,12 @@ import minmax from 'dayjs/plugin/minMax';
 import { isDeepEqual } from 'remeda';
 import { useImmer } from 'use-immer';
 
-import type { ControlOption, IPickerProps } from '@/components';
+import type {
+  ControlOption,
+  ControlValue,
+  ControlValues,
+  IPickerProps,
+} from '@/components';
 import {
   IControlWrap,
   IPicker,
@@ -41,7 +46,7 @@ const create = {
     min,
     year,
   }: {
-    year: React.Key;
+    year: ControlValue;
     max: dayjs.ConfigType;
     min: dayjs.ConfigType;
   }): ControlOption[] | undefined => {
@@ -62,8 +67,8 @@ const create = {
     year,
     month,
   }: {
-    year: React.Key;
-    month: React.Key;
+    year: ControlValue;
+    month: ControlValue;
     max: dayjs.ConfigType;
     min: dayjs.ConfigType;
   }): ControlOption[] | undefined => {
@@ -81,7 +86,7 @@ const create = {
 };
 
 const useDateWheels = (
-  select?: React.Key[],
+  select?: ControlValues,
   {
     max = dayjs().add(10, 'years').toISOString(),
     min = dayjs().subtract(10, 'years').toISOString(),
@@ -125,7 +130,7 @@ const DatePicker: React.FC<
 > = (props) => {
   const { value, root, onChange } = props;
 
-  const [select, setSelect] = useState<React.Key[]>();
+  const [select, setSelect] = useState<ControlValues>();
 
   const [current, iChange] = useControlState({ value, onChange });
 

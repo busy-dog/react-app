@@ -42,7 +42,7 @@
     width: 100%;
   }
 
-  &.mini {
+  &.sm {
     height: unset;
     font-size: inherit;
     line-height: inherit;
@@ -57,7 +57,7 @@
       padding: 0 var(--gap-02);
     }
   }
-  &.medium {
+  &.md {
     font-size: var(--font-size-04);
 
     height: var(--control-size-06);
@@ -73,7 +73,7 @@
       padding: 0 var(--gap-05);
     }
   }
-  &.huge {
+  &.lg {
     height: var(--control-size-08);
     min-width: var(--control-size-08);
 

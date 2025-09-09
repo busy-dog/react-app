@@ -1,6 +1,6 @@
 import { Variants } from 'docs/widgets';
 
-import type { ControlOption, IControlVariant } from '@/components';
+import type { ControlOption, ControlUIVariant } from '@/components';
 import { ISelector } from '@/components';
 
 const options: ControlOption[] = [
@@ -11,17 +11,17 @@ const options: ControlOption[] = [
 
 const App: React.FC = () => (
   <Variants
+    densifiable
     patternable
-    sizeable
     statusable
-    variants={['bordered', 'filled', 'standard'] satisfies IControlVariant[]}
+    variants={['bordered', 'filled', 'standard'] satisfies ControlUIVariant[]}
   >
-    {({ size, pattern, variant, status }) => (
+    {({ density, pattern, variant, status }) => (
       <ISelector
+        density={density}
         options={options}
         pattern={pattern}
         placeholder="placeholder"
-        size={size}
         status={status}
         variant={variant}
       />

@@ -3,7 +3,7 @@ import type { HTMLMotionProps } from 'motion/react';
 import type { COLOR_DISC } from '@/constants';
 import type { ReactRender } from '@/models';
 
-import type { ControlUISize } from '../../control';
+import type { ControlUIDensity } from '../../control';
 import type { ISVGWrapProps } from '../../svg-wrap';
 
 export interface IChipState {
@@ -22,9 +22,9 @@ export interface IChipState {
   disabled?: boolean;
   /**
    * 控制控件的尺寸大小
-   *  @default 'medium'
+   *  @default 'md'
    */
-  size?: ControlUISize;
+  density?: ControlUIDensity;
   /**
    * 控制控件的呈现方式
    * @default 'bordered'

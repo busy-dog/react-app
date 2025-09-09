@@ -13,8 +13,8 @@ const root: IControlWrapRootRender = ({ className, style }, { pattern }) => (
 
 const App: React.FC = () => (
   <Variants
+    densifiable
     patternable
-    sizeable
     statusable
     variants={
       [
@@ -24,11 +24,11 @@ const App: React.FC = () => (
       ] satisfies IControlWrapProps['variant'][]
     }
   >
-    {({ size, status, pattern, variant }) => (
+    {({ density, status, pattern, variant }) => (
       <IControlWrap
+        density={density}
         pattern={pattern}
         render={{ root }}
-        size={size}
         status={status}
         style={{ padding: 'var(--gap-03) var(--gap-04)' }}
         variant={variant}

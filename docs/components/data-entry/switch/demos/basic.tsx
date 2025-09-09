@@ -21,11 +21,11 @@ const label: ISwitchLabelRender = (_, { checked }) =>
   checked ? '已开启' : '已关闭';
 
 const App: React.FC = () => (
-  <Variants patternable sizeable>
-    {({ size, pattern }) => (
+  <Variants densifiable patternable>
+    {({ density, pattern }) => (
       <IFlex vertical gap={8}>
-        <ISwitch pattern={pattern} size={size} />
-        <ISwitch pattern={pattern} render={{ label, icon }} size={size} />
+        <ISwitch density={density} pattern={pattern} />
+        <ISwitch density={density} pattern={pattern} render={{ label, icon }} />
       </IFlex>
     )}
   </Variants>

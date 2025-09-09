@@ -6,6 +6,7 @@ import { create } from 'zustand';
 
 import type {
   ControlOption,
+  ControlValue,
   ISelectorChipsRender,
   ISelectorFloatingRender,
   ISelectorOptionRender,
@@ -107,22 +108,24 @@ const iChipListRender: ISelectorChipsRender = (
     const { label, color } = option ?? {};
     const content = label ?? 'UnknownRender';
     return (
-      <Container key={inner.toString()} separator={index !== 0 && separator}>
-        {!multiple && <span style={{ color }}>{content}</span>}
-        {multiple && (
-          <IChip
-            closeable
-            size="mini"
-            style={{ backgroundColor: color, color: 'var(--font-color-b8)' }}
-            variant="filled"
-            onClose={() => {
-              handleChange(values.filter((v) => v !== inner));
-            }}
-          >
-            {content}
-          </IChip>
-        )}
-      </Container>
+      option && (
+        <Container key={inner?.toString()} separator={index !== 0 && separator}>
+          {!multiple && <span style={{ color }}>{content}</span>}
+          {multiple && (
+            <IChip
+              closeable
+              density="sm"
+              style={{ backgroundColor: color, color: 'var(--font-color-b8)' }}
+              variant="filled"
+              onClose={() => {
+                handleChange(values.filter((v) => v !== inner));
+              }}
+            >
+              {content}
+            </IChip>
+          )}
+        </Container>
+      )
     );
   });
 
@@ -212,7 +215,7 @@ const iOptionRender: ISelectorOptionRender = (
 const App: React.FC = () => {
   const [keyword, setKeyword] = useState<string>();
 
-  const [value, setValue] = useState<React.Key[]>(['unknown']);
+  const [value, setValue] = useState<ControlValue[]>(['unknown']);
 
   const options = useSelectorStore(({ options }) => options);
 
@@ -258,7 +261,7 @@ const App: React.FC = () => {
 
   const predicate: ISelectorPredicate = ({ label, title }) => {
     if (!isNonEmptyString(keyword)) return true;
-    const text = title ?? ensure(isString(label) && label);
+    const text = isString(title) ? title : ensure(isString(label) && label);
     return text?.toLowerCase()?.includes(keyword?.toLowerCase()) ?? false;
   };
 

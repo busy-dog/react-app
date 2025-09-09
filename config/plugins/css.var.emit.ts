@@ -40,7 +40,7 @@ const compile = async (assets: readonly Asset[], includes?: string[]) => {
       .flatMap(({ name, source }) =>
         includes?.map((include) => {
           if (isSubdirectory(name, include)) {
-            const code = source.source();
+            const code = source.buffer();
             if (isBufferSource(code)) {
               transform({
                 code,

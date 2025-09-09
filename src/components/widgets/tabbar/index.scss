@@ -1,0 +1,111 @@
+.tabs-root {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: 100%;
+  background-color: #0b1011;
+  border: 1px solid #1d2628;
+  overflow: hidden;
+}
+
+.tabs-list {
+  display: flex;
+  border-bottom: 1px solid #1d2628;
+}
+
+.tabs-trigger {
+  font-family: inherit;
+  padding: 0 20px;
+  height: 45px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--feint-text);
+  user-select: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tabs-trigger .tabs-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ff0088;
+}
+
+.tabs-trigger:hover {
+  color: var(--text);
+}
+
+.tabs-trigger[data-state="active"] {
+  color: var(--text);
+}
+
+.tabs-content {
+  padding: 20px;
+  will-change: opacity, filter;
+}
+
+.tabs-content h3 {
+  margin: 0 0 10px 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.content-wrapper {
+  margin: 0 0 20px 0;
+  color: var(--feint-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-field {
+  padding: 8px 12px;
+  border: 1px solid #1d2628;
+  border-radius: 4px;
+  background: #0b1011;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #ff0088;
+  transition: border-color 0.2s ease;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-weight: 500;
+  user-select: none;
+  border: none;
+  background: #ff0088;
+  color: white;
+  cursor: pointer;
+}
+
+.button.large {
+  font-size: 16px;
+  padding: 0 20px;
+  line-height: 35px;
+  height: 35px;
+}

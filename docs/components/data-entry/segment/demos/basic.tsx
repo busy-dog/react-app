@@ -16,12 +16,12 @@ const options = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']
   ]);
 
 const App: React.FC = () => (
-  <Variants directionable sizeable widthable>
-    {({ size, width, direction }) => (
+  <Variants densifiable directionable widthable>
+    {({ density, width, direction }) => (
       <ISegment
+        density={density}
         isFullWidth={width === 'full-width'}
         options={options}
-        size={size}
         vertical={direction === 'vertical'}
       />
     )}

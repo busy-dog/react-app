@@ -9,8 +9,8 @@ import type { OmitOf, PlainObject } from 'src/utils';
 
 import type {
   ControlPattern,
-  ControlUISize,
-  ControlUIStatus,
+  ControlUIDensity,
+  ControlStatus,
   ControlValue,
 } from '@/components';
 import type { ReactInputProps, ReactWrapProps } from '@/models';
@@ -32,11 +32,11 @@ interface CheckboxStatus {
   /**
    * 设置控件尺寸。
    */
-  size: ControlUISize;
+  size: ControlUIDensity;
   /**
    * 设置控件的校验状态。
    */
-  status: ControlUIStatus;
+  status: ControlStatus;
 }
 
 interface IRender<P = PlainObject, E = unknown> {

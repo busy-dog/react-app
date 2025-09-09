@@ -1,8 +1,9 @@
 import { Fragment, useId } from 'react';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
+import { isString } from 'remeda';
 
-import { iPressEvent } from '@/utils';
+import { ensure, iPressEvent } from '@/utils';
 
 import { useControlState } from '../control';
 import { IFlex } from '../flex';
@@ -30,6 +31,7 @@ const iItemRender: ISegmentItemRender = (
     value,
     thumb,
     extra,
+    title,
     disabled,
     onChange,
     onKeyDown,
@@ -48,6 +50,7 @@ const iItemRender: ISegmentItemRender = (
     <button
       {...others}
       tabIndex={0}
+      title={ensure(isString(title) && title)}
       onClick={(event) => {
         onClick?.(event);
         if (!readOnly && !disabled) {
@@ -95,7 +98,7 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
     isFullWidth,
     defaultValue,
     value: _value,
-    size = 'medium',
+    density = 'md',
     gap = 'var(--gap-02)',
     onChange: _onChange,
     render,
@@ -115,7 +118,7 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
     readOnly,
     disabled,
     value,
-    size,
+    density,
   };
 
   return (render?.root ?? iRootRender)(
@@ -124,7 +127,7 @@ export const ISegment: React.FC<ISegmentProps> = (props) => {
       vertical,
       className: classNames(
         styles.wrap,
-        styles[size],
+        styles[density],
         {
           [styles.vertical]: vertical,
           [styles.isFullWidth]: isFullWidth,

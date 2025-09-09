@@ -47,13 +47,13 @@
 .root {
   display: inline-flex;
 
-  &.mini {
+  &.sm {
     font-size: var(--font-size-03);
   }
-  &.medium {
+  &.md {
     font-size: var(--font-size-04);
   }
-  &.huge {
+  &.lg {
     font-size: var(--font-size-05);
   }
 

@@ -44,7 +44,7 @@ const App: React.FC = () => {
           placement={placement}
           render={{
             reference: (props) => (
-              <IButton size="huge" tabIndex={0} {...props}>
+              <IButton density="lg" tabIndex={0} {...props}>
                 {placement}
               </IButton>
             ),

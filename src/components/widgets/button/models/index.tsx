@@ -2,7 +2,7 @@ import type { HTMLMotionProps } from 'motion/react';
 
 import type { OmitOf } from '@/utils';
 
-import type { ControlUISize } from '../../control';
+import type { ControlUIDensity } from '../../control';
 
 type MotionButtonProps = React.PropsWithChildren &
   OmitOf<HTMLMotionProps<'button'>, 'children'>;
@@ -16,7 +16,7 @@ export interface IButtonProps extends MotionButtonProps {
   icon?: React.ReactNode;
   isFullWidth?: boolean;
   isLoading?: boolean;
-  size?: ControlUISize;
+  density?: ControlUIDensity;
   variant?: IButtonVariant;
   wave?: boolean;
 }

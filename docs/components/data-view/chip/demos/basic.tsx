@@ -5,9 +5,9 @@ import { IChip, IFlex } from '@/components';
 
 const App: React.FC = () => (
   <Variants variants={['filled', 'bordered'] satisfies IChipProps['variant'][]}>
-    {({ size, variant }) => (
+    {({ density, variant }) => (
       <IFlex gap={8}>
-        <IChip size={size} variant={variant}>
+        <IChip density={density} variant={variant}>
           Chip
         </IChip>
       </IFlex>
