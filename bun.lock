@@ -36,7 +36,7 @@
         "@rspack/dev-server": "^1.1.4",
         "@rspack/plugin-react-refresh": "^1.5.1",
         "@rspress/core": "^1.45.3",
-        "@rspress/plugin-preview": "^1.45.3",
+        "@rspress/plugin-preview": "^1.43.11",
         "@rspress/shared": "^1.45.3",
         "@svgr/webpack": "^8.1.0",
         "@tanstack/eslint-plugin-query": "^5.67.2",

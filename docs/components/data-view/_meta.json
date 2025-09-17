@@ -18,5 +18,10 @@
     "type": "file",
     "name": "popover/index",
     "label": "Popover 气泡浮层"
+  },
+  {
+    "type": "file",
+    "name": "table/index",
+    "label": "Table 表格"
   }
 ]
